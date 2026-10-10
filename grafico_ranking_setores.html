@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking dos Setores: Cota vs MDTR | Equipe 847010600</title>
+  <!-- Google Fonts & Chart.js -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #131b2e;
+      --bg-card-hover: #19243d;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .header-title h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #60a5fa, #38bdf8, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-title p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .badge-tag {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Filters Section */
+    .filter-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-panel-title {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5e1;
+    }
+
+    .filter-panel-title span.badge {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .filter-group label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .filter-input, .filter-select {
+      background: rgba(11, 15, 25, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .filter-input:focus, .filter-select:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Quick status chips */
+    .status-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chip-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    .chip-btn.active {
+      background: rgba(59, 130, 246, 0.25);
+      border-color: var(--accent-blue);
+      color: #93c5fd;
+    }
+
+    /* Consultant tags */
+    .consultant-tags-container {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .consultant-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .consultant-tag.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #a7f3d0;
+      font-weight: 600;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--card-accent, var(--accent-blue));
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .kpi-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kpi-sub span.highlight {
+      color: var(--accent-emerald);
+      font-weight: 700;
+    }
+
+    /* Charts Section */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 1024px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chart-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .chart-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-header p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .chart-canvas-container {
+      position: relative;
+      flex-grow: 1;
+      min-height: 380px;
+    }
+
+    /* Table Section */
+    .table-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+      overflow-x: auto;
+    }
+
+    .table-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    th {
+      padding: 12px 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.02);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .rank-1 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .rank-2 { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
+    .rank-3 { background: rgba(217, 119, 6, 0.2); color: #f59e0b; border: 1px solid rgba(217, 119, 6, 0.4); }
+    .rank-other { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    }
+
+    .progress-high { background: linear-gradient(90deg, #10b981, #34d399); }
+    .progress-mid { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .progress-low { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    .tag-status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .status-leader { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .status-ok { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .status-alert { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+    .sim-col {
+      background: rgba(59, 130, 246, 0.03);
+      font-weight: 600;
+      color: #93c5fd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-title">
+        <h1>Ranking dos Setores: Cota vs MDTR</h1>
+        <p>Acompanhamento Gerencial Outubro/2026 • Gerente: José Cabral Neto • Código Regional: 847010600</p>
+      </div>
+      <div>
+        <span class="badge-tag">Posição: MDTR 05/10 | Sales 08/10</span>
+      </div>
+    </header>
+
+    <!-- Interactive Filters Panel -->
+    <section class="filter-panel">
+      <div class="filter-panel-header">
+        <div class="filter-panel-title">
+          <span>⚙️ Filtros e Parâmetros Editáveis</span>
+          <span class="badge" id="activeFilterCount">8 setores visíveis</span>
+        </div>
+        <button class="btn-secondary" id="btnResetFilters" onclick="resetFilters()">🔄 Redefinir Filtros</button>
+      </div>
+
+      <div class="filter-grid">
+        <!-- Search filter -->
+        <div class="filter-group">
+          <label for="searchInput">🔍 Buscar Consultor / Setor</label>
+          <input type="text" id="searchInput" class="filter-input" placeholder="Ex: Isabela, 847010601..." oninput="applyFilters()">
+        </div>
+
+        <!-- Sort by -->
+        <div class="filter-group">
+          <label for="sortBySelect">📊 Ordenar Por</label>
+          <select id="sortBySelect" class="filter-select" onchange="applyFilters()">
+            <option value="cobMdtrDesc">Maior % Cobertura MDTR</option>
+            <option value="cobMdtrAsc">Menor % Cobertura MDTR</option>
+            <option value="cotaDesc">Maior Cota Total (R$)</option>
+            <option value="mdtrDesc">Maior MDTR Realizado (R$)</option>
+            <option value="fatDesc">Maior Faturamento (R$)</option>
+            <option value="gapDesc">Maior GAP Restante (R$)</option>
+          </select>
+        </div>
+
+        <!-- Performance status filter -->
+        <div class="filter-group">
+          <label>🎯 Nível de Desempenho</label>
+          <div class="status-chips">
+            <button class="chip-btn active" data-status="all" onclick="setStatusFilter('all')">Todos</button>
+            <button class="chip-btn" data-status="high" onclick="setStatusFilter('high')">Alta Cob. (&ge;11%)</button>
+            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na Média (9,5%-11%)</button>
+            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">Atenção (&lt;9,5%)</button>
+          </div>
+        </div>
+
+        <!-- Simulator parameters: remaining days and target % -->
+        <div class="filter-group">
+          <label for="diasRestantesInput">⏱️ Simulador: Dias Úteis Restantes</label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="number" id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="15" onchange="applyFilters()">
+            <span style="font-size: 12px; color: var(--text-muted);">dias úteis</span>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label for="metaAlvoSelect">🎯 Simular Alvo de Cota</label>
+          <select id="metaAlvoSelect" class="filter-select" onchange="applyFilters()">
+            <option value="1.0">100% da Cota (Meta Padrão)</option>
+            <option value="0.9">90% da Cota</option>
+            <option value="1.1">110% Supermeta</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Toggle individual consultants -->
+      <div class="consultant-tags-container">
+        <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-right: 4px;">Setores:</span>
+        <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="selectAllConsultants(true)">Marcar Todos</button>
+        <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="selectAllConsultants(false)">Desmarcar Todos</button>
+        <div id="consultantTagsList" style="display: flex; flex-wrap: wrap; gap: 6px; margin-left: 6px;">
+          <!-- Dynamically populated tags -->
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card" style="--card-accent: #3b82f6;">
+        <div class="kpi-label">Cota Total (Filtrada)</div>
+        <div class="kpi-value" id="kpiCota">R$ 8,07 M</div>
+        <div class="kpi-sub" id="kpiCotaSub">Outubro/2026 (8 setores)</div>
+      </div>
+      <div class="kpi-card" style="--card-accent: #06b6d4;">
+        <div class="kpi-label">MDTR Realizado (05/10)</div>
+        <div class="kpi-value" id="kpiMdtr">R$ 836,98 K</div>
+        <div class="kpi-sub"><span class="highlight" id="kpiCobMdtr">10,4%</span> de cob. média</div>
+      </div>
+      <div class="kpi-card" style="--card-accent: #10b981;">
+        <div class="kpi-label">Faturamento Bruto (08/10)</div>
+        <div class="kpi-value" id="kpiFat">R$ 642,36 K</div>
+        <div class="kpi-sub"><span class="highlight" id="kpiCobFat">8,0%</span> faturado</div>
+      </div>
+      <div class="kpi-card" style="--card-accent: #f59e0b;">
+        <div class="kpi-label">1º Lugar no Ranking</div>
+        <div class="kpi-value" id="kpiTopPerformer">Isabela Cruccitti</div>
+        <div class="kpi-sub"><span class="highlight" id="kpiTopCob">13,8%</span> de cobertura</div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="charts-grid">
+      <!-- Chart 1: Ranking por % de Cobertura -->
+      <div class="chart-box">
+        <div class="chart-header">
+          <div>
+            <h2>Ranking por Cobertura de MDTR (%)</h2>
+            <p>Percentual da cota alcançado no MDTR (até 05/10)</p>
+          </div>
+        </div>
+        <div class="chart-canvas-container">
+          <canvas id="rankingChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Comparativo Financeiro Cota vs MDTR -->
+      <div class="chart-box">
+        <div class="chart-header">
+          <div>
+            <h2>Comparativo de Valores: Cota vs MDTR (R$)</h2>
+            <p>Volume em Reais por consultor com ordenação ativa</p>
+          </div>
+        </div>
+        <div class="chart-canvas-container">
+          <canvas id="volumeChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Details -->
+    <div class="table-box">
+      <div class="table-title">
+        <span>Tabela Consolidada dos Setores</span>
+        <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;" id="tableSubheader">8 setores exibidos</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Pos.</th>
+            <th>Setor / Consultor</th>
+            <th>Cota (R$)</th>
+            <th>MDTR 05/10 (R$)</th>
+            <th>Cob. MDTR (%)</th>
+            <th>Fat. Bruto 08/10 (R$)</th>
+            <th>Cob. Fat (%)</th>
+            <th>GAP Cota (R$)</th>
+            <th class="sim-col">MDTR Diário Simulado</th>
+            <th class="sim-col">Aceleração Sim.</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Master data
+    const rawDataSetores = [
+      { id: "847010605", nome: "Isabela Cruccitti", cota: 1363710.73, mdtr: 188273.82, cobMdtr: 13.8, fat: 159685.52, cobFat: 11.7, gap: 1204025.21, status: "Líder Regional", statusClass: "status-leader" },
+      { id: "847010607", nome: "Manuel Artero", cota: 1090998.13, mdtr: 129573.32, cobMdtr: 11.9, fat: 94177.28, cobFat: 8.6, gap: 996820.85, status: "Excelente", statusClass: "status-ok" },
+      { id: "847010606", nome: "Pricila Moreira", cota: 556481.27, mdtr: 57250.91, cobMdtr: 10.3, fat: 38809.28, cobFat: 7.0, gap: 517671.99, status: "Na Média", statusClass: "status-ok" },
+      { id: "847010608", nome: "Valter Pereira Jr", cota: 1085968.45, mdtr: 104638.22, cobMdtr: 9.6, fat: 47842.79, cobFat: 4.4, gap: 1038125.66, status: "Acelerar Fat.", statusClass: "status-alert" },
+      { id: "847010601", nome: "Rafael Nascimento", cota: 942882.94, mdtr: 88775.39, cobMdtr: 9.4, fat: 55371.58, cobFat: 5.9, gap: 887511.36, status: "Acelerar", statusClass: "status-alert" },
+      { id: "847010603", nome: "Erivaldo Maciel", cota: 1122794.36, mdtr: 104241.41, cobMdtr: 9.3, fat: 92898.10, cobFat: 8.3, gap: 1029896.26, status: "Acelerar", statusClass: "status-alert" },
+      { id: "847010602", nome: "Wellington Morais", cota: 848780.32, mdtr: 73902.85, cobMdtr: 8.7, fat: 65384.84, cobFat: 7.7, gap: 783395.48, status: "Atenção", statusClass: "status-alert" },
+      { id: "847010604", nome: "Leonardo Mazzuco", cota: 1060357.11, mdtr: 90328.19, cobMdtr: 8.5, fat: 88194.37, cobFat: 8.3, gap: 972162.74, status: "Atenção", statusClass: "status-alert" }
+    ];
+
+    // State of active consultant selection
+    let selectedConsultantIds = new Set(rawDataSetores.map(d => d.id));
+    let activeStatusFilter = 'all';
+
+    const fmtBRL = (v) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
+
+    // Initialize consultant chips
+    function renderConsultantChips() {
+      const container = document.getElementById('consultantTagsList');
+      container.innerHTML = '';
+      rawDataSetores.forEach(d => {
+        const btn = document.createElement('button');
+        btn.className = `consultant-tag ${selectedConsultantIds.has(d.id) ? 'active' : ''}`;
+        btn.innerHTML = `${selectedConsultantIds.has(d.id) ? '✓ ' : '+ '}${d.nome.split(' ')[0]}`;
+        btn.onclick = () => toggleConsultant(d.id);
+        container.appendChild(btn);
+      });
+    }
+
+    function toggleConsultant(id) {
+      if (selectedConsultantIds.has(id)) {
+        if (selectedConsultantIds.size > 1) {
+          selectedConsultantIds.delete(id);
+        }
+      } else {
+        selectedConsultantIds.add(id);
+      }
+      renderConsultantChips();
+      applyFilters();
+    }
+
+    function selectAllConsultants(selectAll) {
+      if (selectAll) {
+        selectedConsultantIds = new Set(rawDataSetores.map(d => d.id));
+      } else {
+        // Keep at least one
+        selectedConsultantIds = new Set([rawDataSetores[0].id]);
+      }
+      renderConsultantChips();
+      applyFilters();
+    }
+
+    function setStatusFilter(status) {
+      activeStatusFilter = status;
+      document.querySelectorAll('.chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-status') === status);
+      });
+      applyFilters();
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('sortBySelect').value = 'cobMdtrDesc';
+      document.getElementById('diasRestantesInput').value = '15';
+      document.getElementById('metaAlvoSelect').value = '1.0';
+      selectedConsultantIds = new Set(rawDataSetores.map(d => d.id));
+      activeStatusFilter = 'all';
+      document.querySelectorAll('.chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-status') === 'all');
+      });
+      renderConsultantChips();
+      applyFilters();
+    }
+
+    // Chart instances
+    let chartRankingInstance = null;
+    let chartVolumeInstance = null;
+
+    function applyFilters() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      const sortBy = document.getElementById('sortBySelect').value;
+      const diasRestantes = Math.max(1, parseInt(document.getElementById('diasRestantesInput').value) || 15);
+      const metaMultiplier = parseFloat(document.getElementById('metaAlvoSelect').value) || 1.0;
+
+      // Filter data
+      let filtered = rawDataSetores.filter(d => {
+        // Consultant chip filter
+        if (!selectedConsultantIds.has(d.id)) return false;
+
+        // Search text filter
+        if (searchTerm) {
+          const matchName = d.nome.toLowerCase().includes(searchTerm);
+          const matchId = d.id.includes(searchTerm);
+          if (!matchName && !matchId) return false;
+        }
+
+        // Status chip filter
+        if (activeStatusFilter === 'high' && d.cobMdtr < 11) return false;
+        if (activeStatusFilter === 'mid' && (d.cobMdtr < 9.5 || d.cobMdtr >= 11)) return false;
+        if (activeStatusFilter === 'low' && d.cobMdtr >= 9.5) return false;
+
+        return true;
+      });
+
+      // Sort data
+      filtered.sort((a, b) => {
+        switch (sortBy) {
+          case 'cobMdtrDesc': return b.cobMdtr - a.cobMdtr;
+          case 'cobMdtrAsc': return a.cobMdtr - b.cobMdtr;
+          case 'cotaDesc': return b.cota - a.cota;
+          case 'mdtrDesc': return b.mdtr - a.mdtr;
+          case 'fatDesc': return b.fat - a.fat;
+          case 'gapDesc': return b.gap - a.gap;
+          default: return b.cobMdtr - a.cobMdtr;
+        }
+      });
+
+      // Update badge count
+      document.getElementById('activeFilterCount').textContent = `${filtered.length} setores visíveis`;
+      document.getElementById('tableSubheader').textContent = `${filtered.length} de ${rawDataSetores.length} setores exibidos`;
+
+      // Update KPI Cards
+      updateKPIs(filtered);
+
+      // Update Charts
+      updateCharts(filtered);
+
+      // Update Table
+      updateTable(filtered, diasRestantes, metaMultiplier);
+    }
+
+    function updateKPIs(data) {
+      if (data.length === 0) {
+        document.getElementById('kpiCota').textContent = 'R$ 0,00';
+        document.getElementById('kpiMdtr').textContent = 'R$ 0,00';
+        document.getElementById('kpiFat').textContent = 'R$ 0,00';
+        document.getElementById('kpiTopPerformer').textContent = 'Nenhum';
+        return;
+      }
+
+      const totalCota = data.reduce((acc, cur) => acc + cur.cota, 0);
+      const totalMdtr = data.reduce((acc, cur) => acc + cur.mdtr, 0);
+      const totalFat = data.reduce((acc, cur) => acc + cur.fat, 0);
+      const cobMdtrMed = totalCota > 0 ? ((totalMdtr / totalCota) * 100).toFixed(1) : 0;
+      const cobFatMed = totalCota > 0 ? ((totalFat / totalCota) * 100).toFixed(1) : 0;
+
+      // Find top in filtered set
+      const topConsultant = [...data].sort((a, b) => b.cobMdtr - a.cobMdtr)[0];
+
+      document.getElementById('kpiCota').textContent = totalCota >= 1e6 ? `R$ ${(totalCota / 1e6).toFixed(2)} M` : fmtBRL(totalCota);
+      document.getElementById('kpiCotaSub').textContent = `Outubro/2026 (${data.length} setores)`;
+      document.getElementById('kpiMdtr').textContent = fmtBRL(totalMdtr);
+      document.getElementById('kpiCobMdtr').textContent = `${cobMdtrMed}%`;
+      document.getElementById('kpiFat').textContent = fmtBRL(totalFat);
+      document.getElementById('kpiCobFat').textContent = `${cobFatMed}%`;
+
+      if (topConsultant) {
+        document.getElementById('kpiTopPerformer').textContent = topConsultant.nome;
+        document.getElementById('kpiTopCob').textContent = `${topConsultant.cobMdtr.toFixed(1)}%`;
+      }
+    }
+
+    function updateCharts(data) {
+      // 1. Chart Ranking Horizontal
+      const ctxRanking = document.getElementById('rankingChart').getContext('2d');
+      if (chartRankingInstance) chartRankingInstance.destroy();
+
+      chartRankingInstance = new Chart(ctxRanking, {
+        type: 'bar',
+        data: {
+          labels: data.map(d => d.nome),
+          datasets: [
+            {
+              label: 'Cobertura MDTR (%)',
+              data: data.map(d => d.cobMdtr),
+              backgroundColor: data.map(d => 
+                d.cobMdtr >= 12 ? 'rgba(16, 185, 129, 0.85)' :
+                d.cobMdtr >= 10 ? 'rgba(59, 130, 246, 0.85)' :
+                d.cobMdtr >= 9  ? 'rgba(6, 182, 212, 0.85)' :
+                'rgba(245, 158, 11, 0.85)'
+              ),
+              borderRadius: 8,
+              borderSkipped: false
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` Cobertura: ${ctx.raw.toFixed(1)}% da Cota`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', callback: v => v + '%' },
+              max: Math.max(16, Math.ceil(Math.max(...data.map(d => d.cobMdtr), 10) + 2))
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: '#f8fafc', font: { weight: 600 } }
+            }
+          }
+        }
+      });
+
+      // 2. Chart Volume Cota vs MDTR vs Fat
+      const ctxVolume = document.getElementById('volumeChart').getContext('2d');
+      if (chartVolumeInstance) chartVolumeInstance.destroy();
+
+      chartVolumeInstance = new Chart(ctxVolume, {
+        type: 'bar',
+        data: {
+          labels: data.map(d => d.nome.split(' ')[0]),
+          datasets: [
+            {
+              label: 'Cota (R$)',
+              data: data.map(d => d.cota),
+              backgroundColor: 'rgba(255, 255, 255, 0.12)',
+              borderColor: 'rgba(255, 255, 255, 0.25)',
+              borderWidth: 1,
+              borderRadius: 6
+            },
+            {
+              label: 'MDTR (R$)',
+              data: data.map(d => d.mdtr),
+              backgroundColor: 'rgba(59, 130, 246, 0.85)',
+              borderRadius: 6
+            },
+            {
+              label: 'Fat. Bruto (R$)',
+              data: data.map(d => d.fat),
+              backgroundColor: 'rgba(16, 185, 129, 0.85)',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { color: '#cbd5e1', font: { weight: 500 } }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` ${ctx.dataset.label}: ${fmtBRL(ctx.raw)}`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#f8fafc', font: { weight: 600 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                color: '#94a3b8',
+                callback: v => 'R$ ' + (v / 1000).toFixed(0) + 'k'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateTable(data, diasRestantes, metaMultiplier) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum setor corresponde aos filtros aplicados.</td></tr>`;
+        return;
+      }
+
+      data.forEach((item, idx) => {
+        const rank = idx + 1;
+        const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-other';
+        const progressClass = item.cobMdtr >= 11 ? 'progress-high' : item.cobMdtr >= 9.5 ? 'progress-mid' : 'progress-low';
+        
+        // Simulation calculations:
+        const metaCalculada = item.cota * metaMultiplier;
+        const gapSimulado = Math.max(0, metaCalculada - item.fat);
+        const mdtrDiarioSimulado = gapSimulado / diasRestantes;
+        const fatDiarioAtual = item.fat / 6; // 6 dias úteis decorridos até 08/10
+        const aceleracao = fatDiarioAtual > 0 ? (mdtrDiarioSimulado / fatDiarioAtual).toFixed(1) : '-';
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="rank-badge ${rankClass}">${rank}º</span></td>
+          <td><strong>${item.nome}</strong><br><span style="font-size: 11px; color: var(--text-muted);">${item.id}</span></td>
+          <td>${fmtBRL(item.cota)}</td>
+          <td><strong>${fmtBRL(item.mdtr)}</strong></td>
+          <td>
+            <span style="font-weight: 700;">${item.cobMdtr.toFixed(1)}%</span>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill ${progressClass}" style="width: ${Math.min(100, (item.cobMdtr / 15) * 100)}%;"></div>
+            </div>
+          </td>
+          <td>${fmtBRL(item.fat)}</td>
+          <td>${item.cobFat.toFixed(1)}%</td>
+          <td style="color: #f87171;">-${fmtBRL(item.gap)}</td>
+          <td class="sim-col">${fmtBRL(mdtrDiarioSimulado)} /dia</td>
+          <td class="sim-col" style="color: ${parseFloat(aceleracao) > 6 ? '#f87171' : '#60a5fa'};">${aceleracao}x</td>
+          <td><span class="tag-status ${item.statusClass}">${item.status}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Initial setup on load
+    renderConsultantChips();
+    applyFilters();
+  </script>
+</body>
+</html>

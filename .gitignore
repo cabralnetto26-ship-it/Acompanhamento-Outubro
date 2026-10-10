@@ -1,0 +1,7 @@
+# Scratch / temp files
+*.tmp
+~$*.xlsx
+.system_generated/
+scratch/
+copy.xlsx
+test_copy.xlsx
