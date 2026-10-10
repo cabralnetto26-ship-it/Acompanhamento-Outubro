@@ -653,18 +653,8 @@
             <th>Diagnóstico</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td><strong>DRUGSTORE NEBRASCA 24H</strong></td><td>HIPER SAÚDE</td><td>Isabela Cruccitti</td><td>R$ 112.437,07</td><td>R$ 15.487,77</td><td><span style="color: #60a5fa; font-weight: 700;">13,8%</span></td><td>Maior cliente individual do time.</td></tr>
-          <tr><td><strong>DROGARIA ULTRA NACIONAL</strong></td><td>ASSOCIADAS</td><td>Leonardo Mazzuco</td><td>R$ 109.379,36</td><td>R$ 10.851,93</td><td><span style="color: #fbbf24; font-weight: 700;">9,9%</span></td><td>Potencial de R$ 98k de faturamento pendente.</td></tr>
-          <tr><td><strong>FARMACIA ODEON</strong></td><td>ODEON</td><td>Valter Pereira Jr</td><td>R$ 96.288,27</td><td>R$ 1.679,27</td><td><span style="color: #f87171; font-weight: 700;">1,7% ⚠️</span></td><td><strong>Grave represamento</strong>: faltam R$ 94,6k.</td></tr>
-          <tr><td><strong>DROGARIAS ULTRA POPULAR</strong></td><td>FARMARCAS</td><td>Erivaldo Maciel</td><td>R$ 67.104,95</td><td>R$ 14.342,60</td><td><span style="color: #60a5fa; font-weight: 700;">21,4%</span></td><td>Bom andamento inicial.</td></tr>
-          <tr><td><strong>DROGARIA ULTRA POPULAR</strong></td><td>FARMARCAS</td><td>Isabela Cruccitti</td><td>R$ 63.199,57</td><td>R$ 14.342,60</td><td><span style="color: #60a5fa; font-weight: 700;">22,7%</span></td><td>Bom andamento inicial.</td></tr>
-          <tr><td><strong>DROGARIA ULTRAPOPULAR</strong></td><td>FARMARCAS</td><td>Leonardo Mazzuco</td><td>R$ 60.669,36</td><td>R$ 5.045,97</td><td><span style="color: #fbbf24; font-weight: 700;">8,3%</span></td><td>Gap de R$ 55,6k a ser trabalhado.</td></tr>
-          <tr><td><strong>NEI DROGAS II</strong></td><td>COMPRE BEM</td><td>Leonardo Mazzuco</td><td>R$ 54.670,83</td><td>R$ 4.265,36</td><td><span style="color: #fbbf24; font-weight: 700;">7,8%</span></td><td>Gap de R$ 50,4k.</td></tr>
-          <tr><td><strong>DROGARIA ULTRAPOPULAR</strong></td><td>FARMARCAS</td><td>Erivaldo Maciel</td><td>R$ 54.207,93</td><td>R$ 7.584,43</td><td><span style="color: #60a5fa; font-weight: 700;">14,0%</span></td><td>Tração em linha com a média.</td></tr>
-          <tr><td><strong>DROGARIA SÃO MARCOS</strong></td><td>INDEPENDENTES</td><td>Manuel Artero</td><td>R$ 49.452,51</td><td>R$ 4.394,56</td><td><span style="color: #fbbf24; font-weight: 700;">8,9%</span></td><td>Gap de R$ 45,0k.</td></tr>
-          <tr><td><strong>FARMACIA ODEON</strong></td><td>ODEON</td><td>Valter Pereira Jr</td><td>R$ 47.675,81</td><td>R$ 852,67</td><td><span style="color: #f87171; font-weight: 700;">1,8% ⚠️</span></td><td>Segundo CNPJ da Odeon quase inativo.</td></tr>
-          <tr><td><strong>DROGARIA ULTRA POPULAR PENAPOL</strong></td><td>FARMARCAS</td><td>Valter Pereira Jr</td><td>R$ 45.417,12</td><td>R$ 234,25</td><td><span style="color: #f87171; font-weight: 700;">0,5% ⚠️</span></td><td>Cota de R$ 45k com faturamento irrisório.</td></tr>
+        <tbody id="abcBody">
+          <!-- Populated by JS -->
         </tbody>
       </table>
     </div>
@@ -681,6 +671,20 @@
       { id: "847010603", nome: "Erivaldo Maciel", cota: 1122794.36, mdtr: 104241.41, cobMdtr: 9.3, fat: 92898.10, cobFat: 8.3, gap: 1029896.26, status: "Acelerar", statusClass: "status-alert" },
       { id: "847010602", nome: "Wellington Morais", cota: 848780.32, mdtr: 73902.85, cobMdtr: 8.7, fat: 65384.84, cobFat: 7.7, gap: 783395.48, status: "Atenção", statusClass: "status-alert" },
       { id: "847010604", nome: "Leonardo Mazzuco", cota: 1060357.11, mdtr: 90328.19, cobMdtr: 8.5, fat: 88194.37, cobFat: 8.3, gap: 972162.74, status: "Atenção", statusClass: "status-alert" }
+    ];
+
+    const rawAbc = [
+      { razao: "DRUGSTORE NEBRASCA 24H", rede: "HIPER SAÚDE", consultor: "Isabela Cruccitti", cota: 112437.07, fat: 15487.77, cob: 13.8, diag: "Maior cliente individual do time." },
+      { razao: "DROGARIA ULTRA NACIONAL", rede: "ASSOCIADAS", consultor: "Leonardo Mazzuco", cota: 109379.36, fat: 10851.93, cob: 9.9, diag: "Potencial de R$ 98k de faturamento pendente." },
+      { razao: "FARMACIA ODEON", rede: "ODEON", consultor: "Valter Pereira Jr", cota: 96288.27, fat: 1679.27, cob: 1.7, diag: "Grave represamento: faltam R$ 94,6k." },
+      { razao: "DROGARIAS ULTRA POPULAR", rede: "FARMARCAS", consultor: "Erivaldo Maciel", cota: 67104.95, fat: 14342.60, cob: 21.4, diag: "Bom andamento inicial." },
+      { razao: "DROGARIA ULTRA POPULAR", rede: "FARMARCAS", consultor: "Isabela Cruccitti", cota: 63199.57, fat: 14342.60, cob: 22.7, diag: "Bom andamento inicial." },
+      { razao: "DROGARIA ULTRAPOPULAR", rede: "FARMARCAS", consultor: "Leonardo Mazzuco", cota: 60669.36, fat: 5045.97, cob: 8.3, diag: "Gap de R$ 55,6k a ser trabalhado." },
+      { razao: "NEI DROGAS II", rede: "COMPRE BEM", consultor: "Leonardo Mazzuco", cota: 54670.83, fat: 4265.36, cob: 7.8, diag: "Gap de R$ 50,4k." },
+      { razao: "DROGARIA ULTRAPOPULAR", rede: "FARMARCAS", consultor: "Erivaldo Maciel", cota: 54207.93, fat: 7584.43, cob: 14.0, diag: "Tração em linha com a média." },
+      { razao: "DROGARIA SÃO MARCOS", rede: "INDEPENDENTES", consultor: "Manuel Artero", cota: 49452.51, fat: 4394.56, cob: 8.9, diag: "Gap de R$ 45,0k." },
+      { razao: "FARMACIA ODEON", rede: "ODEON", consultor: "Valter Pereira Jr", cota: 47675.81, fat: 852.67, cob: 1.8, diag: "Segundo CNPJ da Odeon quase inativo." },
+      { razao: "DROGARIA ULTRA POPULAR PENAPOL", rede: "FARMARCAS", consultor: "Valter Pereira Jr", cota: 45417.12, fat: 234.25, cob: 0.5, diag: "Cota de R$ 45k com faturamento irrisório." }
     ];
 
     // State of active consultant selection
@@ -802,6 +806,9 @@
 
       // Update Table
       updateTable(filtered, diasRestantes, metaMultiplier);
+
+      // Update ABC Table
+      updateAbcTable(filtered, searchTerm);
     }
 
     function updateKPIs(data) {
@@ -986,6 +993,45 @@
           <td class="sim-col">${fmtBRL(mdtrDiarioSimulado)} /dia</td>
           <td class="sim-col" style="color: ${parseFloat(aceleracao) > 6 ? '#f87171' : '#60a5fa'};">${aceleracao}x</td>
           <td><span class="tag-status ${item.statusClass}">${item.status}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateAbcTable(filteredConsultants, searchTerm) {
+      const tbody = document.getElementById('abcBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      
+      const allowedNames = filteredConsultants.map(d => d.nome);
+      
+      let filteredAbc = rawAbc.filter(item => allowedNames.includes(item.consultor));
+      
+      if (searchTerm) {
+        filteredAbc = filteredAbc.filter(item => 
+          item.razao.toLowerCase().includes(searchTerm) || 
+          item.rede.toLowerCase().includes(searchTerm) ||
+          item.consultor.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      if (filteredAbc.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum cliente na Curva ABC para os filtros aplicados.</td></tr>`;
+        return;
+      }
+      
+      filteredAbc.forEach(item => {
+        const tr = document.createElement('tr');
+        const cobColor = item.cob >= 11 ? '#60a5fa' : (item.cob >= 5 ? '#fbbf24' : '#f87171');
+        const alertHtml = item.cob < 5 ? ' ⚠️' : '';
+        tr.innerHTML = `
+          <td><strong>${item.razao}</strong></td>
+          <td>${item.rede}</td>
+          <td>${item.consultor}</td>
+          <td>${fmtBRL(item.cota)}</td>
+          <td>${fmtBRL(item.fat)}</td>
+          <td><span style="color: ${cobColor}; font-weight: 700;">${item.cob.toFixed(1)}%${alertHtml}</span></td>
+          <td>${item.diag}</td>
         `;
         tbody.appendChild(tr);
       });
