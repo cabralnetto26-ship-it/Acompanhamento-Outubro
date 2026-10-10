@@ -446,10 +446,10 @@
     <header>
       <div class="header-title">
         <h1>Ranking dos Setores: Cota vs MDTR</h1>
-        <p>Acompanhamento Gerencial Outubro/2026 Ã¢â‚¬Â¢ Gerente: JosÃƒÂ© Cabral Neto Ã¢â‚¬Â¢ CÃƒÂ³digo Regional: 847010600</p>
+        <p>Acompanhamento Gerencial Outubro/2026 • Gerente: José Cabral Neto • Código Regional: 847010600</p>
       </div>
       <div>
-        <span class="badge-tag">PosiÃƒÂ§ÃƒÂ£o: MDTR 05/10 | Sales 08/10</span>
+        <span class="badge-tag">Posição: MDTR 05/10 | Sales 08/10</span>
       </div>
     </header>
 
@@ -457,22 +457,22 @@
     <section class="filter-panel">
       <div class="filter-panel-header">
         <div class="filter-panel-title">
-          <span>Ã¢Å¡â„¢Ã¯Â¸Â Filtros e ParÃƒÂ¢metros EditÃƒÂ¡veis</span>
-          <span class="badge" id="activeFilterCount">8 setores visÃƒÂ­veis</span>
+          <span>⚙️ Filtros e Parâmetros Editáveis</span>
+          <span class="badge" id="activeFilterCount">8 setores visíveis</span>
         </div>
-        <button class="btn-secondary" id="btnResetFilters" onclick="resetFilters()">Ã°Å¸â€â€ž Redefinir Filtros</button>
+        <button class="btn-secondary" id="btnResetFilters" onclick="resetFilters()">🔄 Redefinir Filtros</button>
       </div>
 
       <div class="filter-grid">
         <!-- Search filter -->
         <div class="filter-group">
-          <label for="searchInput">Ã°Å¸â€Â Buscar Consultor / Setor</label>
+          <label for="searchInput">🔍 Buscar Consultor / Setor</label>
           <input type="text" id="searchInput" class="filter-input" placeholder="Ex: Isabela, 847010601..." oninput="applyFilters()">
         </div>
 
         <!-- Sort by -->
         <div class="filter-group">
-          <label for="sortBySelect">Ã°Å¸â€œÅ  Ordenar Por</label>
+          <label for="sortBySelect">📊 Ordenar Por</label>
           <select id="sortBySelect" class="filter-select" onchange="applyFilters()">
             <option value="cobMdtrDesc">Maior % Cobertura MDTR</option>
             <option value="cobMdtrAsc">Menor % Cobertura MDTR</option>
@@ -485,28 +485,28 @@
 
         <!-- Performance status filter -->
         <div class="filter-group">
-          <label>Ã°Å¸Å½Â¯ NÃƒÂ­vel de Desempenho</label>
+          <label>🎯 Nível de Desempenho</label>
           <div class="status-chips">
             <button class="chip-btn active" data-status="all" onclick="setStatusFilter('all')">Todos</button>
             <button class="chip-btn" data-status="high" onclick="setStatusFilter('high')">Alta Cob. (&ge;11%)</button>
-            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na MÃƒÂ©dia (9,5%-11%)</button>
-            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">AtenÃƒÂ§ÃƒÂ£o (&lt;9,5%)</button>
+            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na Média (9,5%-11%)</button>
+            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">Atenção (&lt;9,5%)</button>
           </div>
         </div>
 
         <!-- Simulator parameters: remaining days and target % -->
         <div class="filter-group">
-          <label for="diasRestantesInput">Ã¢ÂÂ±Ã¯Â¸Â Simulador: Dias ÃƒÅ¡teis Restantes</label>
+          <label for="diasRestantesInput">⏱️ Simulador: Dias Úteis Restantes</label>
           <div style="display: flex; gap: 8px; align-items: center;">
             <input type="number" id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="15" onchange="applyFilters()">
-            <span style="font-size: 12px; color: var(--text-muted);">dias ÃƒÂºteis</span>
+            <span style="font-size: 12px; color: var(--text-muted);">dias úteis</span>
           </div>
         </div>
 
         <div class="filter-group">
-          <label for="metaAlvoSelect">Ã°Å¸Å½Â¯ Simular Alvo de Cota</label>
+          <label for="metaAlvoSelect">🎯 Simular Alvo de Cota</label>
           <select id="metaAlvoSelect" class="filter-select" onchange="applyFilters()">
-            <option value="1.0">100% da Cota (Meta PadrÃƒÂ£o)</option>
+            <option value="1.0">100% da Cota (Meta Padrão)</option>
             <option value="0.9">90% da Cota</option>
             <option value="1.1">110% Supermeta</option>
           </select>
@@ -534,7 +534,7 @@
       <div class="kpi-card" style="--card-accent: #06b6d4;">
         <div class="kpi-label">MDTR Realizado (05/10)</div>
         <div class="kpi-value" id="kpiMdtr">R$ 836,98 K</div>
-        <div class="kpi-sub"><span class="highlight" id="kpiCobMdtr">10,4%</span> de cob. mÃƒÂ©dia</div>
+        <div class="kpi-sub"><span class="highlight" id="kpiCobMdtr">10,4%</span> de cob. média</div>
       </div>
       <div class="kpi-card" style="--card-accent: #10b981;">
         <div class="kpi-label">Faturamento Bruto (08/10)</div>
@@ -542,7 +542,7 @@
         <div class="kpi-sub"><span class="highlight" id="kpiCobFat">8,0%</span> faturado</div>
       </div>
       <div class="kpi-card" style="--card-accent: #f59e0b;">
-        <div class="kpi-label">1Ã‚Âº Lugar no Ranking</div>
+        <div class="kpi-label">1º Lugar no Ranking</div>
         <div class="kpi-value" id="kpiTopPerformer">Isabela Cruccitti</div>
         <div class="kpi-sub"><span class="highlight" id="kpiTopCob">13,8%</span> de cobertura</div>
       </div>
@@ -555,7 +555,7 @@
         <div class="chart-header">
           <div>
             <h2>Ranking por Cobertura de MDTR (%)</h2>
-            <p>Percentual da cota alcanÃƒÂ§ado no MDTR (atÃƒÂ© 05/10)</p>
+            <p>Percentual da cota alcançado no MDTR (até 05/10)</p>
           </div>
         </div>
         <div class="chart-canvas-container">
@@ -568,7 +568,7 @@
         <div class="chart-header">
           <div>
             <h2>Comparativo de Valores: Cota vs MDTR (R$)</h2>
-            <p>Volume em Reais por consultor com ordenaÃƒÂ§ÃƒÂ£o ativa</p>
+            <p>Volume em Reais por consultor com ordenação ativa</p>
           </div>
         </div>
         <div class="chart-canvas-container">
@@ -594,8 +594,8 @@
             <th>Fat. Bruto 08/10 (R$)</th>
             <th>Cob. Fat (%)</th>
             <th>GAP Cota (R$)</th>
-            <th class="sim-col">MDTR DiÃƒÂ¡rio Simulado</th>
-            <th class="sim-col">AceleraÃƒÂ§ÃƒÂ£o Sim.</th>
+            <th class="sim-col">MDTR Diário Simulado</th>
+            <th class="sim-col">Aceleração Sim.</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -605,15 +605,15 @@
       </table>
     </div>
 
-    <!-- DiagnÃƒÂ³stico por Rede -->
+    <!-- Diagnóstico por Rede -->
     <div class="table-box" style="margin-top: 24px;">
       <div class="table-title">
-        <span>DiagnÃƒÂ³stico por Rede FarmacÃƒÂªutica (BASE 600)</span>
+        <span>Diagnóstico por Rede Farmacêutica (BASE 600)</span>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Rede FarmacÃƒÂªutica</th>
+            <th>Rede Farmacêutica</th>
             <th style="text-align: center;">Lojas na Base</th>
             <th>Cota Total (R$)</th>
             <th>Faturado (R$)</th>
@@ -635,13 +635,13 @@
       <table>
         <thead>
           <tr>
-            <th>RazÃƒÂ£o Social / Fantasia</th>
+            <th>Razão Social / Fantasia</th>
             <th>Rede</th>
             <th>Consultor</th>
             <th>Cota (R$)</th>
             <th>Faturado (R$)</th>
             <th>Cob. (%)</th>
-            <th>DiagnÃƒÂ³stico</th>
+            <th>Diagnóstico</th>
           </tr>
         </thead>
         <tbody id="abcBody">
@@ -650,17 +650,17 @@
       </table>
     </div>
 
-    <!-- Cobertura de Carteira e PositivaÃƒÂ§ÃƒÂ£o (HYMPAR) -->
+    <!-- Cobertura de Carteira e Positivação (HYMPAR) -->
     <div class="table-box" style="margin-top: 24px;">
       <div class="table-title">
-        <span>Cobertura de Carteira e PositivaÃƒÂ§ÃƒÂ£o (HYMPAR)</span>
+        <span>Cobertura de Carteira e Positivação (HYMPAR)</span>
       </div>
       <table>
         <thead>
           <tr>
             <th>Consultor</th>
             <th style="text-align: center;">Clientes na Base</th>
-            <th style="text-align: center;">Meta PositivaÃƒÂ§ÃƒÂ£o</th>
+            <th style="text-align: center;">Meta Positivação</th>
             <th style="text-align: center;">Positivados PH</th>
             <th style="text-align: center;">% Atingido</th>
             <th style="text-align: center;">Saldo / Gap</th>
@@ -684,11 +684,11 @@
 
     const statusRedes = {
       "FARMARCAS": "Maior volume da regional (Ultra Popular, Drogatop).",
-      "INDEPENDENTES VIN": "Melhor taxa de conversÃƒÂ£o. Forte resposta no canal direto.",
-      "ASSOCIADAS": "Boa traÃƒÂ§ÃƒÂ£o de compras na primeira quinzena.",
+      "INDEPENDENTES VIN": "Melhor taxa de conversão. Forte resposta no canal direto.",
+      "ASSOCIADAS": "Boa tração de compras na primeira quinzena.",
       "HIPER SAUDE": "Grande peso nos setores de MS e MT.",
-      "MASTERFARMA": "Alta adesÃƒÂ£o ao faturamento.",
-      "REDE SANTA CATARINA": "Abaixo da mÃƒÂ©dia regional. Requer alinhamento de central.",
+      "MASTERFARMA": "Alta adesão ao faturamento.",
+      "REDE SANTA CATARINA": "Abaixo da média regional. Requer alinhamento de central.",
       "ECONOMIZE RONDONOPOLIS": "Concentrada no sul de MT (Erivaldo/Isabela).",
       "DROGARIA TOTAL": "Faturamento constante.",
       "COMPRE BEM": "Faturamento constante.",
@@ -714,7 +714,7 @@
       rawDataSetores.forEach(d => {
         const btn = document.createElement('button');
         btn.className = `consultant-tag ${selectedConsultantIds.has(d.id) ? 'active' : ''}`;
-        btn.innerHTML = `${selectedConsultantIds.has(d.id) ? 'Ã¢Å“â€œ ' : '+ '}${d.nome.split(' ')[0]}`;
+        btn.innerHTML = `${selectedConsultantIds.has(d.id) ? '✓ ' : '+ '}${d.nome.split(' ')[0]}`;
         btn.onclick = () => toggleConsultant(d.id);
         container.appendChild(btn);
       });
@@ -809,7 +809,7 @@
       });
 
       // Update badge count
-      document.getElementById('activeFilterCount').textContent = `${filtered.length} setores visÃƒÂ­veis`;
+      document.getElementById('activeFilterCount').textContent = `${filtered.length} setores visíveis`;
       document.getElementById('tableSubheader').textContent = `${filtered.length} de ${rawDataSetores.length} setores exibidos`;
 
       // Update KPI Cards
@@ -992,12 +992,12 @@
         const metaCalculada = item.cota * metaMultiplier;
         const gapSimulado = Math.max(0, metaCalculada - item.fat);
         const mdtrDiarioSimulado = gapSimulado / diasRestantes;
-        const fatDiarioAtual = item.fat / 6; // 6 dias ÃƒÂºteis decorridos atÃƒÂ© 08/10
+        const fatDiarioAtual = item.fat / 6; // 6 dias úteis decorridos até 08/10
         const aceleracao = fatDiarioAtual > 0 ? (mdtrDiarioSimulado / fatDiarioAtual).toFixed(1) : '-';
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><span class="rank-badge ${rankClass}">${rank}Ã‚Âº</span></td>
+          <td><span class="rank-badge ${rankClass}">${rank}º</span></td>
           <td><strong>${item.nome}</strong><br><span style="font-size: 11px; color: var(--text-muted);">${item.id}</span></td>
           <td>${fmtBRL(item.cota)}</td>
           <td><strong>${fmtBRL(item.mdtr)}</strong></td>
@@ -1043,7 +1043,7 @@
       filteredAbc.forEach(item => {
         const tr = document.createElement('tr');
         const cobColor = item.cob >= 11 ? '#60a5fa' : (item.cob >= 5 ? '#fbbf24' : '#f87171');
-        const alertHtml = item.cob < 5 ? ' Ã¢Å¡Â Ã¯Â¸Â' : '';
+        const alertHtml = item.cob < 5 ? ' ⚠️' : '';
         tr.innerHTML = `
           <td><strong>${item.razao}</strong></td>
           <td>${item.rede}</td>
@@ -1100,12 +1100,12 @@
         const tr = document.createElement('tr');
         const cob = item.cota > 0 ? (item.fat / item.cota) * 100 : 0;
         const cobColor = cob >= 11 ? '#34d399' : (cob >= 8 ? '#60a5fa' : '#fbbf24');
-        const alertHtml = cob < 8 ? ' Ã¢Å¡Â Ã¯Â¸Â' : '';
+        const alertHtml = cob < 8 ? ' ⚠️' : '';
         const diag = statusRedes[item.rede] || "-";
         
         let redeNome = item.rede;
-        if (redeNome === "HIPER SAUDE") redeNome = "HIPER SAÃƒÅ¡DE";
-        if (redeNome === "ECONOMIZE RONDONOPOLIS") redeNome = "ECONOMIZE RONDONÃƒâ€œPOLIS";
+        if (redeNome === "HIPER SAUDE") redeNome = "HIPER SAÚDE";
+        if (redeNome === "ECONOMIZE RONDONOPOLIS") redeNome = "ECONOMIZE RONDONÓPOLIS";
 
         tr.innerHTML = `
           <td><strong>${redeNome}</strong></td>
@@ -1138,7 +1138,7 @@
       filtered.sort((a, b) => (b.pos / b.meta) - (a.pos / a.meta));
       
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum dado de positivaÃƒÂ§ÃƒÂ£o para os filtros aplicados.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum dado de positivação para os filtros aplicados.</td></tr>`;
         return;
       }
       
@@ -1154,7 +1154,7 @@
         const tr = document.createElement('tr');
         const pct = (item.pos / item.meta) * 100;
         const color = pct >= 60 ? '#34d399' : (pct >= 40 ? '#60a5fa' : '#f87171');
-        const alertHtml = pct < 20 ? ' Ã¢Å¡Â Ã¯Â¸Â' : '';
+        const alertHtml = pct < 20 ? ' ⚠️' : '';
         
         tr.innerHTML = `
           <td><strong>${item.consultor}</strong></td>
@@ -1189,6 +1189,4 @@
   </script>
 </body>
 </html>
-
-
 
