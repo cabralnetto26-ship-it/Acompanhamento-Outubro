@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -446,10 +446,10 @@
     <header>
       <div class="header-title">
         <h1>Ranking dos Setores: Cota vs MDTR</h1>
-        <p>Acompanhamento Gerencial Outubro/2026 â€¢ Gerente: JosÃ© Cabral Neto â€¢ CÃ³digo Regional: 847010600</p>
+        <p>Acompanhamento Gerencial Outubro/2026 • Gerente: José Cabral Neto • Código Regional: 847010600</p>
       </div>
       <div>
-        <span class="badge-tag">PosiÃ§Ã£o: MDTR 05/10 | Sales 08/10</span>
+        <span class="badge-tag">Posição: MDTR 05/10 | Sales 08/10</span>
       </div>
     </header>
 
@@ -457,22 +457,22 @@
     <section class="filter-panel">
       <div class="filter-panel-header">
         <div class="filter-panel-title">
-          <span>âš™ï¸ Filtros e ParÃ¢metros EditÃ¡veis</span>
-          <span class="badge" id="activeFilterCount">8 setores visÃ­veis</span>
+          <span>⚙️ Filtros e Parâmetros Editáveis</span>
+          <span class="badge" id="activeFilterCount">8 setores visíveis</span>
         </div>
-        <button class="btn-secondary" id="btnResetFilters" onclick="resetFilters()">ðŸ”„ Redefinir Filtros</button>
+        <button class="btn-secondary" id="btnResetFilters" onclick="resetFilters()">🔄 Redefinir Filtros</button>
       </div>
 
       <div class="filter-grid">
         <!-- Search filter -->
         <div class="filter-group">
-          <label for="searchInput">ðŸ” Buscar Consultor / Setor</label>
+          <label for="searchInput">🔍 Buscar Consultor / Setor</label>
           <input type="text" id="searchInput" class="filter-input" placeholder="Ex: Isabela, 847010601..." oninput="applyFilters()">
         </div>
 
         <!-- Sort by -->
         <div class="filter-group">
-          <label for="sortBySelect">ðŸ“Š Ordenar Por</label>
+          <label for="sortBySelect">📊 Ordenar Por</label>
           <select id="sortBySelect" class="filter-select" onchange="applyFilters()">
             <option value="cobMdtrDesc">Maior % Cobertura MDTR</option>
             <option value="cobMdtrAsc">Menor % Cobertura MDTR</option>
@@ -485,28 +485,28 @@
 
         <!-- Performance status filter -->
         <div class="filter-group">
-          <label>ðŸŽ¯ NÃ­vel de Desempenho</label>
+          <label>🎯 Nível de Desempenho</label>
           <div class="status-chips">
             <button class="chip-btn active" data-status="all" onclick="setStatusFilter('all')">Todos</button>
             <button class="chip-btn" data-status="high" onclick="setStatusFilter('high')">Alta Cob. (&ge;11%)</button>
-            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na MÃ©dia (9,5%-11%)</button>
-            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">AtenÃ§Ã£o (&lt;9,5%)</button>
+            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na Média (9,5%-11%)</button>
+            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">Atenção (&lt;9,5%)</button>
           </div>
         </div>
 
         <!-- Simulator parameters: remaining days and target % -->
         <div class="filter-group">
-          <label for="diasRestantesInput">â±ï¸ Simulador: Dias Ãšteis Restantes</label>
+          <label for="diasRestantesInput">⏱️ Simulador: Dias Úteis Restantes</label>
           <div style="display: flex; gap: 8px; align-items: center;">
             <input type="number" id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="15" onchange="applyFilters()">
-            <span style="font-size: 12px; color: var(--text-muted);">dias Ãºteis</span>
+            <span style="font-size: 12px; color: var(--text-muted);">dias úteis</span>
           </div>
         </div>
 
         <div class="filter-group">
-          <label for="metaAlvoSelect">ðŸŽ¯ Simular Alvo de Cota</label>
+          <label for="metaAlvoSelect">🎯 Simular Alvo de Cota</label>
           <select id="metaAlvoSelect" class="filter-select" onchange="applyFilters()">
-            <option value="1.0">100% da Cota (Meta PadrÃ£o)</option>
+            <option value="1.0">100% da Cota (Meta Padrão)</option>
             <option value="0.9">90% da Cota</option>
             <option value="1.1">110% Supermeta</option>
           </select>
@@ -534,7 +534,7 @@
       <div class="kpi-card" style="--card-accent: #06b6d4;">
         <div class="kpi-label">MDTR Realizado (05/10)</div>
         <div class="kpi-value" id="kpiMdtr">R$ 836,98 K</div>
-        <div class="kpi-sub"><span class="highlight" id="kpiCobMdtr">10,4%</span> de cob. mÃ©dia</div>
+        <div class="kpi-sub"><span class="highlight" id="kpiCobMdtr">10,4%</span> de cob. média</div>
       </div>
       <div class="kpi-card" style="--card-accent: #10b981;">
         <div class="kpi-label">Faturamento Bruto (08/10)</div>
@@ -542,7 +542,7 @@
         <div class="kpi-sub"><span class="highlight" id="kpiCobFat">8,0%</span> faturado</div>
       </div>
       <div class="kpi-card" style="--card-accent: #f59e0b;">
-        <div class="kpi-label">1Âº Lugar no Ranking</div>
+        <div class="kpi-label">1º Lugar no Ranking</div>
         <div class="kpi-value" id="kpiTopPerformer">Isabela Cruccitti</div>
         <div class="kpi-sub"><span class="highlight" id="kpiTopCob">13,8%</span> de cobertura</div>
       </div>
@@ -555,7 +555,7 @@
         <div class="chart-header">
           <div>
             <h2>Ranking por Cobertura de MDTR (%)</h2>
-            <p>Percentual da cota alcanÃ§ado no MDTR (atÃ© 05/10)</p>
+            <p>Percentual da cota alcançado no MDTR (até 05/10)</p>
           </div>
         </div>
         <div class="chart-canvas-container">
@@ -568,7 +568,7 @@
         <div class="chart-header">
           <div>
             <h2>Comparativo de Valores: Cota vs MDTR (R$)</h2>
-            <p>Volume em Reais por consultor com ordenaÃ§Ã£o ativa</p>
+            <p>Volume em Reais por consultor com ordenação ativa</p>
           </div>
         </div>
         <div class="chart-canvas-container">
@@ -594,8 +594,8 @@
             <th>Fat. Bruto 08/10 (R$)</th>
             <th>Cob. Fat (%)</th>
             <th>GAP Cota (R$)</th>
-            <th class="sim-col">MDTR DiÃ¡rio Simulado</th>
-            <th class="sim-col">AceleraÃ§Ã£o Sim.</th>
+            <th class="sim-col">MDTR Diário Simulado</th>
+            <th class="sim-col">Aceleração Sim.</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -605,15 +605,15 @@
       </table>
     </div>
 
-    <!-- DiagnÃ³stico por Rede -->
+    <!-- Diagnóstico por Rede -->
     <div class="table-box" style="margin-top: 24px;">
       <div class="table-title">
-        <span>DiagnÃ³stico por Rede FarmacÃªutica (BASE 600)</span>
+        <span>Diagnóstico por Rede Farmacêutica (BASE 600)</span>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Rede FarmacÃªutica</th>
+            <th>Rede Farmacêutica</th>
             <th style="text-align: center;">Lojas na Base</th>
             <th>Cota Total (R$)</th>
             <th>Faturado (R$)</th>
@@ -635,13 +635,13 @@
       <table>
         <thead>
           <tr>
-            <th>RazÃ£o Social / Fantasia</th>
+            <th>Razão Social / Fantasia</th>
             <th>Rede</th>
             <th>Consultor</th>
             <th>Cota (R$)</th>
             <th>Faturado (R$)</th>
             <th>Cob. (%)</th>
-            <th>DiagnÃ³stico</th>
+            <th>Diagnóstico</th>
           </tr>
         </thead>
         <tbody id="abcBody">
@@ -650,17 +650,17 @@
       </table>
     </div>
 
-    <!-- Cobertura de Carteira e PositivaÃ§Ã£o (HYMPAR) -->
+    <!-- Cobertura de Carteira e Positivação (HYMPAR) -->
     <div class="table-box" style="margin-top: 24px;">
       <div class="table-title">
-        <span>Cobertura de Carteira e PositivaÃ§Ã£o (HYMPAR)</span>
+        <span>Cobertura de Carteira e Positivação (HYMPAR)</span>
       </div>
       <table>
         <thead>
           <tr>
             <th>Consultor</th>
             <th style="text-align: center;">Clientes na Base</th>
-            <th style="text-align: center;">Meta PositivaÃ§Ã£o</th>
+            <th style="text-align: center;">Meta Positivação</th>
             <th style="text-align: center;">Positivados PH</th>
             <th style="text-align: center;">% Atingido</th>
             <th style="text-align: center;">Saldo / Gap</th>
@@ -678,26 +678,118 @@
 
   <script>
     // Master data
-    const rawDataSetores = [{"id":"847010607","nome":"Manuel Artero","cota":1090998.13,"mdtr":129573.32,"cobMdtr":11.9,"fat":94177.28,"cobFat":8.6,"gap":996820.85,"status":"Lider","statusClass":"status-leader"},{"id":"847010604","nome":"Leonardo Mazzuco","cota":1060357.11,"mdtr":-2146736400.16,"cobMdtr":-202454.1,"fat":-2146739142.93,"cobFat":-202454.4,"gap":2147799500.04,"status":"Acelerar","statusClass":"status-alert"},{"id":"847010603","nome":"Erivaldo Maciel","cota":1122794.36,"mdtr":104241.41,"cobMdtr":9.3,"fat":92898.1,"cobFat":8.3,"gap":1029896.26,"status":"Acelerar","statusClass":"status-alert"},{"id":"847010602","nome":"Wellington Morais","cota":848780.32,"mdtr":73902.85,"cobMdtr":8.7,"fat":65384.84,"cobFat":7.7,"gap":783395.48,"status":"Acelerar","statusClass":"status-alert"},{"id":"847010601","nome":"Rafael Nascimento","cota":942882.94,"mdtr":88775.39,"cobMdtr":9.4,"fat":55371.58,"cobFat":5.9,"gap":887511.36,"status":"Acelerar","statusClass":"status-alert"},{"id":"847010606","nome":"Pricila Moreira","cota":556481.27,"mdtr":57250.91,"cobMdtr":10.3,"fat":38809.28,"cobFat":7,"gap":517671.99,"status":"Na Media","statusClass":"status-ok"},{"id":"847010608","nome":"Valter Pereira Jr","cota":1085968.45,"mdtr":104638.22,"cobMdtr":9.6,"fat":47842.79,"cobFat":4.4,"gap":1038125.66,"status":"Na Media","statusClass":"status-ok"},{"id":"847010605","nome":"Isabela Cruccitti","cota":1363710.73,"mdtr":188273.82,"cobMdtr":13.8,"fat":159685.52,"cobFat":11.7,"gap":1204025.21,"status":"Lider","statusClass":"status-leader"}];
+    const rawDataSetores = [
+      { id: "847010605", nome: "Isabela Cruccitti", cota: 1363710.73, mdtr: 188273.82, cobMdtr: 13.8, fat: 159685.52, cobFat: 11.7, gap: 1204025.21, status: "Líder Regional", statusClass: "status-leader" },
+      { id: "847010607", nome: "Manuel Artero", cota: 1090998.13, mdtr: 129573.32, cobMdtr: 11.9, fat: 94177.28, cobFat: 8.6, gap: 996820.85, status: "Excelente", statusClass: "status-ok" },
+      { id: "847010606", nome: "Pricila Moreira", cota: 556481.27, mdtr: 57250.91, cobMdtr: 10.3, fat: 38809.28, cobFat: 7.0, gap: 517671.99, status: "Na Média", statusClass: "status-ok" },
+      { id: "847010608", nome: "Valter Pereira Jr", cota: 1085968.45, mdtr: 104638.22, cobMdtr: 9.6, fat: 47842.79, cobFat: 4.4, gap: 1038125.66, status: "Acelerar Fat.", statusClass: "status-alert" },
+      { id: "847010601", nome: "Rafael Nascimento", cota: 942882.94, mdtr: 88775.39, cobMdtr: 9.4, fat: 55371.58, cobFat: 5.9, gap: 887511.36, status: "Acelerar", statusClass: "status-alert" },
+      { id: "847010603", nome: "Erivaldo Maciel", cota: 1122794.36, mdtr: 104241.41, cobMdtr: 9.3, fat: 92898.10, cobFat: 8.3, gap: 1029896.26, status: "Acelerar", statusClass: "status-alert" },
+      { id: "847010602", nome: "Wellington Morais", cota: 848780.32, mdtr: 73902.85, cobMdtr: 8.7, fat: 65384.84, cobFat: 7.7, gap: 783395.48, status: "Atenção", statusClass: "status-alert" },
+      { id: "847010604", nome: "Leonardo Mazzuco", cota: 1060357.11, mdtr: 90328.19, cobMdtr: 8.5, fat: 88194.37, cobFat: 8.3, gap: 972162.74, status: "Atenção", statusClass: "status-alert" }
+    ];
 
     const statusRedes = {
       "FARMARCAS": "Maior volume da regional (Ultra Popular, Drogatop).",
-      "INDEPENDENTES VIN": "Melhor taxa de conversÃ£o. Forte resposta no canal direto.",
-      "ASSOCIADAS": "Boa traÃ§Ã£o de compras na primeira quinzena.",
+      "INDEPENDENTES VIN": "Melhor taxa de conversão. Forte resposta no canal direto.",
+      "ASSOCIADAS": "Boa tração de compras na primeira quinzena.",
       "HIPER SAUDE": "Grande peso nos setores de MS e MT.",
-      "MASTERFARMA": "Alta adesÃ£o ao faturamento.",
-      "REDE SANTA CATARINA": "Abaixo da mÃ©dia regional. Requer alinhamento de central.",
+      "MASTERFARMA": "Alta adesão ao faturamento.",
+      "REDE SANTA CATARINA": "Abaixo da média regional. Requer alinhamento de central.",
       "ECONOMIZE RONDONOPOLIS": "Concentrada no sul de MT (Erivaldo/Isabela).",
       "DROGARIA TOTAL": "Faturamento constante.",
       "COMPRE BEM": "Faturamento constante.",
       "DSG FARMA": "Maior percentual de cobertura entre redes."
     };
     
-    const rawRedes = [{"rede":"ASSOCIADAS","consultor":"Wellington Morais","lojas":36,"cota":209008.58,"fat":9548.47},{"rede":"FARMARCAS","consultor":"Leonardo Mazzuco","lojas":30,"cota":412438.48,"fat":35678.24},{"rede":"COMPRE BEM","consultor":"Pricila Moreira","lojas":12,"cota":62511.5,"fat":10393.46},{"rede":"ECONOMIZE RONDONOPOLIS","consultor":"Pricila Moreira","lojas":8,"cota":59561.42,"fat":7165.67},{"rede":"MASTERFARMA","consultor":"Rafael Nascimento","lojas":18,"cota":78508.01,"fat":160.88},{"rede":"COMPRE BEM","consultor":"Rafael Nascimento","lojas":4,"cota":14157.38,"fat":0},{"rede":"ASSOCIADAS","consultor":"Rafael Nascimento","lojas":49,"cota":283242.04,"fat":20966.69},{"rede":"INDEPENDENTES VIN","consultor":"Leonardo Mazzuco","lojas":43,"cota":157978.4,"fat":10017.93},{"rede":"HIPER SAUDE","consultor":"Pricila Moreira","lojas":9,"cota":29183.58,"fat":2504.82},{"rede":"DSG FARMA","consultor":"Valter Pereira Jr","lojas":13,"cota":46723.22,"fat":3333.37},{"rede":"INDEPENDENTES VIN","consultor":"Rafael Nascimento","lojas":34,"cota":202698.24,"fat":2015.84},{"rede":"FARMARCAS","consultor":"Rafael Nascimento","lojas":18,"cota":233836.06,"fat":17519.18},{"rede":"ASSOCIADAS","consultor":"Isabela Cruccitti","lojas":18,"cota":168163.27,"fat":28371.92},{"rede":"DSG FARMA","consultor":"Leonardo Mazzuco","lojas":1,"cota":2582.07,"fat":2430.09},{"rede":"HIPER SAUDE","consultor":"Leonardo Mazzuco","lojas":6,"cota":33791.05,"fat":5511.05},{"rede":"MASTERFARMA","consultor":"Valter Pereira Jr","lojas":12,"cota":77782.48,"fat":468.53},{"rede":"INDEPENDENTES VIN","consultor":"Erivaldo Maciel","lojas":43,"cota":181697.22,"fat":5686.24},{"rede":"DSG FARMA","consultor":"Manuel Artero","lojas":6,"cota":32235.28,"fat":2867.11},{"rede":"ASSOCIADAS","consultor":"Valter Pereira Jr","lojas":15,"cota":84429.64,"fat":6465.68},{"rede":"HIPER SAUDE","consultor":"Erivaldo Maciel","lojas":14,"cota":88158.64,"fat":4468.67},{"rede":"ECONOMIZE RONDONOPOLIS","consultor":"Rafael Nascimento","lojas":1,"cota":6184.45,"fat":0},{"rede":"INDEPENDENTES VIN","consultor":"Wellington Morais","lojas":52,"cota":254810.02,"fat":16699.79},{"rede":"FARMARCAS","consultor":"Pricila Moreira","lojas":9,"cota":81464.17,"fat":6963.65},{"rede":"ASSOCIADAS","consultor":"Erivaldo Maciel","lojas":32,"cota":158099.9,"fat":6290.76},{"rede":"FARMARCAS","consultor":"Valter Pereira Jr","lojas":6,"cota":105990.31,"fat":7485.16},{"rede":"ASSOCIADAS","consultor":"Pricila Moreira","lojas":20,"cota":90103.33,"fat":5932.08},{"rede":"INDEPENDENTES VIN","consultor":"Manuel Artero","lojas":40,"cota":315121.35,"fat":31502.57},{"rede":"ASSOCIADAS","consultor":"Leonardo Mazzuco","lojas":14,"cota":186223.16,"fat":12119.95},{"rede":"HIPER SAUDE","consultor":"Valter Pereira Jr","lojas":9,"cota":39227.33,"fat":590.96},{"rede":"INDEPENDENTES VIN","consultor":"Isabela Cruccitti","lojas":32,"cota":140366.4,"fat":14542.16},{"rede":"MASTERFARMA","consultor":"Manuel Artero","lojas":4,"cota":21681.16,"fat":2281.75},{"rede":"ECONOMIZE RONDONOPOLIS","consultor":"Wellington Morais","lojas":2,"cota":19532.89,"fat":0},{"rede":"INDEPENDENTES VIN","consultor":"Pricila Moreira","lojas":52,"cota":157077.31,"fat":291.23},{"rede":"MASTERFARMA","consultor":"Erivaldo Maciel","lojas":12,"cota":67442.86,"fat":431.53},{"rede":"HIPER SAUDE","consultor":"Rafael Nascimento","lojas":12,"cota":72330.82,"fat":6478.43},{"rede":"COMPRE BEM","consultor":"Wellington Morais","lojas":1,"cota":4424.93,"fat":0},{"rede":"MASTERFARMA","consultor":"Isabela Cruccitti","lojas":13,"cota":85181.19,"fat":4308.41},{"rede":"DSG FARMA","consultor":"Wellington Morais","lojas":2,"cota":5034.43,"fat":0},{"rede":"COMPRE BEM","consultor":"Leonardo Mazzuco","lojas":4,"cota":73788.02,"fat":6893.66},{"rede":"FARMARCAS","consultor":"Isabela Cruccitti","lojas":31,"cota":405856.58,"fat":28973.95},{"rede":"MASTERFARMA","consultor":"Wellington Morais","lojas":18,"cota":66737.88,"fat":4407.12},{"rede":"COMPRE BEM","consultor":"Isabela Cruccitti","lojas":3,"cota":17980.32,"fat":0},{"rede":"INDEPENDENTES VIN","consultor":"Valter Pereira Jr","lojas":38,"cota":208115.55,"fat":7359.71},{"rede":"ECONOMIZE RONDONOPOLIS","consultor":"Erivaldo Maciel","lojas":11,"cota":136415.21,"fat":1284.07},{"rede":"HIPER SAUDE","consultor":"Isabela Cruccitti","lojas":11,"cota":204327.66,"fat":26480.48},{"rede":"ECONOMIZE RONDONOPOLIS","consultor":"Leonardo Mazzuco","lojas":10,"cota":72317.97,"fat":7391.02},{"rede":"DSG FARMA","consultor":"Erivaldo Maciel","lojas":3,"cota":25331.7,"fat":411.34},{"rede":"DSG FARMA","consultor":"Isabela Cruccitti","lojas":4,"cota":7466.03,"fat":1967.04},{"rede":"REDE SANTA CATARINA","consultor":"Manuel Artero","lojas":38,"cota":395139.6,"fat":38914.02},{"rede":"MASTERFARMA","consultor":"Pricila Moreira","lojas":11,"cota":52348.92,"fat":1950.5},{"rede":"DROGARIA TOTAL","consultor":"Valter Pereira Jr","lojas":18,"cota":162891.54,"fat":9677.66},{"rede":"HIPER SAUDE","consultor":"Wellington Morais","lojas":3,"cota":19851.12,"fat":0},{"rede":"ECONOMIZE RONDONOPOLIS","consultor":"Isabela Cruccitti","lojas":9,"cota":79116.58,"fat":1785.34},{"rede":"MASTERFARMA","consultor":"Leonardo Mazzuco","lojas":10,"cota":25263.78,"fat":700.16},{"rede":"DROGARIA TOTAL","consultor":"Manuel Artero","lojas":12,"cota":75338.73,"fat":637.63},{"rede":"DSG FARMA","consultor":"Pricila Moreira","lojas":2,"cota":4774.09,"fat":1174.82},{"rede":"FARMARCAS","consultor":"Erivaldo Maciel","lojas":19,"cota":445300.87,"fat":74325.49},{"rede":"DSG FARMA","consultor":"Rafael Nascimento","lojas":4,"cota":35600.24,"fat":8230.56},{"rede":"FARMARCAS","consultor":"Wellington Morais","lojas":21,"cota":223197.8,"fat":27836.2},{"rede":"COMPRE BEM","consultor":"Erivaldo Maciel","lojas":4,"cota":18807.06,"fat":0},{"rede":"HIPER SAUDE","consultor":"Manuel Artero","lojas":2,"cota":20766.44,"fat":17.35}];
+    const rawRedes = [
+      {rede:"ASSOCIADAS",consultor:"Wellington Morais",lojas:36,cota:209008.58,fat:72984.68},
+      {rede:"FARMARCAS",consultor:"Leonardo Mazzuco",lojas:30,cota:412438.48,fat:38806.79},
+      {rede:"COMPRE BEM",consultor:"Pricila Moreira",lojas:12,cota:62511.50,fat:16129.11},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Pricila Moreira",lojas:8,cota:59561.42,fat:13099.18},
+      {rede:"MASTERFARMA",consultor:"Rafael Nascimento",lojas:18,cota:78508.01,fat:31706.37},
+      {rede:"COMPRE BEM",consultor:"Rafael Nascimento",lojas:4,cota:14157.38,fat:2880.15},
+      {rede:"ASSOCIADAS",consultor:"Rafael Nascimento",lojas:49,cota:283242.04,fat:70275.03},
+      {rede:"INDEPENDENTES VIN",consultor:"Leonardo Mazzuco",lojas:43,cota:163115.33,fat:76370.53},
+      {rede:"HIPER SAUDE",consultor:"Pricila Moreira",lojas:9,cota:29183.58,fat:11870.99},
+      {rede:"DSG FARMA",consultor:"Valter Pereira Jr",lojas:13,cota:46723.22,fat:28797.73},
+      {rede:"INDEPENDENTES VIN",consultor:"Rafael Nascimento",lojas:34,cota:202698.24,fat:66310.03},
+      {rede:"FARMARCAS",consultor:"Rafael Nascimento",lojas:18,cota:233836.06,fat:28445.15},
+      {rede:"ASSOCIADAS",consultor:"Isabela Cruccitti",lojas:18,cota:168163.27,fat:33338.08},
+      {rede:"DSG FARMA",consultor:"Leonardo Mazzuco",lojas:1,cota:2582.07,fat:2430.09},
+      {rede:"HIPER SAUDE",consultor:"Leonardo Mazzuco",lojas:6,cota:33791.05,fat:7109.12},
+      {rede:"MASTERFARMA",consultor:"Valter Pereira Jr",lojas:12,cota:77782.48,fat:14295.50},
+      {rede:"INDEPENDENTES VIN",consultor:"Erivaldo Maciel",lojas:43,cota:181697.22,fat:58455.76},
+      {rede:"DSG FARMA",consultor:"Manuel Artero",lojas:6,cota:32235.28,fat:7900.76},
+      {rede:"ASSOCIADAS",consultor:"Valter Pereira Jr",lojas:15,cota:84429.64,fat:32481.20},
+      {rede:"HIPER SAUDE",consultor:"Erivaldo Maciel",lojas:14,cota:88158.64,fat:20956.01},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Rafael Nascimento",lojas:1,cota:6184.45,fat:234.25},
+      {rede:"INDEPENDENTES VIN",consultor:"Wellington Morais",lojas:52,cota:254810.02,fat:88301.80},
+      {rede:"FARMARCAS",consultor:"Pricila Moreira",lojas:9,cota:81464.17,fat:20328.14},
+      {rede:"ASSOCIADAS",consultor:"Erivaldo Maciel",lojas:32,cota:158099.90,fat:56317.38},
+      {rede:"FARMARCAS",consultor:"Valter Pereira Jr",lojas:6,cota:105990.31,fat:10003.93},
+      {rede:"ASSOCIADAS",consultor:"Pricila Moreira",lojas:20,cota:90103.33,fat:49046.52},
+      {rede:"INDEPENDENTES VIN",consultor:"Manuel Artero",lojas:40,cota:315121.35,fat:99353.59},
+      {rede:"ASSOCIADAS",consultor:"Leonardo Mazzuco",lojas:14,cota:186223.16,fat:27663.14},
+      {rede:"HIPER SAUDE",consultor:"Valter Pereira Jr",lojas:9,cota:39227.33,fat:10330.05},
+      {rede:"INDEPENDENTES VIN",consultor:"Isabela Cruccitti",lojas:32,cota:143563.57,fat:49797.34},
+      {rede:"MASTERFARMA",consultor:"Manuel Artero",lojas:4,cota:21681.16,fat:8049.67},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Wellington Morais",lojas:2,cota:19532.89,fat:1817.88},
+      {rede:"INDEPENDENTES VIN",consultor:"Pricila Moreira",lojas:52,cota:157077.31,fat:71069.99},
+      {rede:"MASTERFARMA",consultor:"Erivaldo Maciel",lojas:12,cota:67442.86,fat:9031.77},
+      {rede:"HIPER SAUDE",consultor:"Rafael Nascimento",lojas:12,cota:72330.82,fat:24222.47},
+      {rede:"COMPRE BEM",consultor:"Wellington Morais",lojas:1,cota:4424.93,fat:2148.20},
+      {rede:"MASTERFARMA",consultor:"Isabela Cruccitti",lojas:13,cota:85181.19,fat:25752.98},
+      {rede:"DSG FARMA",consultor:"Wellington Morais",lojas:2,cota:5034.43,fat:2774.09},
+      {rede:"COMPRE BEM",consultor:"Leonardo Mazzuco",lojas:4,cota:73788.02,fat:9146.06},
+      {rede:"FARMARCAS",consultor:"Isabela Cruccitti",lojas:31,cota:405856.58,fat:83104.74},
+      {rede:"MASTERFARMA",consultor:"Wellington Morais",lojas:18,cota:66737.88,fat:18388.44},
+      {rede:"COMPRE BEM",consultor:"Isabela Cruccitti",lojas:3,cota:17980.32,fat:9709.38},
+      {rede:"INDEPENDENTES VIN",consultor:"Valter Pereira Jr",lojas:38,cota:208115.55,fat:50723.64},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Erivaldo Maciel",lojas:11,cota:136415.21,fat:13049.20},
+      {rede:"HIPER SAUDE",consultor:"Isabela Cruccitti",lojas:11,cota:204327.66,fat:36474.17},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Leonardo Mazzuco",lojas:10,cota:72317.97,fat:14318.03},
+      {rede:"DSG FARMA",consultor:"Erivaldo Maciel",lojas:3,cota:25331.70,fat:5226.57},
+      {rede:"DSG FARMA",consultor:"Isabela Cruccitti",lojas:4,cota:7466.03,fat:6293.89},
+      {rede:"REDE SANTA CATARINA",consultor:"Manuel Artero",lojas:38,cota:395139.60,fat:40795.21},
+      {rede:"MASTERFARMA",consultor:"Pricila Moreira",lojas:11,cota:52348.92,fat:7347.46},
+      {rede:"DROGARIA TOTAL",consultor:"Valter Pereira Jr",lojas:18,cota:162891.54,fat:42924.83},
+      {rede:"HIPER SAUDE",consultor:"Wellington Morais",lojas:3,cota:19851.12,fat:7464.19},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Isabela Cruccitti",lojas:9,cota:79116.58,fat:27059.40},
+      {rede:"MASTERFARMA",consultor:"Leonardo Mazzuco",lojas:10,cota:25263.78,fat:40836.19},
+      {rede:"DROGARIA TOTAL",consultor:"Manuel Artero",lojas:12,cota:75338.73,fat:11532.12},
+      {rede:"DSG FARMA",consultor:"Pricila Moreira",lojas:2,cota:4774.09,fat:1174.82},
+      {rede:"FARMARCAS",consultor:"Erivaldo Maciel",lojas:19,cota:445300.87,fat:76356.73},
+      {rede:"DSG FARMA",consultor:"Rafael Nascimento",lojas:4,cota:35600.24,fat:9165.26},
+      {rede:"FARMARCAS",consultor:"Wellington Morais",lojas:21,cota:223197.80,fat:46154.59},
+      {rede:"COMPRE BEM",consultor:"Erivaldo Maciel",lojas:4,cota:18807.06,fat:6617.55},
+      {rede:"HIPER SAUDE",consultor:"Manuel Artero",lojas:2,cota:20766.44,fat:831.08}
+    ];
 
-    const rawAbc = [{"razao":"DRUGSTORE NEBRASCA 24H","rede":"HIPER SAUDE","consultor":"Isabela Cruccitti","cota":112437.07,"fat":15487.77,"cob":13.8,"diag":"Em acompanhamento."},{"razao":"DROGARIA ULTRA NACIONAL","rede":"ASSOCIADAS","consultor":"Leonardo Mazzuco","cota":109379.36,"fat":10851.93,"cob":9.9,"diag":"Abaixo da media, requer tracao."},{"razao":"FARMACIA ODEON","rede":"ODEON","consultor":"Valter Pereira Jr","cota":96288.27,"fat":1679.27,"cob":1.7,"diag":"Grave represamento."},{"razao":"DROGARIAS ULTRA POPULAR","rede":"FARMARCAS","consultor":"Erivaldo Maciel","cota":67104.95,"fat":14342.6,"cob":21.4,"diag":"Bom andamento inicial."},{"razao":"DROGARIA ULTRA POPULAR","rede":"FARMARCAS","consultor":"Isabela Cruccitti","cota":63199.57,"fat":0,"cob":0,"diag":"Grave represamento."},{"razao":"DROGARIA ULTRAPOPULAR","rede":"FARMARCAS","consultor":"Leonardo Mazzuco","cota":60669.36,"fat":5045.97,"cob":8.3,"diag":"Abaixo da media, requer tracao."},{"razao":"NEI DROGAS II","rede":"COMPRE BEM","consultor":"Leonardo Mazzuco","cota":54670.83,"fat":4265.36,"cob":7.8,"diag":"Abaixo da media, requer tracao."},{"razao":"DROGARIA ULTRAPOPULAR","rede":"FARMARCAS","consultor":"Erivaldo Maciel","cota":54207.93,"fat":7584.43,"cob":14,"diag":"Em acompanhamento."},{"razao":"DROGARIA SAO MARCOS","rede":"INDEPENDENTES VIN","consultor":"Manuel Artero","cota":49452.51,"fat":4394.56,"cob":8.9,"diag":"Abaixo da media, requer tracao."},{"razao":"FARMACIA ODEON","rede":"ODEON","consultor":"Valter Pereira Jr","cota":47675.81,"fat":852.67,"cob":1.8,"diag":"Grave represamento."},{"razao":"DROGATOP","rede":"FARMARCAS","consultor":"Wellington Morais","cota":46280.06,"fat":4279.22,"cob":9.2,"diag":"Abaixo da media, requer tracao."},{"razao":"FARMACIA IMPERIAL","rede":"INDEPENDENTES VIN","consultor":"Manuel Artero","cota":45417.75,"fat":6334.9,"cob":13.9,"diag":"Em acompanhamento."},{"razao":"DROGARIA ULTRA POPULAR PENAPOLIS","rede":"FARMARCAS","consultor":"Valter Pereira Jr","cota":45417.12,"fat":0,"cob":0,"diag":"Grave represamento."},{"razao":"FARMACIA GALENA MANIPULACAO DE FORMULAS","rede":"ECONOMIZE RONDONOPOLIS","consultor":"Erivaldo Maciel","cota":45368.03,"fat":0,"cob":0,"diag":"Grave represamento."},{"razao":"FARMACIA MADEIRA","rede":"REDE MADEIRA","consultor":"Isabela Cruccitti","cota":44175.32,"fat":9923.39,"cob":22.5,"diag":"Bom andamento inicial."}];
+    const rawAbc = [
+      { razao: "DRUGSTORE NEBRASCA 24H", rede: "HIPER SAÚDE", consultor: "Isabela Cruccitti", cota: 112437.07, fat: 15487.77, cob: 13.8, diag: "Maior cliente individual do time." },
+      { razao: "DROGARIA ULTRA NACIONAL", rede: "ASSOCIADAS", consultor: "Leonardo Mazzuco", cota: 109379.36, fat: 10851.93, cob: 9.9, diag: "Potencial de R$ 98k de faturamento pendente." },
+      { razao: "FARMACIA ODEON", rede: "ODEON", consultor: "Valter Pereira Jr", cota: 96288.27, fat: 1679.27, cob: 1.7, diag: "Grave represamento: faltam R$ 94,6k." },
+      { razao: "DROGARIAS ULTRA POPULAR", rede: "FARMARCAS", consultor: "Erivaldo Maciel", cota: 67104.95, fat: 14342.60, cob: 21.4, diag: "Bom andamento inicial." },
+      { razao: "DROGARIA ULTRA POPULAR", rede: "FARMARCAS", consultor: "Isabela Cruccitti", cota: 63199.57, fat: 14342.60, cob: 22.7, diag: "Bom andamento inicial." },
+      { razao: "DROGARIA ULTRAPOPULAR", rede: "FARMARCAS", consultor: "Leonardo Mazzuco", cota: 60669.36, fat: 5045.97, cob: 8.3, diag: "Gap de R$ 55,6k a ser trabalhado." },
+      { razao: "NEI DROGAS II", rede: "COMPRE BEM", consultor: "Leonardo Mazzuco", cota: 54670.83, fat: 4265.36, cob: 7.8, diag: "Gap de R$ 50,4k." },
+      { razao: "DROGARIA ULTRAPOPULAR", rede: "FARMARCAS", consultor: "Erivaldo Maciel", cota: 54207.93, fat: 7584.43, cob: 14.0, diag: "Tração em linha com a média." },
+      { razao: "DROGARIA SÃO MARCOS", rede: "INDEPENDENTES", consultor: "Manuel Artero", cota: 49452.51, fat: 4394.56, cob: 8.9, diag: "Gap de R$ 45,0k." },
+      { razao: "FARMACIA ODEON", rede: "ODEON", consultor: "Valter Pereira Jr", cota: 47675.81, fat: 852.67, cob: 1.8, diag: "Segundo CNPJ da Odeon quase inativo." },
+      { razao: "DROGARIA ULTRA POPULAR PENAPOL", rede: "FARMARCAS", consultor: "Valter Pereira Jr", cota: 45417.12, fat: 234.25, cob: 0.5, diag: "Cota de R$ 45k com faturamento irrisório." }
+    ];
 
-    const rawHympar = [{"id":"847010607","consultor":"Manuel Artero","base":135,"meta":108,"pos":135,"gap":27},{"id":"847010604","consultor":"Leonardo Mazzuco","base":130,"meta":104,"pos":129,"gap":25},{"id":"847010603","consultor":"Erivaldo Maciel","base":139,"meta":111,"pos":139,"gap":28},{"id":"847010602","consultor":"Wellington Morais","base":140,"meta":112,"pos":140,"gap":28},{"id":"847010601","consultor":"Rafael Nascimento","base":143,"meta":114,"pos":143,"gap":29},{"id":"847010606","consultor":"Pricila Moreira","base":132,"meta":106,"pos":132,"gap":26},{"id":"847010608","consultor":"Valter Pereira Jr","base":138,"meta":110,"pos":138,"gap":28},{"id":"847010605","consultor":"Isabela Cruccitti","base":140,"meta":112,"pos":140,"gap":28}];
+    const rawHympar = [
+      { id: "847010607", consultor: "Manuel Artero", base: 135, meta: 108, pos: 70, gap: -38 },
+      { id: "847010604", consultor: "Leonardo Mazzuco", base: 129, meta: 104, pos: 62, gap: -42 },
+      { id: "847010605", consultor: "Isabela Cruccitti", base: 140, meta: 112, pos: 67, gap: -45 },
+      { id: "847010608", consultor: "Valter Pereira Jr", base: 138, meta: 110, pos: 38, gap: -72 },
+      { id: "847010601", consultor: "Rafael Nascimento", base: 143, meta: 114, pos: 37, gap: -77 },
+      { id: "847010603", consultor: "Erivaldo Maciel", base: 139, meta: 111, pos: 34, gap: -77 },
+      { id: "847010602", consultor: "Wellington Morais", base: 140, meta: 112, pos: 35, gap: -77 },
+      { id: "847010606", consultor: "Pricila Moreira", base: 132, meta: 106, pos: 19, gap: -87 }
+    ];
 
     // State of active consultant selection
     let selectedConsultantIds = new Set(rawDataSetores.map(d => d.id));
@@ -712,7 +804,7 @@
       rawDataSetores.forEach(d => {
         const btn = document.createElement('button');
         btn.className = `consultant-tag ${selectedConsultantIds.has(d.id) ? 'active' : ''}`;
-        btn.innerHTML = `${selectedConsultantIds.has(d.id) ? 'âœ“ ' : '+ '}${d.nome.split(' ')[0]}`;
+        btn.innerHTML = `${selectedConsultantIds.has(d.id) ? '✓ ' : '+ '}${d.nome.split(' ')[0]}`;
         btn.onclick = () => toggleConsultant(d.id);
         container.appendChild(btn);
       });
@@ -807,7 +899,7 @@
       });
 
       // Update badge count
-      document.getElementById('activeFilterCount').textContent = `${filtered.length} setores visÃ­veis`;
+      document.getElementById('activeFilterCount').textContent = `${filtered.length} setores visíveis`;
       document.getElementById('tableSubheader').textContent = `${filtered.length} de ${rawDataSetores.length} setores exibidos`;
 
       // Update KPI Cards
@@ -990,12 +1082,12 @@
         const metaCalculada = item.cota * metaMultiplier;
         const gapSimulado = Math.max(0, metaCalculada - item.fat);
         const mdtrDiarioSimulado = gapSimulado / diasRestantes;
-        const fatDiarioAtual = item.fat / 6; // 6 dias Ãºteis decorridos atÃ© 08/10
+        const fatDiarioAtual = item.fat / 6; // 6 dias úteis decorridos até 08/10
         const aceleracao = fatDiarioAtual > 0 ? (mdtrDiarioSimulado / fatDiarioAtual).toFixed(1) : '-';
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><span class="rank-badge ${rankClass}">${rank}Âº</span></td>
+          <td><span class="rank-badge ${rankClass}">${rank}º</span></td>
           <td><strong>${item.nome}</strong><br><span style="font-size: 11px; color: var(--text-muted);">${item.id}</span></td>
           <td>${fmtBRL(item.cota)}</td>
           <td><strong>${fmtBRL(item.mdtr)}</strong></td>
@@ -1041,7 +1133,7 @@
       filteredAbc.forEach(item => {
         const tr = document.createElement('tr');
         const cobColor = item.cob >= 11 ? '#60a5fa' : (item.cob >= 5 ? '#fbbf24' : '#f87171');
-        const alertHtml = item.cob < 5 ? ' âš ï¸' : '';
+        const alertHtml = item.cob < 5 ? ' ⚠️' : '';
         tr.innerHTML = `
           <td><strong>${item.razao}</strong></td>
           <td>${item.rede}</td>
@@ -1098,12 +1190,12 @@
         const tr = document.createElement('tr');
         const cob = item.cota > 0 ? (item.fat / item.cota) * 100 : 0;
         const cobColor = cob >= 11 ? '#34d399' : (cob >= 8 ? '#60a5fa' : '#fbbf24');
-        const alertHtml = cob < 8 ? ' âš ï¸' : '';
+        const alertHtml = cob < 8 ? ' ⚠️' : '';
         const diag = statusRedes[item.rede] || "-";
         
         let redeNome = item.rede;
-        if (redeNome === "HIPER SAUDE") redeNome = "HIPER SAÃšDE";
-        if (redeNome === "ECONOMIZE RONDONOPOLIS") redeNome = "ECONOMIZE RONDONÃ“POLIS";
+        if (redeNome === "HIPER SAUDE") redeNome = "HIPER SAÚDE";
+        if (redeNome === "ECONOMIZE RONDONOPOLIS") redeNome = "ECONOMIZE RONDONÓPOLIS";
 
         tr.innerHTML = `
           <td><strong>${redeNome}</strong></td>
@@ -1136,7 +1228,7 @@
       filtered.sort((a, b) => (b.pos / b.meta) - (a.pos / a.meta));
       
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum dado de positivaÃ§Ã£o para os filtros aplicados.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum dado de positivação para os filtros aplicados.</td></tr>`;
         return;
       }
       
@@ -1152,7 +1244,7 @@
         const tr = document.createElement('tr');
         const pct = (item.pos / item.meta) * 100;
         const color = pct >= 60 ? '#34d399' : (pct >= 40 ? '#60a5fa' : '#f87171');
-        const alertHtml = pct < 20 ? ' âš ï¸' : '';
+        const alertHtml = pct < 20 ? ' ⚠️' : '';
         
         tr.innerHTML = `
           <td><strong>${item.consultor}</strong></td>
@@ -1187,4 +1279,3 @@
   </script>
 </body>
 </html>
-
