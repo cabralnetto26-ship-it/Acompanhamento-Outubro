@@ -649,6 +649,31 @@
         </tbody>
       </table>
     </div>
+
+    <!-- Cobertura de Carteira e Positivação (HYMPAR) -->
+    <div class="table-box" style="margin-top: 24px;">
+      <div class="table-title">
+        <span>Cobertura de Carteira e Positivação (HYMPAR)</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Consultor</th>
+            <th style="text-align: center;">Clientes na Base</th>
+            <th style="text-align: center;">Meta Positivação</th>
+            <th style="text-align: center;">Positivados PH</th>
+            <th style="text-align: center;">% Atingido</th>
+            <th style="text-align: center;">Saldo / Gap</th>
+          </tr>
+        </thead>
+        <tbody id="hymparBody">
+          <!-- Populated by JS -->
+        </tbody>
+        <tfoot id="hymparFoot">
+          <!-- Populated by JS -->
+        </tfoot>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -753,6 +778,17 @@
       { razao: "DROGARIA SÃO MARCOS", rede: "INDEPENDENTES", consultor: "Manuel Artero", cota: 49452.51, fat: 4394.56, cob: 8.9, diag: "Gap de R$ 45,0k." },
       { razao: "FARMACIA ODEON", rede: "ODEON", consultor: "Valter Pereira Jr", cota: 47675.81, fat: 852.67, cob: 1.8, diag: "Segundo CNPJ da Odeon quase inativo." },
       { razao: "DROGARIA ULTRA POPULAR PENAPOL", rede: "FARMARCAS", consultor: "Valter Pereira Jr", cota: 45417.12, fat: 234.25, cob: 0.5, diag: "Cota de R$ 45k com faturamento irrisório." }
+    ];
+
+    const rawHympar = [
+      { id: "847010607", consultor: "Manuel Artero", base: 135, meta: 108, pos: 70, gap: -38 },
+      { id: "847010604", consultor: "Leonardo Mazzuco", base: 129, meta: 104, pos: 62, gap: -42 },
+      { id: "847010605", consultor: "Isabela Cruccitti", base: 140, meta: 112, pos: 67, gap: -45 },
+      { id: "847010608", consultor: "Valter Pereira Jr", base: 138, meta: 110, pos: 38, gap: -72 },
+      { id: "847010601", consultor: "Rafael Nascimento", base: 143, meta: 114, pos: 37, gap: -77 },
+      { id: "847010603", consultor: "Erivaldo Maciel", base: 139, meta: 111, pos: 34, gap: -77 },
+      { id: "847010602", consultor: "Wellington Morais", base: 140, meta: 112, pos: 35, gap: -77 },
+      { id: "847010606", consultor: "Pricila Moreira", base: 132, meta: 106, pos: 19, gap: -87 }
     ];
 
     // State of active consultant selection
@@ -880,6 +916,9 @@
 
       // Update Redes Table
       updateRedesTable(filtered, searchTerm);
+
+      // Update Hympar Table
+      updateHymparTable(filtered, searchTerm);
     }
 
     function updateKPIs(data) {
@@ -1168,6 +1207,70 @@
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    function updateHymparTable(filteredConsultants, searchTerm) {
+      const tbody = document.getElementById('hymparBody');
+      const tfoot = document.getElementById('hymparFoot');
+      if (!tbody || !tfoot) return;
+      tbody.innerHTML = '';
+      tfoot.innerHTML = '';
+      
+      const allowedIds = filteredConsultants.map(d => d.id);
+      let filtered = rawHympar.filter(item => allowedIds.includes(item.id));
+      
+      if (searchTerm) {
+        filtered = filtered.filter(item => 
+          item.consultor.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      filtered.sort((a, b) => (b.pos / b.meta) - (a.pos / a.meta));
+      
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhum dado de positivação para os filtros aplicados.</td></tr>`;
+        return;
+      }
+      
+      let totalBase = 0;
+      let totalMeta = 0;
+      let totalPos = 0;
+
+      filtered.forEach(item => {
+        totalBase += item.base;
+        totalMeta += item.meta;
+        totalPos += item.pos;
+
+        const tr = document.createElement('tr');
+        const pct = (item.pos / item.meta) * 100;
+        const color = pct >= 60 ? '#34d399' : (pct >= 40 ? '#60a5fa' : '#f87171');
+        const alertHtml = pct < 20 ? ' ⚠️' : '';
+        
+        tr.innerHTML = `
+          <td><strong>${item.consultor}</strong></td>
+          <td style="text-align: center;">${item.base}</td>
+          <td style="text-align: center;">${item.meta}</td>
+          <td style="text-align: center; font-weight: 700;">${item.pos}</td>
+          <td style="text-align: center;"><span style="color: ${color}; font-weight: 700;">${pct.toFixed(1)}%${alertHtml}</span></td>
+          <td style="text-align: center; color: #f87171;">${item.gap}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      if (filtered.length > 1) {
+        const totalPct = (totalPos / totalMeta) * 100;
+        const color = totalPct >= 60 ? '#34d399' : (totalPct >= 40 ? '#60a5fa' : '#f87171');
+        tfoot.innerHTML = `
+          <tr style="background-color: rgba(255, 255, 255, 0.05); font-weight: 700;">
+            <td>TOTAL SELECIONADO</td>
+            <td style="text-align: center;">${totalBase}</td>
+            <td style="text-align: center;">${totalMeta}</td>
+            <td style="text-align: center;">${totalPos}</td>
+            <td style="text-align: center;"><span style="color: ${color};">${totalPct.toFixed(1)}%</span></td>
+            <td style="text-align: center; color: #f87171;">${totalPos - totalMeta}</td>
+          </tr>
+        `;
+      }
     }
 
     // Initial setup on load
