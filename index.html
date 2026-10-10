@@ -621,17 +621,8 @@
             <th>Status e Comportamento</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td><strong>FARMARCAS</strong></td><td style="text-align: center;">134</td><td>R$ 1.908.084,28</td><td>R$ 303.200,07</td><td><span style="font-weight: 700; color: #34d399;">15,9%</span></td><td>Maior volume da regional (Ultra Popular, Drogatop).</td></tr>
-          <tr><td><strong>INDEPENDENTES VIN</strong></td><td style="text-align: center;">334</td><td>R$ 1.626.198,58</td><td>R$ 560.382,68</td><td><span style="font-weight: 700; color: #34d399;">34,5%</span></td><td><strong>Melhor taxa de conversão</strong>. Forte resposta no canal direto.</td></tr>
-          <tr><td><strong>ASSOCIADAS</strong></td><td style="text-align: center;">184</td><td>R$ 1.179.269,92</td><td>R$ 342.106,03</td><td><span style="font-weight: 700; color: #34d399;">29,0%</span></td><td>Boa tração de compras na primeira quinzena.</td></tr>
-          <tr><td><strong>HIPER SAÚDE</strong></td><td style="text-align: center;">66</td><td>R$ 507.636,64</td><td>R$ 119.258,08</td><td><span style="font-weight: 700; color: #60a5fa;">23,5%</span></td><td>Grande peso nos setores de MS e MT.</td></tr>
-          <tr><td><strong>MASTERFARMA</strong></td><td style="text-align: center;">98</td><td>R$ 474.946,27</td><td>R$ 155.408,38</td><td><span style="font-weight: 700; color: #34d399;">32,7%</span></td><td>Alta adesão ao faturamento.</td></tr>
-          <tr><td><strong>REDE SANTA CATARINA</strong></td><td style="text-align: center;">38</td><td>R$ 395.139,60</td><td>R$ 40.795,21</td><td><span style="font-weight: 700; color: #fbbf24;">10,3% ⚠️</span></td><td><strong>Abaixo da média regional</strong>. Requer alinhamento de central.</td></tr>
-          <tr><td><strong>ECONOMIZE RONDONÓPOLIS</strong></td><td style="text-align: center;">41</td><td>R$ 373.128,52</td><td>R$ 69.577,94</td><td><span style="font-weight: 700; color: #60a5fa;">18,6%</span></td><td>Concentrada no sul de MT (Erivaldo/Isabela).</td></tr>
-          <tr><td><strong>DROGARIA TOTAL</strong></td><td style="text-align: center;">30</td><td>R$ 238.230,26</td><td>R$ 54.456,95</td><td><span style="font-weight: 700; color: #60a5fa;">22,9%</span></td><td>Faturamento constante.</td></tr>
-          <tr><td><strong>COMPRE BEM</strong></td><td style="text-align: center;">28</td><td>R$ 191.669,21</td><td>R$ 46.630,45</td><td><span style="font-weight: 700; color: #60a5fa;">24,3%</span></td><td>Faturamento constante.</td></tr>
-          <tr><td><strong>DSG FARMA</strong></td><td style="text-align: center;">35</td><td>R$ 159.747,06</td><td>R$ 63.763,21</td><td><span style="font-weight: 700; color: #34d399;">39,9%</span></td><td>Maior percentual de cobertura entre redes.</td></tr>
+        <tbody id="redesBody">
+          <!-- Populated by JS -->
         </tbody>
       </table>
     </div>
@@ -671,6 +662,83 @@
       { id: "847010603", nome: "Erivaldo Maciel", cota: 1122794.36, mdtr: 104241.41, cobMdtr: 9.3, fat: 92898.10, cobFat: 8.3, gap: 1029896.26, status: "Acelerar", statusClass: "status-alert" },
       { id: "847010602", nome: "Wellington Morais", cota: 848780.32, mdtr: 73902.85, cobMdtr: 8.7, fat: 65384.84, cobFat: 7.7, gap: 783395.48, status: "Atenção", statusClass: "status-alert" },
       { id: "847010604", nome: "Leonardo Mazzuco", cota: 1060357.11, mdtr: 90328.19, cobMdtr: 8.5, fat: 88194.37, cobFat: 8.3, gap: 972162.74, status: "Atenção", statusClass: "status-alert" }
+    ];
+
+    const statusRedes = {
+      "FARMARCAS": "Maior volume da regional (Ultra Popular, Drogatop).",
+      "INDEPENDENTES VIN": "Melhor taxa de conversão. Forte resposta no canal direto.",
+      "ASSOCIADAS": "Boa tração de compras na primeira quinzena.",
+      "HIPER SAUDE": "Grande peso nos setores de MS e MT.",
+      "MASTERFARMA": "Alta adesão ao faturamento.",
+      "REDE SANTA CATARINA": "Abaixo da média regional. Requer alinhamento de central.",
+      "ECONOMIZE RONDONOPOLIS": "Concentrada no sul de MT (Erivaldo/Isabela).",
+      "DROGARIA TOTAL": "Faturamento constante.",
+      "COMPRE BEM": "Faturamento constante.",
+      "DSG FARMA": "Maior percentual de cobertura entre redes."
+    };
+    
+    const rawRedes = [
+      {rede:"ASSOCIADAS",consultor:"Wellington Morais",lojas:36,cota:209008.58,fat:72984.68},
+      {rede:"FARMARCAS",consultor:"Leonardo Mazzuco",lojas:30,cota:412438.48,fat:38806.79},
+      {rede:"COMPRE BEM",consultor:"Pricila Moreira",lojas:12,cota:62511.50,fat:16129.11},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Pricila Moreira",lojas:8,cota:59561.42,fat:13099.18},
+      {rede:"MASTERFARMA",consultor:"Rafael Nascimento",lojas:18,cota:78508.01,fat:31706.37},
+      {rede:"COMPRE BEM",consultor:"Rafael Nascimento",lojas:4,cota:14157.38,fat:2880.15},
+      {rede:"ASSOCIADAS",consultor:"Rafael Nascimento",lojas:49,cota:283242.04,fat:70275.03},
+      {rede:"INDEPENDENTES VIN",consultor:"Leonardo Mazzuco",lojas:43,cota:163115.33,fat:76370.53},
+      {rede:"HIPER SAUDE",consultor:"Pricila Moreira",lojas:9,cota:29183.58,fat:11870.99},
+      {rede:"DSG FARMA",consultor:"Valter Pereira Jr",lojas:13,cota:46723.22,fat:28797.73},
+      {rede:"INDEPENDENTES VIN",consultor:"Rafael Nascimento",lojas:34,cota:202698.24,fat:66310.03},
+      {rede:"FARMARCAS",consultor:"Rafael Nascimento",lojas:18,cota:233836.06,fat:28445.15},
+      {rede:"ASSOCIADAS",consultor:"Isabela Cruccitti",lojas:18,cota:168163.27,fat:33338.08},
+      {rede:"DSG FARMA",consultor:"Leonardo Mazzuco",lojas:1,cota:2582.07,fat:2430.09},
+      {rede:"HIPER SAUDE",consultor:"Leonardo Mazzuco",lojas:6,cota:33791.05,fat:7109.12},
+      {rede:"MASTERFARMA",consultor:"Valter Pereira Jr",lojas:12,cota:77782.48,fat:14295.50},
+      {rede:"INDEPENDENTES VIN",consultor:"Erivaldo Maciel",lojas:43,cota:181697.22,fat:58455.76},
+      {rede:"DSG FARMA",consultor:"Manuel Artero",lojas:6,cota:32235.28,fat:7900.76},
+      {rede:"ASSOCIADAS",consultor:"Valter Pereira Jr",lojas:15,cota:84429.64,fat:32481.20},
+      {rede:"HIPER SAUDE",consultor:"Erivaldo Maciel",lojas:14,cota:88158.64,fat:20956.01},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Rafael Nascimento",lojas:1,cota:6184.45,fat:234.25},
+      {rede:"INDEPENDENTES VIN",consultor:"Wellington Morais",lojas:52,cota:254810.02,fat:88301.80},
+      {rede:"FARMARCAS",consultor:"Pricila Moreira",lojas:9,cota:81464.17,fat:20328.14},
+      {rede:"ASSOCIADAS",consultor:"Erivaldo Maciel",lojas:32,cota:158099.90,fat:56317.38},
+      {rede:"FARMARCAS",consultor:"Valter Pereira Jr",lojas:6,cota:105990.31,fat:10003.93},
+      {rede:"ASSOCIADAS",consultor:"Pricila Moreira",lojas:20,cota:90103.33,fat:49046.52},
+      {rede:"INDEPENDENTES VIN",consultor:"Manuel Artero",lojas:40,cota:315121.35,fat:99353.59},
+      {rede:"ASSOCIADAS",consultor:"Leonardo Mazzuco",lojas:14,cota:186223.16,fat:27663.14},
+      {rede:"HIPER SAUDE",consultor:"Valter Pereira Jr",lojas:9,cota:39227.33,fat:10330.05},
+      {rede:"INDEPENDENTES VIN",consultor:"Isabela Cruccitti",lojas:32,cota:143563.57,fat:49797.34},
+      {rede:"MASTERFARMA",consultor:"Manuel Artero",lojas:4,cota:21681.16,fat:8049.67},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Wellington Morais",lojas:2,cota:19532.89,fat:1817.88},
+      {rede:"INDEPENDENTES VIN",consultor:"Pricila Moreira",lojas:52,cota:157077.31,fat:71069.99},
+      {rede:"MASTERFARMA",consultor:"Erivaldo Maciel",lojas:12,cota:67442.86,fat:9031.77},
+      {rede:"HIPER SAUDE",consultor:"Rafael Nascimento",lojas:12,cota:72330.82,fat:24222.47},
+      {rede:"COMPRE BEM",consultor:"Wellington Morais",lojas:1,cota:4424.93,fat:2148.20},
+      {rede:"MASTERFARMA",consultor:"Isabela Cruccitti",lojas:13,cota:85181.19,fat:25752.98},
+      {rede:"DSG FARMA",consultor:"Wellington Morais",lojas:2,cota:5034.43,fat:2774.09},
+      {rede:"COMPRE BEM",consultor:"Leonardo Mazzuco",lojas:4,cota:73788.02,fat:9146.06},
+      {rede:"FARMARCAS",consultor:"Isabela Cruccitti",lojas:31,cota:405856.58,fat:83104.74},
+      {rede:"MASTERFARMA",consultor:"Wellington Morais",lojas:18,cota:66737.88,fat:18388.44},
+      {rede:"COMPRE BEM",consultor:"Isabela Cruccitti",lojas:3,cota:17980.32,fat:9709.38},
+      {rede:"INDEPENDENTES VIN",consultor:"Valter Pereira Jr",lojas:38,cota:208115.55,fat:50723.64},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Erivaldo Maciel",lojas:11,cota:136415.21,fat:13049.20},
+      {rede:"HIPER SAUDE",consultor:"Isabela Cruccitti",lojas:11,cota:204327.66,fat:36474.17},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Leonardo Mazzuco",lojas:10,cota:72317.97,fat:14318.03},
+      {rede:"DSG FARMA",consultor:"Erivaldo Maciel",lojas:3,cota:25331.70,fat:5226.57},
+      {rede:"DSG FARMA",consultor:"Isabela Cruccitti",lojas:4,cota:7466.03,fat:6293.89},
+      {rede:"REDE SANTA CATARINA",consultor:"Manuel Artero",lojas:38,cota:395139.60,fat:40795.21},
+      {rede:"MASTERFARMA",consultor:"Pricila Moreira",lojas:11,cota:52348.92,fat:7347.46},
+      {rede:"DROGARIA TOTAL",consultor:"Valter Pereira Jr",lojas:18,cota:162891.54,fat:42924.83},
+      {rede:"HIPER SAUDE",consultor:"Wellington Morais",lojas:3,cota:19851.12,fat:7464.19},
+      {rede:"ECONOMIZE RONDONOPOLIS",consultor:"Isabela Cruccitti",lojas:9,cota:79116.58,fat:27059.40},
+      {rede:"MASTERFARMA",consultor:"Leonardo Mazzuco",lojas:10,cota:25263.78,fat:40836.19},
+      {rede:"DROGARIA TOTAL",consultor:"Manuel Artero",lojas:12,cota:75338.73,fat:11532.12},
+      {rede:"DSG FARMA",consultor:"Pricila Moreira",lojas:2,cota:4774.09,fat:1174.82},
+      {rede:"FARMARCAS",consultor:"Erivaldo Maciel",lojas:19,cota:445300.87,fat:76356.73},
+      {rede:"DSG FARMA",consultor:"Rafael Nascimento",lojas:4,cota:35600.24,fat:9165.26},
+      {rede:"FARMARCAS",consultor:"Wellington Morais",lojas:21,cota:223197.80,fat:46154.59},
+      {rede:"COMPRE BEM",consultor:"Erivaldo Maciel",lojas:4,cota:18807.06,fat:6617.55},
+      {rede:"HIPER SAUDE",consultor:"Manuel Artero",lojas:2,cota:20766.44,fat:831.08}
     ];
 
     const rawAbc = [
@@ -809,6 +877,9 @@
 
       // Update ABC Table
       updateAbcTable(filtered, searchTerm);
+
+      // Update Redes Table
+      updateRedesTable(filtered, searchTerm);
     }
 
     function updateKPIs(data) {
@@ -1032,6 +1103,68 @@
           <td>${fmtBRL(item.fat)}</td>
           <td><span style="color: ${cobColor}; font-weight: 700;">${item.cob.toFixed(1)}%${alertHtml}</span></td>
           <td>${item.diag}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateRedesTable(filteredConsultants, searchTerm) {
+      const tbody = document.getElementById('redesBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      
+      const allowedNames = filteredConsultants.map(d => d.nome);
+      
+      // Filter by consultant
+      let filtered = rawRedes.filter(item => allowedNames.includes(item.consultor));
+      
+      // Group by rede
+      let grouped = {};
+      filtered.forEach(item => {
+        if (!grouped[item.rede]) {
+          grouped[item.rede] = { rede: item.rede, lojas: 0, cota: 0, fat: 0 };
+        }
+        grouped[item.rede].lojas += item.lojas;
+        grouped[item.rede].cota += item.cota;
+        grouped[item.rede].fat += item.fat;
+      });
+      
+      let aggregated = Object.values(grouped);
+      
+      // Filter by search
+      if (searchTerm) {
+        aggregated = aggregated.filter(item => 
+          item.rede.toLowerCase().includes(searchTerm) ||
+          (statusRedes[item.rede] && statusRedes[item.rede].toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      // Sort by cota desc
+      aggregated.sort((a, b) => b.cota - a.cota);
+      
+      if (aggregated.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Nenhuma rede encontrada para os filtros aplicados.</td></tr>`;
+        return;
+      }
+      
+      aggregated.forEach(item => {
+        const tr = document.createElement('tr');
+        const cob = item.cota > 0 ? (item.fat / item.cota) * 100 : 0;
+        const cobColor = cob >= 11 ? '#34d399' : (cob >= 8 ? '#60a5fa' : '#fbbf24');
+        const alertHtml = cob < 8 ? ' ⚠️' : '';
+        const diag = statusRedes[item.rede] || "-";
+        
+        let redeNome = item.rede;
+        if (redeNome === "HIPER SAUDE") redeNome = "HIPER SAÚDE";
+        if (redeNome === "ECONOMIZE RONDONOPOLIS") redeNome = "ECONOMIZE RONDONÓPOLIS";
+
+        tr.innerHTML = `
+          <td><strong>${redeNome}</strong></td>
+          <td style="text-align: center;">${item.lojas}</td>
+          <td>${fmtBRL(item.cota)}</td>
+          <td>${fmtBRL(item.fat)}</td>
+          <td><span style="color: ${cobColor}; font-weight: 700;">${cob.toFixed(1)}%${alertHtml}</span></td>
+          <td>${diag}</td>
         `;
         tbody.appendChild(tr);
       });
