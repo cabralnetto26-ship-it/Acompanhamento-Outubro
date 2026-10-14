@@ -93,30 +93,174 @@ Para que cada consultor alcance **100% da sua cota** nos **13 dias úteis restan
 
 ---
 
-## 5. Diagnóstico por Rede Farmacêutica (BASE 600)
+## 5. Diagnóstico por Rede Farmacêutica & Clientes Sem Compra (BASE 600)
 
-| Rede Farmacêutica | Lojas na Base | Cota Total (R$) | Faturado (R$) | % Cobertura | Status e Comportamento |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **FARMARCAS** | 134 | R$ 1.908.084,28 | R$ 343.344,00 | **18,0%** | Maior volume da regional (Ultra Popular, Drogatop). |
-| **INDEPENDENTES VIN** | 334 | R$ 1.626.198,58 | R$ 268.049,69 | **16,5%** | Forte tração no canal direto. |
-| **ASSOCIADAS** | 184 | R$ 1.179.269,92 | R$ 180.370,17 | **15,3%** | Boa tração de compras na primeira quinzena. |
-| **HIPER SAÚDE** | 66 | R$ 507.636,64 | R$ 101.409,91 | **20,0%** | Grande peso nos setores de MS e MT. |
-| **MASTERFARMA** | 98 | R$ 474.946,27 | R$ 54.498,90 | **11,5%** | Adesão consistente ao faturamento. |
-| **REDE SANTA CATARINA** | 38 | R$ 395.139,60 | R$ 77.479,11 | **19,6%** | Recuperação sólida no setor Manuel Artero. |
-| **ECONOMIZE RONDONÓPOLIS** | 41 | R$ 373.128,52 | R$ 108.782,51 | **29,2%** | Destaque em MT (Isabela/Leonardo/Erivaldo). |
-| **DROGARIA TOTAL** | 30 | R$ 238.230,26 | R$ 34.132,29 | **14,3%** | Faturamento constante. |
-| **COMPRE BEM** | 28 | R$ 191.669,21 | R$ 31.913,51 | **16,7%** | Faturamento constante. |
-| **DSG FARMA** | 35 | R$ 159.747,06 | R$ 38.831,18 | **24,3%** | Alta cobertura em redes organizadas. |
+> 💡 **Painel Interativo de Redes e Clientes**: O dashboard comercial conta agora com uma aba dedicada de **Lojas Sem Compra / Zeradas (505)** com filtros em tempo real por Consultor, Rede, Status (Pedido Retido vs Inativo) e busca rápida por CNPJ/Razão Social. Acesse em:  
+> 👉 **[grafico_ranking_setores.html](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/grafico_ranking_setores.html)** ou no **[GitHub Pages](https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/)**
+
+### 5.1. Panorama Geral de Inatividade e Faturamento Zero
+
+Na base consolidada da regional (**1.097 pontos de venda**), foram identificadas **505 lojas com faturamento zero** (46,0% da carteira) até o corte de 13/10/2026. Essas lojas representam **R$ 2.206.960,02 em cota travada/sem realização** (27,3% da cota total da regional).
+
+O cruzamento entre **MDTR** (pedidos gerados) e **Sales** (faturamento bruto faturado) revela dois perfis operacionais fundamentais:
+
+```mermaid
+pie title Distribuição das Lojas da Carteira Regional (1.097 Lojas)
+    "Lojas Ativas / Faturando (592)" : 54.0
+    "Pedidos Retidos em Carteira (467)" : 42.5
+    "Totalmente Inativos (38)" : 3.5
+```
+
+1. **Pedidos Retidos em Carteira (`MDTR > 0` e `Sales == 0`):**
+   - **467 lojas** já emitiram pedidos comerciais no mês totalizando **R$ 448.694,05 em MDTR**.
+   - Cota dessas lojas: **R$ 2.154.016,61**.
+   - **Diagnóstico:** O consultor realizou a venda, mas o pedido está represado na esteira logística/financeira (pendência de crédito, trava cadastral, limite de pagamento ou fila de separação/faturamento). A liberação imediata desses pedidos destravará quase meio milhão de reais no faturamento.
+
+2. **Totalmente Inativos (`MDTR == 0` e `Sales == 0`):**
+   - **38 lojas** não possuem nenhuma movimentação (nem pedido gerado e nem faturamento).
+   - Cota dessas lojas: **R$ 52.943,41**.
+   - **Diagnóstico:** Inadimplência impeditiva, encerramento de atividades, troca de bandeira ou falta de visitação comercial. Destas, **22 lojas** concentram-se no grupo **INDEPENDENTES VIN**.
+
+---
+
+### 5.2. Desempenho e Mapeamento de Lojas Zeradas por Rede Farmacêutica
+
+A tabela a seguir consolida o volume total, as lojas faturando, as lojas com faturamento zero e o volume financeiro de cota travada em cada uma das principais redes da regional:
+
+| Rede Farmacêutica | Lojas Totais | Lojas Ativas | Lojas Zeradas | % Lojas Zeradas | Cota Total (R$) | Faturado Realizado (R$) | Cob. Fat (%) | Cota Zerada/Travada (R$) | Status e Diagnóstico Comercial |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **FARMARCAS** | 134 | 114 | **20** | **14,9%** | R$ 1.908.084,28 | R$ 343.344,00 | 18,0% | **R$ 215.027,62** | Menor taxa de inatividade da regional; excelente aderência nas bandeiras Ultra Popular e Drogatop. |
+| **INDEPENDENTES VIN** | 334 | 132 | **202** | **60,5% ⚠️** | R$ 1.626.198,58 | R$ 268.049,69 | 16,5% | **R$ 733.440,95** | Maior concentração de risco. 202 lojas sem compra e 22 totalmente inativas. Requer campanha de positivação. |
+| **ASSOCIADAS** | 184 | 85 | **99** | **53,8% ⚠️** | R$ 1.179.269,92 | R$ 180.370,17 | 15,3% | **R$ 451.908,44** | Mais da metade da rede ainda não faturou. Maior represamento nos setores de Rafael (28) e Wellington (19). |
+| **HIPER SAÚDE** | 66 | 39 | **27** | **40,9%** | R$ 507.636,64 | R$ 101.409,91 | 20,0% | **R$ 116.120,87** | Boa cobertura no faturamento (20%), mas 27 lojas aguardam liberação ou pedido. |
+| **MASTERFARMA** | 98 | 46 | **52** | **53,1% ⚠️** | R$ 474.946,27 | R$ 54.498,90 | 11,5% | **R$ 191.228,09** | Baixa cobertura (11,5%). 52 lojas sem compra com impacto crítico em Rafael Nascimento (13 zeradas). |
+| **REDE SANTA CATARINA** | 38 | 38 | **0** | **0,0% ★** | R$ 395.139,60 | R$ 77.479,11 | 19,6% | **R$ 0,00** | **100% das lojas ativas e faturando.** Referência regional sob gestão de Manuel Artero. |
+| **ECONOMIZE RONDONÓPOLIS** | 41 | 24 | **17** | **41,5%** | R$ 373.128,52 | R$ 108.782,51 | 29,2% | **R$ 94.260,63** | Maior cobertura da regional (29,2%), porém com 17 lojas zeradas em cidades satélites. |
+| **DROGARIA TOTAL** | 30 | 15 | **15** | **50,0%** | R$ 238.230,26 | R$ 34.132,29 | 14,3% | **R$ 102.982,66** | 50% de inatividade dividida entre Valter Pereira Jr (8 lojas) e Manuel Artero (7 lojas). |
+| **COMPRE BEM** | 28 | 11 | **17** | **60,7% ⚠️** | R$ 191.669,21 | R$ 31.913,51 | 16,7% | **R$ 65.932,61** | 17 de 28 lojas zeradas, concentradas principalmente nos setores de Pricila Moreira e Rafael Nascimento. |
+| **DSG FARMA** | 35 | 19 | **16** | **45,7%** | R$ 159.747,06 | R$ 38.831,18 | 24,3% | **R$ 54.460,63** | Boa tração de faturamento (24,3%), com 16 lojas zeradas de pequeno porte. |
+| **OUTRAS REDES / CANAIS** | 9 | 4 | **5** | **55,6%** | R$ 77.522,50 | R$ 9.176,82 | 11,8% | **R$ 41.597,94** | Redes regionais menores (Multidrogas, Farma & Farma, Rede Inova). |
+| **TOTAL REGIONAL** | **1.097** | **592** | **505** | **46,0%** | **R$ 8.071.973,31** | **R$ 1.428.579,15** | **17,7%** | **R$ 2.206.960,02** | **Cota total travada em lojas zeradas: R$ 2,21 Milhões** |
+
+---
+
+### 5.3. Análise Detalhada dos Maiores Grupos Críticos
+
+#### 1. INDEPENDENTES VIN: 202 Lojas Zeradas (R$ 733,4k em Cota)
+- O canal de independentes vinculado é o maior gargalo numérico da regional: **60,5% das lojas não faturaram nada**.
+- **Distribuição por Consultor:**
+  - **Pricila Moreira:** 48 lojas zeradas de 52 (92,3% zeradas | R$ 105,8k de cota travada).
+  - **Erivaldo Maciel:** 29 lojas zeradas de 43 (67,4% zeradas | R$ 95,8k de cota travada).
+  - **Wellington Morais:** 27 lojas zeradas de 52 (51,9% zeradas | R$ 92,0k de cota travada).
+  - **Rafael Nascimento:** 23 lojas zeradas de 34 (67,6% zeradas | R$ 140,8k de cota travada).
+  - **Leonardo Mazzuco:** 21 lojas zeradas de 43 (48,8% zeradas | R$ 60,4k de cota travada).
+  - **Valter Pereira Jr:** 20 lojas zeradas de 38 (52,6% zeradas | R$ 104,7k de cota travada).
+  - **Isabela Cruccitti:** 18 lojas zeradas de 32 (56,3% zeradas | R$ 66,2k de cota travada).
+  - **Manuel Artero:** 16 lojas zeradas de 40 (40,0% zeradas | R$ 67,8k de cota travada).
+- **Ação:** Implementação de combo promocional com boleto parcelado para reativação das independentes.
+
+#### 2. ASSOCIADAS: 99 Lojas Zeradas (R$ 451,9k em Cota)
+- **53,8% das lojas da rede Associadas** estão sem compras faturadas, somando quase meio milhão de cota travada.
+- O setor de **Rafael Nascimento** lidera o represamento na rede com **28 lojas zeradas** (R$ 115,2k de cota), seguido por **Erivaldo Maciel** com **23 lojas zeradas** (R$ 101,3k de cota) e **Wellington Morais** com **19 lojas zeradas** (R$ 107,1k de cota).
+
+#### 3. MASTERFARMA: 52 Lojas Zeradas (R$ 191,2k em Cota)
+- A rede apresenta baixa cobertura de faturamento (11,5%), com mais da metade de sua base inativa.
+- Destaque crítico no setor de **Rafael Nascimento**, com **13 lojas zeradas de 18** (R$ 64,5k de cota zerada).
+
+---
+
+### 5.4. Top 20 Maiores Clientes com Faturamento Zero (Cota Travada)
+
+Abaixo estão relacionados os **20 maiores clientes em volume de cota** da regional que ainda não registraram nenhum centavo de faturamento no mês:
+
+| # | CNPJ | Razão Social | Rede Farmacêutica | Setor / Consultor | Cota Total (R$) | MDTR Retido (R$) | Status Operacional |
+| :-: | :---: | :--- | :--- | :--- | :---: | :---: | :---: |
+| 1 | `18666741000171` | **DROGARIA ULTRA POPULAR PENAPOLIS** | FARMARCAS | Valter Pereira Jr | **R$ 45.417,12** | R$ 13.502,97 | Pedido Retido |
+| 2 | `16825373000131` | **FARMACIA MAIS** | INDEPENDENTES VIN | Rafael Nascimento | **R$ 32.504,21** | R$ 6.406,66 | Pedido Retido |
+| 3 | `11368538000170` | **FARMACIA INDEPENDENCIA** | FARMARCAS | Valter Pereira Jr | **R$ 25.182,74** | R$ 9.679,62 | Pedido Retido |
+| 4 | `03381216000132` | **DROGARIA E CIRURGICA SANTA CECILIA** | INDEPENDENTES VIN | Manuel Artero | **R$ 22.238,17** | R$ 3.629,54 | Pedido Retido |
+| 5 | `16926052000123` | **FARMA KILL** | ASSOCIADAS | Wellington Morais | **R$ 20.021,72** | R$ 639,30 | Pedido Retido |
+| 6 | `03480787000124` | **SAO JOSE I** | INDEPENDENTES VIN | Valter Pereira Jr | **R$ 19.260,20** | R$ 1.778,76 | Pedido Retido |
+| 7 | `07236140000102` | **DROGARIA BIOFARMA** | FARMA & FARMA | Isabela Cruccitti | **R$ 18.449,68** | R$ 547,71 | Pedido Retido |
+| 8 | `14931934000151` | **DROGARIA RIO FARMA** | DROGARIA TOTAL | Manuel Artero | **R$ 17.272,61** | R$ 3.751,93 | Pedido Retido |
+| 9 | `21746348000100` | **DROGARIAS ULTRA POPULAR** | FARMARCAS | Pricila Moreira | **R$ 16.199,93** | R$ 4.327,00 | Pedido Retido |
+| 10 | `05344624000140` | **DROGARIA MAXIPOPULAR** | FARMARCAS | Rafael Nascimento | **R$ 15.636,44** | R$ 4.178,69 | Pedido Retido |
+| 11 | `36014287000156` | **HIPER POPULAR** | HIPER SAÚDE | Manuel Artero | **R$ 15.629,51** | R$ 1.051,91 | Pedido Retido |
+| 12 | `50357285000190` | **DROGARIAS FARMARELA** | ECONOMIZE RONDONÓPOLIS | Wellington Morais | **R$ 15.557,60** | R$ 4.713,93 | Pedido Retido |
+| 13 | `03377845000199` | **DROG SAO JOSE MANIP** | INDEPENDENTES VIN | Rafael Nascimento | **R$ 15.131,23** | R$ 2.208,92 | Pedido Retido |
+| 14 | `21784054000165` | **DROGARIA BONFIM** | ASSOCIADAS | Wellington Morais | **R$ 14.956,64** | R$ 3.041,01 | Pedido Retido |
+| 15 | `15532062000111` | **DROG STO ANTONIO** | INDEPENDENTES VIN | Rafael Nascimento | **R$ 14.881,18** | R$ 2.739,15 | Pedido Retido |
+| 16 | `19909093000108` | **DROGARIA ULTRAPOPULAR** | FARMARCAS | Leonardo Mazzuco | **R$ 14.853,09** | R$ 4.163,67 | Pedido Retido |
+| 17 | `63937486000109` | **MEDEIROS & GALINDO** | DROGARIA TOTAL | Manuel Artero | **R$ 14.212,19** | R$ 1.532,06 | Pedido Retido |
+| 18 | `29946302000139` | **DROGA CERTA** | ASSOCIADAS | Pricila Moreira | **R$ 13.885,65** | R$ 1.610,81 | Pedido Retido |
+| 19 | `01134776000167` | **DROG SAO PAULO** | ASSOCIADAS | Isabela Cruccitti | **R$ 13.232,19** | R$ 3.924,00 | Pedido Retido |
+| 20 | `05939112000126` | **FARMAVIDA FARMACIA** | FARMARCAS | Leonardo Mazzuco | **R$ 13.036,98** | R$ 3.766,65 | Pedido Retido |
+
+> [!IMPORTANT]
+> **Observação Operacional dos Top 20:**  
+> **100% dos 20 maiores clientes zerados já possuem pedidos inseridos no sistema (MDTR acumulado de R$ 77.294,32)**.  
+> Nenhum deles é inativo por recusa de compra; todos estão aguardando desbloqueio comercial/logístico/financeiro. A atuação prioritária deve ser feita junto ao CSC/Crédito para liberar o faturamento dessas 20 contas, gerando impacto imediato de mais de R$ 77 mil faturados.
+
+---
+
+### 5.5. Lista Completa dos Clientes Totalmente Inativos (Sem Pedido e Sem Compra)
+
+As **38 lojas** abaixo não possuem faturamento nem pedidos gerados no MDTR (`MDTR = 0` e `Sales = 0`), totalizando **R$ 52.943,41 de cota descoberta**:
+
+| # | CNPJ | Razão Social | Rede Farmacêutica | Setor / Consultor | Cota do Mês (R$) |
+| :-: | :---: | :--- | :--- | :--- | :---: |
+| 1 | `1053206000142` | DROGARIA BRASNORTE | INDEPENDENTES VIN | Leonardo Mazzuco | R$ 7.103,97 |
+| 2 | `05233140000123` | DROG BOA ESPERANCA | INDEPENDENTES VIN | Erivaldo Maciel | R$ 4.857,78 |
+| 3 | `04077499000196` | DROG NEIDE M S P CAMARGO | INDEPENDENTES VIN | Leonardo Mazzuco | R$ 3.720,53 |
+| 4 | `18876606000231` | FARMACIA ECCOCHAPADA | INDEPENDENTES VIN | Erivaldo Maciel | R$ 3.183,41 |
+| 5 | `48892332000154` | DROGARIA HIPER POPULAR | ASSOCIADAS | Pricila Moreira | R$ 2.630,61 |
+| 6 | `13475688000108` | FARMACIA FLOR DE LIS | ECONOMIZE RONDONÓPOLIS | Erivaldo Maciel | R$ 2.548,41 |
+| 7 | `49465956000158` | DROGARIA SONORA SUPER POPULAR | MASTERFARMA | Wellington Morais | R$ 2.341,74 |
+| 8 | `22977550000106` | FARMACIA MAIS POPULAR | MASTERFARMA | Isabela Cruccitti | R$ 1.954,83 |
+| 9 | `34700354000160` | DROGARIA+SAUDE | INDEPENDENTES VIN | Erivaldo Maciel | R$ 1.753,77 |
+| 10 | `37563038000182` | FARMASINTESE | MASTERFARMA | Rafael Nascimento | R$ 1.685,92 |
+| 11 | `16735647000282` | DROGARIA SANTA MARIA | INDEPENDENTES VIN | Leonardo Mazzuco | R$ 1.672,69 |
+| 12 | `15272871000131` | FARMA LIMA | INDEPENDENTES VIN | Leonardo Mazzuco | R$ 1.582,82 |
+| 13 | `24127802000125` | DROGARIA MARCELO | ASSOCIADAS | Rafael Nascimento | R$ 1.559,37 |
+| 14 | `16789469000191` | DROGARIA FLORAIS | CONCEITO | Erivaldo Maciel | R$ 1.540,91 |
+| 15 | `32203543000100` | UP 2 | MASTERFARMA | Rafael Nascimento | R$ 1.375,88 |
+| 16 | `24092237000108` | FARMACIA SAO PEDRO | FARMA & FARMA | Wellington Morais | R$ 1.319,88 |
+| 17 | `40190327000198` | DROGA VIDA POPULAR | INDEPENDENTES VIN | Pricila Moreira | R$ 1.300,89 |
+| 18 | `58230920000186` | DROGARIAS FL DO LUIZINHO PIONEIRA | ASSOCIADAS | Wellington Morais | R$ 1.199,03 |
+| 19 | `15487866000146` | DROGARIAS BEM POPULAR BRASIL | COMPRE BEM | Rafael Nascimento | R$ 1.097,15 |
+| 20 | `48130762000139` | DROGARIA IMPERATRIZ | HIPER SAÚDE | Pricila Moreira | R$ 1.020,15 |
+| 21 | `62668131000107` | IPE FARMA | INDEPENDENTES VIN | Valter Pereira Jr | R$ 948,64 |
+| 22 | `25204663000159` | DROGARIA DROGA VIDA | INDEPENDENTES VIN | Pricila Moreira | R$ 673,68 |
+| 23 | `02021988000109` | FARMACIA DO JOAO E DROGARIA | INDEPENDENTES VIN | Wellington Morais | R$ 613,53 |
+| 24 | `47614350000101` | DROGARIA UNIFARMA | INDEPENDENTES VIN | Pricila Moreira | R$ 612,81 |
+| 25 | `05558461000106` | FCIA POPULAR | INDEPENDENTES VIN | Isabela Cruccitti | R$ 596,42 |
+| 26 | `32409163000119` | DROGARIA TREVAO | ASSOCIADAS | Isabela Cruccitti | R$ 573,71 |
+| 27 | `55133314000154` | FARMACIA ECONOMIZE | ECONOMIZE RONDONÓPOLIS | Isabela Cruccitti | R$ 418,26 |
+| 28 | `12026397000170` | OLIVEIRA FARMA | ASSOCIADAS | Wellington Morais | R$ 414,53 |
+| 29 | `61585281000186` | DROGARIA OLIRA | MASTERFARMA | Leonardo Mazzuco | R$ 398,58 |
+| 30 | `01323294000155` | DROGARIA BRASIL | INDEPENDENTES VIN | Pricila Moreira | R$ 394,78 |
+| 31 | `01069181000175` | DROGARIA BOM JESUS | INDEPENDENTES VIN | Pricila Moreira | R$ 393,16 |
+| 32 | `49685257000113` | FARMACIA MAIS VIDA | INDEPENDENTES VIN | Pricila Moreira | R$ 309,03 |
+| 33 | `33586036000158` | FARMACIA BEM ESTAR | INDEPENDENTES VIN | Isabela Cruccitti | R$ 303,26 |
+| 34 | `35652065000104` | DROGARIA BEM ESTAR | INDEPENDENTES VIN | Pricila Moreira | R$ 294,22 |
+| 35 | `01039294000127` | DROGARIA CONFIANCA | INDEPENDENTES VIN | Pricila Moreira | R$ 286,47 |
+| 36 | `09137352000168` | DROGARIA AVENIDA | INDEPENDENTES VIN | Pricila Moreira | R$ 151,32 |
+| 37 | `10742383000127` | FARMACIA PIONEIRA | INDEPENDENTES VIN | Isabela Cruccitti | R$ 97,49 |
+| 38 | `63102694000198` | DROGARIA COHAB | INDEPENDENTES VIN | Erivaldo Maciel | R$ 13,78 |
+| **TOTAL** | - | **38 Lojas Totalmente Inativas** | - | - | **R$ 52.943,41** |
 
 ---
 
 ## 6. Recomendações e Plano Tático
 
-1. **Aceleração da Positivação HYMPAR**:
-   - Atenção focada para o setor de **Pricila Moreira** (apenas 34 positivados de 106).
-   - Apoiar **Rafael Nascimento** (61/114) e **Erivaldo Maciel** (66/111) para atingir os 80% da carteira.
-2. **Conversão de Carteira em Faturamento**:
-   - A regional possui **R$ 2.120.257,37 no MDTR** e **R$ 1.428.579,15 faturados** (R$ 691k de saldo entre pedido e expedição).
-   - Monitorar diariamente liberação de crédito e expedição para acelerar o faturamento.
-3. **Atingimento da Meta Intermediária (R$ 4.893.633,82)**:
-   - Saldo restante de **R$ 3.465.054,67**, exigindo um ritmo diário de faturamento de aproximadamente **R$ 266,5k / dia** nos 13 dias úteis restantes.
+1. **Força-Tarefa Imediata: Liberação dos R$ 448,7k Represados em Carteira (MDTR sem Faturamento)**:
+   - 467 lojas já compraram mas ainda não faturaram.
+   - Cruzar diariamente a lista de pedidos bloqueados no CSC/Crédito com foco prioritário nos **Top 20 clientes** (R$ 77,3k imediatos).
+2. **Plano de Reativação das 38 Lojas Totalmente Inativas**:
+   - 22 lojas pertencem ao grupo **INDEPENDENTES VIN**, com maior incidência nos setores de **Pricila Moreira** (10 lojas) e **Leonardo Mazzuco** (4 lojas).
+   - Realizar contato presencial ou por televendas oferecendo condições de entrada com prazos elásticos de pagamento.
+3. **Aceleração da Positivação HYMPAR**:
+   - Foco crítico no setor de **Pricila Moreira** (apenas 34 positivados de 106, atingimento de 32,1%).
+   - Apoiar **Rafael Nascimento** (61/114) e **Erivaldo Maciel** (66/111) para superar a meta de 80% da carteira.
+4. **Ritmo de Faturamento para Meta Intermediária (R$ 4.893.633,82)**:
+   - Saldo restante de **R$ 3.465.054,67**, exigindo um faturamento regional médio de **R$ 266.542,67 / dia** nos 13 dias úteis restantes.

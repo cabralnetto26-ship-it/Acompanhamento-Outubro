@@ -158,40 +158,78 @@ try {
         "REDE SANTA CATARINA", "ECONOMIZE RONDONOPOLIS", "DROGARIA TOTAL", "COMPRE BEM", "DSG FARMA"
     )
 
+    # 4. REDES & CLIENTES COM FATURAMENTO ZERO (SEM COMPRA)
+    $targetRedes = @(
+        "FARMARCAS", "INDEPENDENTES VIN", "ASSOCIADAS", "HIPER SAUDE", "MASTERFARMA", 
+        "REDE SANTA CATARINA", "ECONOMIZE RONDONOPOLIS", "DROGARIA TOTAL", "COMPRE BEM", "DSG FARMA"
+    )
+
     $redesHash = @{}
+    $zeroClientsList = @()
+
     foreach ($c in $clients) {
         if (-not $c.Rede) { continue }
         $rede = $c.Rede.Trim().ToUpper()
         if ($rede -match "HIPER SA") { $rede = "HIPER SAUDE" }
         if ($rede -match "ECONOMIZE RONDON") { $rede = "ECONOMIZE RONDONOPOLIS" }
 
+        $isZero = ($c.Sales -le 0.01)
+        if ($isZero) {
+            $statusCli = "Inativo"
+            if ($c.MDTR -gt 0.01) { $statusCli = "Pedido Retido" }
+
+            $zeroClientsList += [PSCustomObject]@{
+                cnpj      = $c.CNPJ
+                razao     = $c.Razao
+                rede      = $rede
+                consultor = $c.Consultor
+                cota      = [Math]::Round($c.Cota, 2)
+                mdtr      = [Math]::Round($c.MDTR, 2)
+                status    = $statusCli
+            }
+        }
+
         if ($targetRedes -contains $rede) {
             $key = "$rede|$($c.Consultor)"
             if (-not $redesHash.ContainsKey($key)) {
                 $redesHash[$key] = @{
-                    Rede      = $rede
-                    Consultor = $c.Consultor
-                    Lojas     = 0
-                    Cota      = 0.0
-                    Sales     = 0.0
+                    Rede         = $rede
+                    Consultor    = $c.Consultor
+                    Lojas        = 0
+                    LojasAtivas  = 0
+                    LojasZeradas = 0
+                    Cota         = 0.0
+                    Sales        = 0.0
+                    CotaZerada   = 0.0
                 }
             }
             $redesHash[$key].Lojas += 1
             $redesHash[$key].Cota  += $c.Cota
             $redesHash[$key].Sales += $c.Sales
+            if ($isZero) {
+                $redesHash[$key].LojasZeradas += 1
+                $redesHash[$key].CotaZerada   += $c.Cota
+            } else {
+                $redesHash[$key].LojasAtivas  += 1
+            }
         }
     }
 
     $rawRedes = @()
     foreach ($val in $redesHash.Values) {
         $rawRedes += [PSCustomObject]@{
-            rede      = $val.Rede
-            consultor = $val.Consultor
-            lojas     = $val.Lojas
-            cota      = [Math]::Round($val.Cota, 2)
-            fat       = [Math]::Round($val.Sales, 2)
+            rede         = $val.Rede
+            consultor    = $val.Consultor
+            lojas        = $val.Lojas
+            lojasAtivas  = $val.LojasAtivas
+            lojasZeradas = $val.LojasZeradas
+            cota         = [Math]::Round($val.Cota, 2)
+            fat          = [Math]::Round($val.Sales, 2)
+            cotaZerada   = [Math]::Round($val.CotaZerada, 2)
         }
     }
+
+    $rawZeroClients = $zeroClientsList | Sort-Object Cota -Descending
 
     # 5. CURVA ABC (Top regional + top individual per consultant for active filtering)
     $abcList = @()
@@ -247,11 +285,18 @@ $jsonSetores = $rawDataSetores | ConvertTo-Json -Depth 5 -Compress
 $jsonRedes   = $rawRedes       | ConvertTo-Json -Depth 5 -Compress
 $jsonHympar  = $rawHympar      | ConvertTo-Json -Depth 5 -Compress
 $jsonAbc     = $rawAbc         | ConvertTo-Json -Depth 5 -Compress
+$jsonZero    = $rawZeroClients | ConvertTo-Json -Depth 5 -Compress
 
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawDataSetores = \[[\s\S]*?\];', "const rawDataSetores = $jsonSetores;")
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawRedes = \[[\s\S]*?\];', "const rawRedes = $jsonRedes;")
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawHympar = \[[\s\S]*?\];', "const rawHympar = $jsonHympar;")
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawAbc = \[[\s\S]*?\];', "const rawAbc = $jsonAbc;")
+
+if ($html -match 'const rawZeroClients = \[[\s\S]*?\];') {
+    $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawZeroClients = \[[\s\S]*?\];', "const rawZeroClients = $jsonZero;")
+} else {
+    $html = $html.Replace("const rawAbc =", "const rawZeroClients = $jsonZero;`r`n    const rawAbc =")
+}
 
 # Update date badge and titles (using regex and pure ASCII to guarantee matching)
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR 05/10 \| Sales 08/10', "MDTR 09/10 | Sales 13/10")
