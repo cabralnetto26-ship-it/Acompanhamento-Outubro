@@ -449,7 +449,7 @@
         <p>Acompanhamento Gerencial Outubro/2026 • Gerente: José Cabral Neto • Código Regional: 847010600</p>
       </div>
       <div>
-        <span class="badge-tag">Posição: MDTR 05/10 | Sales 08/10</span>
+        <span class="badge-tag">Posição: MDTR 09/10 | Sales 13/10</span>
       </div>
     </header>
 
@@ -489,8 +489,8 @@
           <div class="status-chips">
             <button class="chip-btn active" data-status="all" onclick="setStatusFilter('all')">Todos</button>
             <button class="chip-btn" data-status="high" onclick="setStatusFilter('high')">Alta Cob. (&ge;26%)</button>
-            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na Média (9,5%-11%)</button>
-            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">Atenção (&lt;9,5%)</button>
+            <button class="chip-btn" data-status="mid" onclick="setStatusFilter('mid')">Na Média (24%-26%)</button>
+            <button class="chip-btn" data-status="low" onclick="setStatusFilter('low')">Atenção (&lt;24%)</button>
           </div>
         </div>
 
@@ -555,7 +555,7 @@
         <div class="chart-header">
           <div>
             <h2>Ranking por Cobertura de MDTR (%)</h2>
-            <p>Percentual da cota alcançado no MDTR (até 05/10)</p>
+            <p>Percentual da cota alcançado no MDTR (atÃ© 09/10)</p>
           </div>
         </div>
         <div class="chart-canvas-container">
@@ -992,7 +992,7 @@
         const metaCalculada = item.cota * metaMultiplier;
         const gapSimulado = Math.max(0, metaCalculada - item.fat);
         const mdtrDiarioSimulado = gapSimulado / diasRestantes;
-        const fatDiarioAtual = item.fat / 6; // 6 dias úteis decorridos até 08/10
+        const fatDiarioAtual = item.fat / 8; // 8 dias Ãºteis decorridos atÃ© 13/10
         const aceleracao = fatDiarioAtual > 0 ? (mdtrDiarioSimulado / fatDiarioAtual).toFixed(1) : '-';
 
         const tr = document.createElement('tr');

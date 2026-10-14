@@ -253,33 +253,31 @@ $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawRedes =
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawHympar = \[[\s\S]*?\];', "const rawHympar = $jsonHympar;")
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawAbc = \[[\s\S]*?\];', "const rawAbc = $jsonAbc;")
 
-# Update date badge and titles
-$html = $html.Replace("Posição: MDTR 05/10 | Sales 08/10", "Posição: MDTR 09/10 | Sales 13/10")
-$html = $html.Replace("MDTR Realizado (05/10)", "MDTR Realizado (09/10)")
-$html = $html.Replace("Faturamento Bruto (08/10)", "Faturamento Bruto (13/10)")
-$html = $html.Replace("Percentual da cota alcançado no MDTR (até 05/10)", "Percentual da cota alcançado no MDTR (até 09/10)")
+# Update date badge and titles (using regex and pure ASCII to guarantee matching)
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR 05/10 \| Sales 08/10', "MDTR 09/10 | Sales 13/10")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR Realizado \(05/10\)', "MDTR Realizado (09/10)")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'Faturamento Bruto \(08/10\)', "Faturamento Bruto (13/10)")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(at.{1,4} 05/10\)', "(até 09/10)")
 $html = $html.Replace("<th>MDTR 05/10 (R$)</th>", "<th>MDTR 09/10 (R$)</th>")
 $html = $html.Replace("<th>Fat. Bruto 08/10 (R$)</th>", "<th>Fat. Bruto 13/10 (R$)</th>")
 
 # Update remaining days simulation
-$html = $html.Replace("const fatDiarioAtual = item.fat / 6; // 6 dias úteis decorridos até 08/10", "const fatDiarioAtual = item.fat / 8; // 8 dias úteis decorridos até 13/10")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const fatDiarioAtual = item\.fat / 6;.*', "const fatDiarioAtual = item.fat / 8; // 8 dias úteis decorridos até 13/10")
 $html = $html.Replace('id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="15"', 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="13"')
 
 # Update filter chips and JS logic thresholds
-$html = $html.Replace('Alta Cob. (&ge;11%)', 'Alta Cob. (&ge;26%)')
-$html = $html.Replace('Na Média (9,5%-11%)', 'Na Média (24%-26%)')
-$html = $html.Replace('Atenção (&lt;9,5%)', 'Atenção (&lt;24%)')
+$html = $html.Replace('(&ge;11%)', '(&ge;26%)')
+$html = $html.Replace('(9,5%-11%)', '(24%-26%)')
+$html = $html.Replace('(&lt;9,5%)', '(&lt;24%)')
 
 $html = $html.Replace("activeStatusFilter === 'high' && d.cobMdtr < 11", "activeStatusFilter === 'high' && d.cobMdtr < 26")
 $html = $html.Replace("activeStatusFilter === 'mid' && (d.cobMdtr < 9.5 || d.cobMdtr >= 11)", "activeStatusFilter === 'mid' && (d.cobMdtr < 24 || d.cobMdtr >= 26)")
 $html = $html.Replace("activeStatusFilter === 'low' && d.cobMdtr >= 9.5", "activeStatusFilter === 'low' && d.cobMdtr >= 24")
 $html = $html.Replace("const progressClass = item.cobMdtr >= 11 ? 'progress-high' : item.cobMdtr >= 9.5 ? 'progress-mid' : 'progress-low';", "const progressClass = item.cobMdtr >= 26 ? 'progress-high' : item.cobMdtr >= 24 ? 'progress-mid' : 'progress-low';")
-$html = $html.Replace("style=""width: `${Math.min(100, (item.cobMdtr / 15) * 100)}%`;""", "style=""width: `${Math.min(100, (item.cobMdtr / 38) * 100)}%`;""")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'item\.cobMdtr / 15', 'item.cobMdtr / 38')
 
 # Update chart color thresholds
-$oldColors = "d.cobMdtr >= 12 ? 'rgba(16, 185, 129, 0.85)' :`r`n                d.cobMdtr >= 10 ? 'rgba(59, 130, 246, 0.85)' :`r`n                d.cobMdtr >= 9  ? 'rgba(6, 182, 212, 0.85)' :"
-$newColors = "d.cobMdtr >= 26 ? 'rgba(16, 185, 129, 0.85)' :`r`n                d.cobMdtr >= 24 ? 'rgba(59, 130, 246, 0.85)' :`r`n                d.cobMdtr >= 22 ? 'rgba(6, 182, 212, 0.85)' :"
-$html = $html.Replace($oldColors, $newColors)
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "d\.cobMdtr >= 12 \? 'rgba\(16, 185, 129, 0\.85\)' :[\s\r\n]*d\.cobMdtr >= 10 \? 'rgba\(59, 130, 246, 0\.85\)' :[\s\r\n]*d\.cobMdtr >= 9  \? 'rgba\(6, 182, 212, 0\.85\)' :", "d.cobMdtr >= 26 ? 'rgba(16, 185, 129, 0.85)' :`r`n                d.cobMdtr >= 24 ? 'rgba(59, 130, 246, 0.85)' :`r`n                d.cobMdtr >= 22 ? 'rgba(6, 182, 212, 0.85)' :")
 
 # Save both grafico_ranking_setores.html and index.html in pure UTF-8 without BOM
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
