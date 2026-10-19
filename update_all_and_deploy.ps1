@@ -23,16 +23,6 @@ $consultantMap = @{
     "847010608" = "Valter Pereira Jr"
 }
 
-# UTF-8 encoded text constants to prevent any PowerShell codepage distortion
-$statusLider    = [System.Text.Encoding]::UTF8.GetString([byte[]]@(0x4C, 0xC3, 0xAD, 0x64, 0x65, 0x72)) # Líder
-$statusNaMedia  = [System.Text.Encoding]::UTF8.GetString([byte[]]@(0x4E, 0x61, 0x20, 0x4D, 0xC3, 0xA9, 0x64, 0x69, 0x61)) # Na Média
-$statusAcelerar = "Acelerar"
-
-$diagAbaixo  = [System.Text.Encoding]::UTF8.GetString([byte[]]@(0x41, 0x62, 0x61, 0x69, 0x78, 0x6F, 0x20, 0x64, 0x61, 0x20, 0x6D, 0xC3, 0xA9, 0x64, 0x69, 0x61, 0x2C, 0x20, 0x72, 0x65, 0x71, 0x75, 0x65, 0x72, 0x20, 0x74, 0x72, 0x61, 0xC3, 0xA7, 0xC3, 0xA3, 0x6F, 0x2E))
-$diagBom     = "Bom andamento inicial."
-$diagAcomp   = "Em acompanhamento."
-$diagGrave   = "Grave represamento."
-
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
 $excel.DisplayAlerts = $false
@@ -48,7 +38,7 @@ try {
 
     $clients = @()
     for ($r = 2; $r -le $rowCount; $r++) {
-        $cnpj = $data[$r, 1]
+        $cnpj = [string]$data[$r, 1]
         if (-not $cnpj) { continue }
 
         $cota  = $data[$r, 10]; if ($null -eq $cota -or $cota -lt 0) { $cota = 0 }
@@ -63,7 +53,7 @@ try {
         if (-not $consultor) { $consultor = $id }
 
         $clients += [PSCustomObject]@{
-            CNPJ      = [string]$cnpj
+            CNPJ      = $cnpj
             Razao     = [string]$data[$r, 4]
             Rede      = [string]$data[$r, 7]
             SetorId   = $id
@@ -129,13 +119,13 @@ try {
         $gap     = $s.cota - $s.fat
 
         $statusClass = "status-ok"
-        $statusStr   = $statusNaMedia
-        if ($cobMdtr -ge 26.0) {
+        $statusStr   = "Na Média"
+        if ($cobMdtr -ge 39.0) {
             $statusClass = "status-leader"
-            $statusStr   = $statusLider
-        } elseif ($cobMdtr -lt 24.0) {
+            $statusStr   = "Líder"
+        } elseif ($cobMdtr -lt 36.0) {
             $statusClass = "status-alert"
-            $statusStr   = $statusAcelerar
+            $statusStr   = "Acelerar"
         }
 
         $rawDataSetores += [PSCustomObject]@{
@@ -152,12 +142,6 @@ try {
         }
     }
 
-    # 4. REDES
-    $targetRedes = @(
-        "FARMARCAS", "INDEPENDENTES VIN", "ASSOCIADAS", "HIPER SAUDE", "MASTERFARMA", 
-        "REDE SANTA CATARINA", "ECONOMIZE RONDONOPOLIS", "DROGARIA TOTAL", "COMPRE BEM", "DSG FARMA"
-    )
-
     # 4. REDES & CLIENTES COM FATURAMENTO ZERO (SEM COMPRA)
     $targetRedes = @(
         "FARMARCAS", "INDEPENDENTES VIN", "ASSOCIADAS", "HIPER SAUDE", "MASTERFARMA", 
@@ -168,8 +152,8 @@ try {
     $zeroClientsList = @()
 
     foreach ($c in $clients) {
-        if (-not $c.Rede) { continue }
-        $rede = $c.Rede.Trim().ToUpper()
+        $rede = [string]$c.Rede
+        if ($rede) { $rede = $rede.Trim().ToUpper() } else { $rede = "OUTROS" }
         if ($rede -match "HIPER SA") { $rede = "HIPER SAUDE" }
         if ($rede -match "ECONOMIZE RONDON") { $rede = "ECONOMIZE RONDONOPOLIS" }
 
@@ -231,7 +215,7 @@ try {
 
     $rawZeroClients = $zeroClientsList | Sort-Object Cota -Descending
 
-    # 5. CURVA ABC (Top regional + top individual per consultant for active filtering)
+    # 5. CURVA ABC
     $abcList = @()
     $sortedAll = $clients | Sort-Object Cota -Descending
     foreach ($c in ($sortedAll | Select-Object -First 25)) {
@@ -250,10 +234,10 @@ try {
     foreach ($c in ($abcList | Sort-Object Cota -Descending)) {
         $cob = 0; if ($c.Cota -gt 0) { $cob = ($c.Sales / $c.Cota) * 100 }
 
-        $diag = $diagAcomp
-        if ($cob -lt 5.0) { $diag = $diagGrave }
-        elseif ($cob -lt 15.0) { $diag = $diagAbaixo }
-        elseif ($cob -gt 25.0) { $diag = $diagBom }
+        $diag = "Em acompanhamento."
+        if ($cob -lt 15.0) { $diag = "Grave represamento." }
+        elseif ($cob -lt 30.0) { $diag = "Abaixo da média, requer tração." }
+        elseif ($cob -gt 40.0) { $diag = "Bom andamento comercial." }
 
         $rawAbc += [PSCustomObject]@{
             razao     = $c.Razao
@@ -298,31 +282,27 @@ if ($html -match 'const rawZeroClients = \[[\s\S]*?\];') {
     $html = $html.Replace("const rawAbc =", "const rawZeroClients = $jsonZero;`r`n    const rawAbc =")
 }
 
-# Update date badge and titles (using regex and pure ASCII to guarantee matching)
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR 05/10 \| Sales 08/10', "MDTR 09/10 | Sales 13/10")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR Realizado \(05/10\)', "MDTR Realizado (09/10)")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'Faturamento Bruto \(08/10\)', "Faturamento Bruto (13/10)")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(at.{1,4} 05/10\)', "(até 09/10)")
-$html = $html.Replace("<th>MDTR 05/10 (R$)</th>", "<th>MDTR 09/10 (R$)</th>")
-$html = $html.Replace("<th>Fat. Bruto 08/10 (R$)</th>", "<th>Fat. Bruto 13/10 (R$)</th>")
+# Update date badge and titles
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR \d{2}/\d{2} \| Sales \d{2}/\d{2}', 'MDTR 14/10 | Sales 19/10')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR Realizado \(\d{2}/\d{2}\)', 'MDTR Realizado (14/10)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'Faturamento Bruto \(\d{2}/\d{2}\)', 'Faturamento Bruto (19/10)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(at.{1,4} \d{2}/\d{2}\)', '(até 14/10)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '<th>MDTR \d{2}/\d{2} \(R\$\)</th>', '<th>MDTR 14/10 (R$)</th>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '<th>Fat\. Bruto \d{2}/\d{2} \(R\$\)</th>', '<th>Fat. Bruto 19/10 (R$)</th>')
 
 # Update remaining days simulation
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const fatDiarioAtual = item\.fat / 6;.*', "const fatDiarioAtual = item.fat / 8; // 8 dias úteis decorridos até 13/10")
-$html = $html.Replace('id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="15"', 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="13"')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const fatDiarioAtual = item\.fat / \d+;.*', 'const fatDiarioAtual = item.fat / 12; // 12 dias úteis decorridos até 19/10')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="\d+"', 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="9"')
 
 # Update filter chips and JS logic thresholds
-$html = $html.Replace('(&ge;11%)', '(&ge;26%)')
-$html = $html.Replace('(9,5%-11%)', '(24%-26%)')
-$html = $html.Replace('(&lt;9,5%)', '(&lt;24%)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(&ge;\d+([,\.]\d+)?%\)', '(&ge;39%)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(\d+([,\.]\d+)?%-\d+([,\.]\d+)?%\)', '(36%-39%)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(&lt;\d+([,\.]\d+)?%\)', '(&lt;36%)')
 
-$html = $html.Replace("activeStatusFilter === 'high' && d.cobMdtr < 11", "activeStatusFilter === 'high' && d.cobMdtr < 26")
-$html = $html.Replace("activeStatusFilter === 'mid' && (d.cobMdtr < 9.5 || d.cobMdtr >= 11)", "activeStatusFilter === 'mid' && (d.cobMdtr < 24 || d.cobMdtr >= 26)")
-$html = $html.Replace("activeStatusFilter === 'low' && d.cobMdtr >= 9.5", "activeStatusFilter === 'low' && d.cobMdtr >= 24")
-$html = $html.Replace("const progressClass = item.cobMdtr >= 11 ? 'progress-high' : item.cobMdtr >= 9.5 ? 'progress-mid' : 'progress-low';", "const progressClass = item.cobMdtr >= 26 ? 'progress-high' : item.cobMdtr >= 24 ? 'progress-mid' : 'progress-low';")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'item\.cobMdtr / 15', 'item.cobMdtr / 38')
-
-# Update chart color thresholds
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, "d\.cobMdtr >= 12 \? 'rgba\(16, 185, 129, 0\.85\)' :[\s\r\n]*d\.cobMdtr >= 10 \? 'rgba\(59, 130, 246, 0\.85\)' :[\s\r\n]*d\.cobMdtr >= 9  \? 'rgba\(6, 182, 212, 0\.85\)' :", "d.cobMdtr >= 26 ? 'rgba(16, 185, 129, 0.85)' :`r`n                d.cobMdtr >= 24 ? 'rgba(59, 130, 246, 0.85)' :`r`n                d.cobMdtr >= 22 ? 'rgba(6, 182, 212, 0.85)' :")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'high' && d\.cobMdtr < \d+(\.\d+)?", "activeStatusFilter === 'high' && d.cobMdtr < 39")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'mid' && \(d\.cobMdtr < \d+(\.\d+)? \|\| d\.cobMdtr >= \d+(\.\d+)?\)", "activeStatusFilter === 'mid' && (d.cobMdtr < 36 || d.cobMdtr >= 39)")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'low' && d\.cobMdtr >= \d+(\.\d+)?", "activeStatusFilter === 'low' && d.cobMdtr >= 36")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "const progressClass = item\.cobMdtr >= \d+(\.\d+)? \? 'progress-high' : item\.cobMdtr >= \d+(\.\d+)? \? 'progress-mid' : 'progress-low';", "const progressClass = item.cobMdtr >= 39 ? 'progress-high' : item.cobMdtr >= 36 ? 'progress-mid' : 'progress-low';")
 
 # Save both grafico_ranking_setores.html and index.html in pure UTF-8 without BOM
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
@@ -330,91 +310,16 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText($indexPath, $html, $utf8NoBom)
 Write-Output "==> HTMLs salvos com sucesso (grafico_ranking_setores.html e index.html) em UTF-8."
 
-Write-Output "==> [4/6] Atualizando README.md..."
-$readmePath = Join-Path $workspaceDir "README.md"
-$readme = [System.IO.File]::ReadAllText($readmePath, [System.Text.Encoding]::UTF8)
-
-$readmeContent = @"
-# 📊 Acompanhamento de Setores, Cota e MDTR — Outubro/2026
-**Regional:** 847010600 - JOSÉ CABRAL NETO  
-**Empresa:** Hypera Pharma  
-**Painel Online (GitHub Pages):** [https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/](https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/)
-
----
-
-## 🎯 Visão Geral do Projeto
-
-Este repositório contém a análise comercial consolidada e o **dashboard executivo interativo** de acompanhamento da equipe comercial (8 setores), cruzando **Cota Total**, **MDTR** (posição 09/10/2026) e **Faturamento Bruto Realizado** (posição 13/10/2026).
-
-### 📈 Indicadores Principais da Regional
-
-| Indicador | Valor Consolidado | % Atingido | Observação |
-| :--- | :---: | :---: | :--- |
-| **Cota Total da Regional** | **R$ 8.071.973,31** | 100% | Cota de Outubro/2026 |
-| **MDTR Realizado (até 09/10)** | **R$ 2.120.257,37** | **26,3%** | Ritmo acelerado de entrada de pedidos |
-| **Faturamento Bruto (até 13/10)** | **R$ 1.428.579,15** | **17,7%** | Pedidos faturados |
-| **GAP Restante para Cota** | **-R$ 6.643.394,16** | 82,3% | Volume a faturar em 13 dias úteis restantes |
-| **Meta Intermediária** | **R$ 4.893.633,82** | **60,6%** | Alvo intermediário da regional |
-| **GAP Meta Intermediária** | **-R$ 3.465.054,67** | - | Volume para o marco intermediário |
-
----
-
-## 🏆 Ranking dos Setores (Cota vs MDTR)
-
-| Pos. | Setor / Consultor | Cota (R$) | MDTR 09/10 (R$) | Cob. MDTR (%) | Fat. Bruto 13/10 (R$) | Cob. Fat (%) | Status |
-| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1º** | **847010607 - Manuel Artero** | R$ 1.090.998,13 | R$ 380.814,07 | **34,9%** | R$ 201.177,41 | 18,4% | 🌟 Líder Regional |
-| **2º** | **847010606 - Pricila Moreira** | R$ 556.481,27 | R$ 149.131,48 | **26,8%** | R$ 88.265,37 | 15,9% | ✅ Alta Cobertura |
-| **3º** | **847010608 - Valter Pereira Jr** | R$ 1.085.968,45 | R$ 289.438,38 | **26,7%** | R$ 148.632,49 | 13,7% | ✅ Alta Cobertura |
-| **4º** | **847010605 - Isabela Cruccitti** | R$ 1.363.710,73 | R$ 351.041,23 | **25,7%** | R$ 326.031,50 | 23,9% | ⚡ Na Média |
-| **5º** | **847010601 - Rafael Nascimento** | R$ 942.882,94 | R$ 232.405,16 | **24,6%** | R$ 133.047,97 | 14,1% | ⚡ Na Média |
-| **6º** | **847010603 - Erivaldo Maciel** | R$ 1.122.794,36 | R$ 270.638,17 | **24,1%** | R$ 182.801,87 | 16,3% | ⚡ Na Média |
-| **7º** | **847010604 - Leonardo Mazzuco** | R$ 1.060.357,11 | R$ 252.860,24 | **23,8%** | R$ 211.890,17 | 20,0% | ⚠️ Acelerar |
-| **8º** | **847010602 - Wellington Morais** | R$ 848.780,32 | R$ 193.928,64 | **22,8%** | R$ 136.732,37 | 16,1% | ⚠️ Acelerar |
-
----
-
-## 🎯 Cobertura de Carteira e Positivação (HYMPAR)
-
-- **Clientes Totais na Base:** 1.097
-- **Meta de Positivação (80%):** 878
-- **Positivados Realizados:** 579 (66,0% de atingimento da meta)
-- **Saldo / Gap Restante:** -299 clientes a positivar
-
----
-
-## 💻 Painel Interativo (`index.html`)
-
-O dashboard está hospedado no GitHub Pages e conta com recursos avançados:
-- **Filtros Editáveis:** busca em tempo real por nome/código, filtro por nível de cobertura, e botões para ligar/desligar setores individuais.
-- **Simulador de Metas Dinâmico:** ajuste o número de dias úteis restantes e o alvo da cota para ver a meta diária e a taxa de aceleração recalculadas na hora.
-- **Gráficos com Chart.js:** visualização horizontal de ranking e barras agrupadas de Cota vs MDTR vs Faturado.
-- **Diagnóstico por Rede & Curva ABC:** tabelas dinâmicas que filtram conforme a seleção dos consultores.
-
----
-
-## 📁 Estrutura de Arquivos
-
-- `index.html`: Dashboard interativo publicado no GitHub Pages.
-- `grafico_ranking_setores.html`: Cópia local do painel interativo.
-- `ANALISE_SETORES_COTA_MDTR_OUTUBRO2026.md`: Relatório executivo e tático completo.
-- `Acompanhamento 847010600 Outubro26.xlsx`: Planilha com a base de dados original.
-- `update_all_and_deploy.ps1`: Script automatizado de atualização e push ao GitHub.
-"@
-
-[System.IO.File]::WriteAllText($readmePath, $readmeContent, $utf8NoBom)
-Write-Output "==> README.md atualizado."
-
-Write-Output "==> [5/6] Preparando git commit..."
+Write-Output "==> [4/6] Preparando git commit..."
 $git = "$env:LOCALAPPDATA\Programs\MinGit\cmd\git.exe"
 
 & $git add .
 & $git status
 
-$commitMsg = "feat: atualizacao de dados comerciais - MDTR 09/10 e Sales 13/10"
+$commitMsg = "feat: atualizacao da base de dados - MDTR 14/10 e Sales 19/10"
 & $git commit -m $commitMsg
 
-Write-Output "==> [6/6] Enviando atualizações para o GitHub (push origin main)..."
+Write-Output "==> [5/6] Enviando atualizações para o GitHub (push origin main)..."
 & $git push origin main
 
 Write-Output "==> SUCESSO! Dashboard atualizado e publicado no GitHub Pages."

@@ -7,56 +7,56 @@
 
 ## 🎯 Visão Geral do Projeto
 
-Este repositório contém a análise comercial consolidada e o **dashboard executivo interativo** de acompanhamento da equipe comercial (8 setores), cruzando **Cota Total**, **MDTR** (posição 09/10/2026) e **Faturamento Bruto Realizado** (posição 13/10/2026).
+Este repositório contém a análise comercial consolidada e o **dashboard executivo interativo** de acompanhamento da equipe comercial (8 setores), cruzando **Cota Total**, **MDTR** (posição 14/10/2026) e **Faturamento Bruto Realizado** (posição 19/10/2026).
 
 ### 📈 Indicadores Principais da Regional
 
 | Indicador | Valor Consolidado | % Atingido | Observação |
 | :--- | :---: | :---: | :--- |
 | **Cota Total da Regional** | **R$ 8.071.973,31** | 100% | Cota de Outubro/2026 |
-| **MDTR Realizado (até 09/10)** | **R$ 2.120.257,37** | **26,3%** | Ritmo acelerado de entrada de pedidos |
-| **Faturamento Bruto (até 13/10)** | **R$ 1.428.579,15** | **17,7%** | Pedidos faturados |
-| **GAP Restante para Cota** | **-R$ 6.643.394,16** | 82,3% | Volume a faturar em 13 dias úteis restantes |
+| **MDTR Realizado (até 14/10)** | **R$ 3.048.749,37** | **37,8%** | Ritmo acelerado de entrada de pedidos |
+| **Faturamento Bruto (até 19/10)** | **R$ 2.394.528,43** | **29,7%** | Pedidos faturados e expedidos |
+| **GAP Restante para Cota** | **-R$ 5.677.444,88** | 70,3% | Volume a faturar em 9 dias úteis restantes |
 | **Meta Intermediária** | **R$ 4.893.633,82** | **60,6%** | Alvo intermediário da regional |
-| **GAP Meta Intermediária** | **-R$ 3.465.054,67** | - | Volume para o marco intermediário |
+| **GAP Meta Intermediária** | **-R$ 2.499.105,39** | - | Volume para o marco intermediário |
 
 ---
 
 ## 🏆 Ranking dos Setores (Cota vs MDTR)
 
-| Pos. | Setor / Consultor | Cota (R$) | MDTR 09/10 (R$) | Cob. MDTR (%) | Fat. Bruto 13/10 (R$) | Cob. Fat (%) | Status |
+| Pos. | Setor / Consultor | Cota (R$) | MDTR 14/10 (R$) | Cob. MDTR (%) | Fat. Bruto 19/10 (R$) | Cob. Fat (%) | Status |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1º** | **847010607 - Manuel Artero** | R$ 1.090.998,13 | R$ 380.814,07 | **34,9%** | R$ 201.177,41 | 18,4% | 🌟 Líder Regional |
-| **2º** | **847010606 - Pricila Moreira** | R$ 556.481,27 | R$ 149.131,48 | **26,8%** | R$ 88.265,37 | 15,9% | ✅ Alta Cobertura |
-| **3º** | **847010608 - Valter Pereira Jr** | R$ 1.085.968,45 | R$ 289.438,38 | **26,7%** | R$ 148.632,49 | 13,7% | ✅ Alta Cobertura |
-| **4º** | **847010605 - Isabela Cruccitti** | R$ 1.363.710,73 | R$ 351.041,23 | **25,7%** | R$ 326.031,50 | 23,9% | ⚡ Na Média |
-| **5º** | **847010601 - Rafael Nascimento** | R$ 942.882,94 | R$ 232.405,16 | **24,6%** | R$ 133.047,97 | 14,1% | ⚡ Na Média |
-| **6º** | **847010603 - Erivaldo Maciel** | R$ 1.122.794,36 | R$ 270.638,17 | **24,1%** | R$ 182.801,87 | 16,3% | ⚡ Na Média |
-| **7º** | **847010604 - Leonardo Mazzuco** | R$ 1.060.357,11 | R$ 252.860,24 | **23,8%** | R$ 211.890,17 | 20,0% | ⚠️ Acelerar |
-| **8º** | **847010602 - Wellington Morais** | R$ 848.780,32 | R$ 193.928,64 | **22,8%** | R$ 136.732,37 | 16,1% | ⚠️ Acelerar |
+| **1º** | **847010605 - Isabela Cruccitti** | R$ 1.363.710,73 | R$ 544.159,64 | **39,9%** | R$ 522.638,38 | 38,3% | 🌟 Líder Regional |
+| **2º** | **847010607 - Manuel Artero** | R$ 1.090.998,13 | R$ 431.127,93 | **39,5%** | R$ 299.562,00 | 27,5% | 🌟 Líder Regional |
+| **3º** | **847010606 - Pricila Moreira** | R$ 556.481,27 | R$ 218.220,96 | **39,2%** | R$ 125.418,64 | 22,5% | 🌟 Líder Regional |
+| **4º** | **847010604 - Leonardo Mazzuco** | R$ 1.060.357,11 | R$ 412.209,76 | **38,9%** | R$ 359.366,33 | 33,9% | ⚡ Na Média |
+| **5º** | **847010608 - Valter Pereira Jr** | R$ 1.085.968,45 | R$ 409.946,78 | **37,7%** | R$ 195.882,21 | 18,0% | ⚡ Na Média |
+| **6º** | **847010603 - Erivaldo Maciel** | R$ 1.122.794,36 | R$ 408.983,57 | **36,4%** | R$ 308.612,11 | 27,5% | ⚡ Na Média |
+| **7º** | **847010602 - Wellington Morais** | R$ 848.780,32 | R$ 296.156,53 | **34,9%** | R$ 302.765,19 | 35,7% | ⚠️ Acelerar |
+| **8º** | **847010601 - Rafael Nascimento** | R$ 942.882,94 | R$ 327.944,20 | **34,8%** | R$ 280.283,57 | 29,7% | ⚠️ Acelerar |
 
 ---
 
 ## 🎯 Cobertura de Carteira e Positivação (HYMPAR)
 
 - **Clientes Totais na Base:** 1.097
-- **Meta de Positivação (80%):** 878
-- **Positivados Realizados:** 579 (66,0% de atingimento da meta)
-- **Saldo / Gap Restante:** -299 clientes a positivar
+- **Meta de Positivação (80%):** 877
+- **Positivados Realizados:** 692 (78,9% de atingimento da meta)
+- **Saldo / Gap Restante:** -185 clientes a positivar
 
 ---
 
 ## 🔍 Diagnóstico por Rede & Clientes Sem Compra (BASE 600)
 
-- **Lojas Ativas / Comprando:** 592 lojas (54,0%) — R$ 1.428.579,15 faturados.
-- **Lojas com Faturamento Zero:** 505 lojas (46,0%) — R$ 2.206.960,02 em cota travada.
-  - **Pedidos Retidos em Carteira:** 467 lojas no MDTR (R$ 448.694,05 em pedidos retidos aguardando faturamento).
-  - **Totalmente Inativos:** 38 lojas (R$ 52.943,41 de cota sem movimentação comercial).
-- **Aba Interativa no Painel:** navegação com alternância de abas entre Desempenho por Rede e Drilldown das 505 Lojas Zeradas com busca instantânea por CNPJ/Razão Social e filtro de status.
+- **Lojas Ativas / Comprando:** 685 lojas (62,4%) — R$ 2.394.528,43 faturados.
+- **Lojas com Faturamento Zero:** 412 lojas (37,6%) — R$ 1.637.283,23 em cota travada.
+  - **Pedidos Retidos em Carteira:** 379 lojas no MDTR (R$ 381.792,42 em pedidos retidos aguardando faturamento).
+  - **Totalmente Inativos:** 33 lojas (R$ 52.943,41 de cota sem movimentação comercial).
+- **Aba Interativa no Painel:** navegação com alternância de abas entre Desempenho por Rede e Drilldown das 412 Lojas Zeradas com busca instantânea por CNPJ/Razão Social e filtro de status.
 
 ---
 
-## 💻 Painel Interativo (index.html)
+## 💻 Painel Interativo (`index.html`)
 
 O dashboard está hospedado no GitHub Pages e conta com recursos avançados:
 - **Filtros Editáveis:** busca em tempo real por nome/código, filtro por nível de cobertura, e botões para ligar/desligar setores individuais.
