@@ -77,23 +77,115 @@ Para que cada consultor alcance **100% da sua cota** nos **9 dias úteis restant
 
 ---
 
-## 4. Cobertura de Carteira e Positivação (HYMPAR)
+## 4. Cobertura de Carteira, Positivação & Clientes Não Positivados (HYMPAR)
 
-A positivação de clientes avançou substancialmente, saltando de **579 para 692 positivados** (atingimento de **78,9% da meta**, restando apenas 185 clientes para o fechamento total da regional):
+> 💡 **Painel Interativo de Clientes HYMPAR**: O dashboard comercial conta agora com uma aba dedicada de **Clientes Não Positivados no Hympar (405)** com filtros em tempo real por Consultor, Rede, Status (Não Comprou vs Comprou SG) e busca instantânea por CNPJ/Razão Social/Cidade. Acesse em:  
+> 👉 **[grafico_ranking_setores.html](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/grafico_ranking_setores.html)** ou no **[GitHub Pages](https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/)**
 
-| Consultor / Setor | Clientes na Base | Meta Positivação | Positivados PH | % Atingido | Saldo / Gap |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **847010604 - Leonardo Mazzuco** | 130 | 104 | 100 | **96,2%** | -4 |
-| **847010605 - Isabela Cruccitti** | 140 | 112 | 102 | **91,1%** | -10 |
-| **847010607 - Manuel Artero** | 135 | 108 | 98 | **90,7%** | -10 |
-| **847010603 - Erivaldo Maciel** | 139 | 111 | 95 | **85,6%** | -16 |
-| **847010602 - Wellington Morais** | 140 | 112 | 87 | **77,7%** | -25 |
-| **847010608 - Valter Pereira Jr** | 138 | 110 | 85 | **77,3%** | -25 |
-| **847010601 - Rafael Nascimento** | 143 | 114 | 85 | **74,6%** | -29 |
-| **847010606 - Pricila Moreira** | 132 | 106 | 40 | **37,7% ⚠️** | -66 |
-| **TOTAL REGIONAL** | **1.097** | **877** | **692** | **78,9%** | **-185** |
+### 4.1. Resumo Consolidado e Ranking de Positivação por Consultor
+
+A positivação de clientes avançou substancialmente, saltando de **579 para 692 positivados** (atingimento de **78,9% da meta**, restando apenas 185 clientes para o fechamento total da meta de 80% da regional):
+
+| Consultor / Setor | Clientes na Base | Meta Positivação (80%) | Positivados PH | % Atingido | Saldo / Gap | Não Compraram Hympar | Cota Não Compradores (R$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **847010604 - Leonardo Mazzuco** | 130 | 104 | 100 | **96,2%** | -4 | **30** | R$ 105.157,22 |
+| **847010605 - Isabela Cruccitti** | 140 | 112 | 102 | **91,1%** | -10 | **38** | R$ 126.289,33 |
+| **847010607 - Manuel Artero** | 135 | 108 | 98 | **90,7%** | -10 | **37** | R$ 139.739,78 |
+| **847010603 - Erivaldo Maciel** | 139 | 111 | 95 | **85,6%** | -16 | **44** | R$ 169.789,59 |
+| **847010602 - Wellington Morais** | 140 | 112 | 87 | **77,7%** | -25 | **53** | R$ 218.490,26 |
+| **847010608 - Valter Pereira Jr** | 138 | 110 | 85 | **77,3%** | -25 | **53** | R$ 265.811,96 |
+| **847010601 - Rafael Nascimento** | 143 | 114 | 85 | **74,6%** | -29 | **58** | R$ 260.672,50 |
+| **847010606 - Pricila Moreira** | 132 | 106 | 40 | **37,7% ⚠️** | -66 | **92** | R$ 284.621,41 |
+| **TOTAL REGIONAL** | **1.097** | **877** | **692** | **78,9%** | **-185** | **405** | **R$ 1.616.108,76** |
 
 ---
+
+### 4.2. Diagnóstico dos Clientes Que Não Compram pelo Hympar
+
+Na base de 1.097 lojas da regional, o cruzamento do indicador de positivação HYMPAR (`POS. HYMPAR`) identificou **405 clientes que não positivaram marcas no mês**, divididos em dois grupos:
+
+1. **Totalmente Sem Compra Hympar (`Não Comprou`):** **385 lojas** que não registraram nenhuma compra de produtos participantes da cesta Hympar no mês.
+2. **Compraram Similar/Genérico mas Não Compraram Marcas (`Comprou SG`):** **20 lojas** que já compram produtos da Hypera (linha similar/genérico), porém ainda não adquiriram marcas prioritárias Hympar (PH). Este grupo representa a **maior oportunidade de conversão rápida**, pois já possuem relacionamento e limite ativo no mês.
+
+A cota total desses 405 clientes soma **R$ 1.616.108,76** (20,0% de toda a cota da regional).
+
+---
+
+### 4.3. Distribuição dos Não Compradores por Rede Farmacêutica
+
+A inatividade no canal Hympar concentra-se majoritariamente nos seguintes grupos:
+- **INDEPENDENTES VIN:** **175 lojas** sem compra Hympar (43,2% de todos os não compradores da regional).
+- **ASSOCIADAS:** **54 lojas** sem positivação.
+- **MASTERFARMA:** **46 lojas** sem positivação.
+- **HIPER SAÚDE:** **22 lojas**.
+- **ECONOMIZE RONDONÓPOLIS:** **16 lojas**.
+- **COMPRE BEM:** **15 lojas**.
+- **DSG FARMA:** **13 lojas**.
+- **DROGARIA TOTAL:** **10 lojas**.
+- **FARMARCAS:** **9 lojas** (altíssima taxa de positivação, apenas 9 pendentes de 134).
+- **DEMAIS REDES:** **45 lojas** distribuídas em redes menores e regionais.
+
+---
+
+### 4.4. Top 20 Maiores Clientes Que Não Compram pelo Hympar
+
+Abaixo estão relacionados os **20 maiores clientes em volume de cota** da regional que ainda não positivaram marcas pelo Hympar:
+
+| # | CNPJ | Razão Social | Cidade / UF | Rede | Consultor | Cota do Mês (R$) | MDTR (R$) | Faturado (R$) | Status Hympar |
+| :-: | :---: | :--- | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| 1 | `16825373000131` | **FARMACIA MAIS** | Rio Brilhante/MS | INDEPENDENTES VIN | Rafael Nascimento | **R$ 32.504,21** | R$ 7.702,00 | R$ 0,00 | Não Comprou |
+| 2 | `11368538000170` | **FARMACIA INDEPENDENCIA** | Penápolis/SP | FARMARCAS | Valter Pereira Jr | **R$ 25.182,74** | R$ 15.581,09 | R$ 0,00 | Comprou SG (Sem Marcas) |
+| 3 | `16926052000123` | **FARMA KILL** | São Gabriel do Oeste/MS | ASSOCIADAS | Wellington Morais | **R$ 20.021,72** | R$ 1.892,58 | R$ 0,00 | Não Comprou |
+| 4 | `03480787000124` | **SAO JOSE I** | Aparecida do Taboado/MS | INDEPENDENTES VIN | Valter Pereira Jr | **R$ 19.260,20** | R$ 1.962,98 | R$ 0,00 | Não Comprou |
+| 5 | `14931934000151` | **DROGARIA RIO FARMA** | Panorama/SP | DROGARIA TOTAL | Manuel Artero | **R$ 17.272,61** | R$ 4.580,82 | R$ 0,00 | Comprou SG (Sem Marcas) |
+| 6 | `21746348000100` | **DROGARIAS ULTRA POPULAR** | Nova Xavantina/MT | FARMARCAS | Pricila Moreira | **R$ 16.199,93** | R$ 5.744,74 | R$ 0,00 | Não Comprou |
+| 7 | `50357285000190` | **DROGARIAS FARMARELA** | Campo Grande/MS | ECONOMIZE RONDONÓPOLIS | Wellington Morais | **R$ 15.557,60** | R$ 5.317,61 | R$ 0,00 | Não Comprou |
+| 8 | `19909093000108` | **DROGARIA ULTRAPOPULAR** | Sapezal/MT | FARMARCAS | Leonardo Mazzuco | **R$ 14.853,09** | R$ 7.141,04 | R$ 0,00 | Não Comprou |
+| 9 | `29946302000139` | **DROGA CERTA** | Barra do Garças/MT | ASSOCIADAS | Pricila Moreira | **R$ 13.885,65** | R$ 1.610,81 | R$ 0,00 | Não Comprou |
+| 10 | `05939112000126` | **FARMAVIDA FARMACIA** | Lucas do Rio Verde/MT | FARMARCAS | Leonardo Mazzuco | **R$ 13.036,98** | R$ 4.380,82 | R$ 0,00 | Não Comprou |
+| 11 | `33540619000148` | **DROGARIA SEMPRE AMERICA** | Várzea Grande/MT | DSG FARMA | Erivaldo Maciel | **R$ 12.792,00** | R$ 3.032,31 | R$ 0,00 | Não Comprou |
+| 12 | `51905753000187` | **FARMACIA POPULAR EM CASA** | Várzea Grande/MT | INDEPENDENTES VIN | Erivaldo Maciel | **R$ 12.611,39** | R$ 6.136,80 | R$ 0,00 | Não Comprou |
+| 13 | `08856967000262` | **FARMACIA ECONOMIZE SINOP** | Sinop/MT | ECONOMIZE RONDONÓPOLIS | Isabela Cruccitti | **R$ 12.190,04** | R$ 2.164,13 | R$ 0,00 | Não Comprou |
+| 14 | `4745484000159` | **FCIA SANTO ANTONIO** | Caarapó/MS | INDEPENDENTES VIN | Rafael Nascimento | **R$ 12.098,78** | R$ 4.298,90 | R$ 0,00 | Não Comprou |
+| 15 | `10497520000105` | **DROG BOM JESUS PREVER** | Dracena/SP | DROGARIA TOTAL | Valter Pereira Jr | **R$ 11.760,24** | R$ 3.447,36 | R$ 0,00 | Não Comprou |
+| 16 | `4344448000183` | **DROG RODOFARMA** | Três Lagoas/MS | INDEPENDENTES VIN | Valter Pereira Jr | **R$ 11.528,19** | R$ 2.051,29 | R$ 0,00 | Não Comprou |
+| 17 | `29303719000183` | **DROGARIA PLANALTO** | Canarana/MT | COMPRE BEM | Pricila Moreira | **R$ 11.465,89** | R$ 3.069,35 | R$ 0,00 | Não Comprou |
+| 18 | `17176661000175` | **FARMAIVI** | Ivinhema/MS | ASSOCIADAS | Rafael Nascimento | **R$ 11.353,77** | R$ 3.491,95 | R$ 0,00 | Não Comprou |
+| 19 | `6368293000140` | **FARMACIAS MEIO PRECO INGAS** | Campo Novo do Parecis/MT | INDEPENDENTES VIN | Isabela Cruccitti | **R$ 11.331,05** | R$ 2.003,18 | R$ 0,00 | Não Comprou |
+| 20 | `00982959000170` | **FCIA DROGAMARA** | Amambai/MS | INDEPENDENTES VIN | Rafael Nascimento | **R$ 11.070,46** | R$ 1.580,06 | R$ 0,00 | Não Comprou |
+
+---
+
+### 4.5. Oportunidade Tática Imediata: As 20 Lojas "Comprou SG (Sem Marcas)"
+
+As **20 lojas** abaixo já demonstraram abertura e compraram produtos similares/genéricos da empresa no mês, mas **ainda não positivaram a linha de marcas prioritárias PH Hympar**. Uma abordagem focada nessas 20 contas oferece o menor atrito para positivação rápida:
+
+| CNPJ | Razão Social | Cidade / UF | Rede | Consultor | Cota (R$) | MDTR (R$) |
+| :---: | :--- | :--- | :--- | :--- | :---: | :---: |
+| `11368538000170` | FARMACIA INDEPENDENCIA | Penápolis/SP | FARMARCAS | Valter Pereira Jr | R$ 25.182,74 | R$ 15.581,09 |
+| `14931934000151` | DROGARIA RIO FARMA | Panorama/SP | DROGARIA TOTAL | Manuel Artero | R$ 17.272,61 | R$ 4.580,82 |
+| `4538037000129` | FARMACIA SAO VICENTE II | Dracena/SP | MULTIDROGAS | Valter Pereira Jr | R$ 6.925,00 | R$ 667,26 |
+| `1524705000170` | DROGA SANTOS | Junqueirópolis/SP | MULTIDROGAS | Manuel Artero | R$ 4.558,85 | R$ 383,00 |
+| `52905500000176` | DROGARIA POPULAR | Maracaju/MS | COMPRE BEM | Wellington Morais | R$ 4.424,93 | R$ 1.743,42 |
+| `55283212000115` | FARMACIA IRAPURU | Irapuru/SP | FARMAIS | Manuel Artero | R$ 4.184,43 | R$ 1.072,94 |
+| `48808406000121` | FARMAIS | Tupi Paulista/SP | FARMAIS | Manuel Artero | R$ 4.127,05 | R$ 1.013,21 |
+| `14511974000144` | FARMALINE | Campo Grande/MS | DSG FARMA | Wellington Morais | R$ 3.945,07 | R$ 336,39 |
+| `35850980000192` | DROGARIA FARMACIL | Tupi Paulista/SP | DROGARIA TOTAL | Manuel Artero | R$ 3.824,47 | R$ 1.258,95 |
+| `07530666000155` | FARMACIA SANTO ANTONIO | Presidente Venceslau/SP | REDE MULTIDROGAS | Manuel Artero | R$ 3.757,28 | R$ 483,18 |
+| `68051770000180` | FARMACIA NOSSA SENHORA APARECIDA | Tupi Paulista/SP | DROGARIA TOTAL | Manuel Artero | R$ 3.655,89 | R$ 442,16 |
+| `14562098000186` | DROG NOVA FARMA | Junqueirópolis/SP | MULTIDROGAS | Manuel Artero | R$ 3.421,79 | R$ 1.344,05 |
+| `14995963000160` | DROGARIA FARMACIL | Dracena/SP | DROGARIA TOTAL | Valter Pereira Jr | R$ 3.391,24 | R$ 684,21 |
+| `47545939000120` | PHARMA VIDA | Presidente Venceslau/SP | DROGARIA TOTAL | Manuel Artero | R$ 3.195,95 | R$ 738,19 |
+| `35282559000109` | MAXI FARMA POPULAR | Dracena/SP | DROGARIA TOTAL | Valter Pereira Jr | R$ 3.176,57 | R$ 745,56 |
+| `33502848000176` | FARMACIA SAO VICENTE | Dracena/SP | MULTIDROGAS | Valter Pereira Jr | R$ 2.923,94 | R$ 687,70 |
+| `09439626000138` | DROGA PLUS | Santo Anastácio/SP | MULTIDROGAS | Valter Pereira Jr | R$ 2.378,39 | R$ 421,80 |
+| `24660706000163` | DROGARIA SANTO ANTONIO | Caarapó/MS | ASSOCIADAS | Rafael Nascimento | R$ 1.391,37 | R$ 225,50 |
+| `11157833000122` | SUPER POPULAR | Glória de Dourados/MS | INDEPENDENTES VIN | Rafael Nascimento | R$ 676,92 | R$ 32,54 |
+| `10212006000120` | DROG TOTAL | Junqueirópolis/SP | DROGARIA TOTAL | Valter Pereira Jr | R$ 242,48 | R$ 51,75 |
+
+
+---
+
 
 ## 5. Diagnóstico por Rede Farmacêutica & Clientes Sem Compra (BASE 600)
 

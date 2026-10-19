@@ -94,6 +94,31 @@ try {
         }
     }
 
+    # 2.1 HYMPAR NON-BUYERS (BASE 600 Col 18)
+    $strNaoComprou = [System.Text.Encoding]::UTF8.GetString([byte[]]@(0x4E, 0xC3, 0xA3, 0x6F, 0x20, 0x43, 0x6F, 0x6D, 0x70, 0x72, 0x6F, 0x75))
+    $strComprouSG  = [System.Text.Encoding]::UTF8.GetString([byte[]]@(0x43, 0x6F, 0x6D, 0x70, 0x72, 0x6F, 0x75, 0x20, 0x53, 0x47, 0x20, 0x28, 0x53, 0x65, 0x6D, 0x20, 0x4D, 0x61, 0x72, 0x63, 0x61, 0x73, 0x29))
+
+    $rawHymparNonBuyers = @()
+    foreach ($c in $clients) {
+        $isNC = ($c.Hympar -match "N.o Comprou")
+        $isSG = ($c.Hympar -eq "Comprou SG")
+        if ($isNC -or $isSG) {
+            $rawHymparNonBuyers += [PSCustomObject]@{
+                cnpj         = $c.CNPJ
+                razao        = $c.Razao
+                cidade       = ""
+                uf           = ""
+                rede         = $c.Rede
+                consultor    = $c.Consultor
+                cota         = [Math]::Round($c.Cota, 2)
+                mdtr         = [Math]::Round($c.MDTR, 2)
+                fat          = [Math]::Round($c.Sales, 2)
+                statusHympar = if ($isNC) { $strNaoComprou } else { $strComprouSG }
+            }
+        }
+    }
+    $rawHymparNonBuyers = $rawHymparNonBuyers | Sort-Object cota -Descending
+
     # 3. SETORES
     $setoresHash = @{}
     foreach ($c in $clients) {
@@ -268,12 +293,15 @@ $html = [System.IO.File]::ReadAllText($htmlPath, [System.Text.Encoding]::UTF8)
 $jsonSetores = $rawDataSetores | ConvertTo-Json -Depth 5 -Compress
 $jsonRedes   = $rawRedes       | ConvertTo-Json -Depth 5 -Compress
 $jsonHympar  = $rawHympar      | ConvertTo-Json -Depth 5 -Compress
+$jsonHymparNB = $rawHymparNonBuyers | ConvertTo-Json -Depth 5 -Compress
 $jsonAbc     = $rawAbc         | ConvertTo-Json -Depth 5 -Compress
 $jsonZero    = $rawZeroClients | ConvertTo-Json -Depth 5 -Compress
 
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawDataSetores = \[[\s\S]*?\];', "const rawDataSetores = $jsonSetores;")
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawRedes = \[[\s\S]*?\];', "const rawRedes = $jsonRedes;")
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawHympar = \[[\s\S]*?\];', "const rawHympar = $jsonHympar;")
+if ($html -match 'const rawHymparNonBuyers = \[[\s\S]*?\];') { $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawHymparNonBuyers = \[[\s\S]*?\];', "const rawHymparNonBuyers = $jsonHymparNB;") } else { $html = $html.Replace("const rawHympar =", "const rawHymparNonBuyers = $jsonHymparNB;
+    const rawHympar =") }
 $html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const rawAbc = \[[\s\S]*?\];', "const rawAbc = $jsonAbc;")
 
 if ($html -match 'const rawZeroClients = \[[\s\S]*?\];') {
