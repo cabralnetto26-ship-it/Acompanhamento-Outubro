@@ -55,6 +55,8 @@ try {
         $clients += [PSCustomObject]@{
             CNPJ      = $cnpj
             Razao     = [string]$data[$r, 4]
+            Cidade    = [string]$data[$r, 5]
+            UF        = [string]$data[$r, 6]
             Rede      = [string]$data[$r, 7]
             SetorId   = $id
             Consultor = $consultor
@@ -106,8 +108,8 @@ try {
             $rawHymparNonBuyers += [PSCustomObject]@{
                 cnpj         = $c.CNPJ
                 razao        = $c.Razao
-                cidade       = ""
-                uf           = ""
+                cidade       = $c.Cidade
+                uf           = $c.UF
                 rede         = $c.Rede
                 consultor    = $c.Consultor
                 cota         = [Math]::Round($c.Cota, 2)
@@ -339,12 +341,16 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 Write-Output "==> HTMLs salvos com sucesso (grafico_ranking_setores.html e index.html) em UTF-8."
 
 Write-Output "==> [4/6] Preparando git commit..."
-$git = "$env:LOCALAPPDATA\Programs\MinGit\cmd\git.exe"
+if (Test-Path "$env:LOCALAPPDATA\Programs\MinGit\cmd\git.exe") {
+    $git = "$env:LOCALAPPDATA\Programs\MinGit\cmd\git.exe"
+} else {
+    $git = "git"
+}
 
 & $git add .
 & $git status
 
-$commitMsg = "feat: atualizacao da base de dados - MDTR 14/10 e Sales 19/10"
+$commitMsg = "feat: atualizacao da base de dados e sincronizacao no github - Outubro/2026"
 & $git commit -m $commitMsg
 
 Write-Output "==> [5/6] Enviando atualizações para o GitHub (push origin main)..."
