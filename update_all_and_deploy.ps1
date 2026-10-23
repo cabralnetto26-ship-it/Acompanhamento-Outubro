@@ -147,10 +147,10 @@ try {
 
         $statusClass = "status-ok"
         $statusStr   = "Na Média"
-        if ($cobMdtr -ge 39.0) {
+        if ($cobMdtr -ge 61.0) {
             $statusClass = "status-leader"
             $statusStr   = "Líder"
-        } elseif ($cobMdtr -lt 36.0) {
+        } elseif ($cobMdtr -lt 58.0) {
             $statusClass = "status-alert"
             $statusStr   = "Acelerar"
         }
@@ -313,26 +313,34 @@ if ($html -match 'const rawZeroClients = \[[\s\S]*?\];') {
 }
 
 # Update date badge and titles
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR \d{2}/\d{2} \| Sales \d{2}/\d{2}', 'MDTR 14/10 | Sales 19/10')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR Realizado \(\d{2}/\d{2}\)', 'MDTR Realizado (14/10)')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'Faturamento Bruto \(\d{2}/\d{2}\)', 'Faturamento Bruto (19/10)')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(at.{1,4} \d{2}/\d{2}\)', '(até 14/10)')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '<th>MDTR \d{2}/\d{2} \(R\$\)</th>', '<th>MDTR 14/10 (R$)</th>')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '<th>Fat\. Bruto \d{2}/\d{2} \(R\$\)</th>', '<th>Fat. Bruto 19/10 (R$)</th>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR \d{2}/\d{2} \| Sales \d{2}/\d{2}', 'MDTR 20/10 | Sales 22/10')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'MDTR Realizado \(\d{2}/\d{2}\)', 'MDTR Realizado (20/10)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'Faturamento Bruto \(\d{2}/\d{2}\)', 'Faturamento Bruto (22/10)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(at.{1,4} \d{2}/\d{2}\)', '(até 20/10)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '<th>MDTR \d{2}/\d{2} \(R\$\)</th>', '<th>MDTR 20/10 (R$)</th>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '<th>Fat\. Bruto \d{2}/\d{2} \(R\$\)</th>', '<th>Fat. Bruto 22/10 (R$)</th>')
+
+# Update static KPI fallback values
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="kpiMdtr">.*?</div>', 'id="kpiMdtr">R$ 4,91 M</div>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="kpiCobMdtr">.*?</span>', 'id="kpiCobMdtr">60,9%</span>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="kpiFat">.*?</div>', 'id="kpiFat">R$ 3,06 M</div>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="kpiCobFat">.*?</span>', 'id="kpiCobFat">37,9%</span>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="kpiTopPerformer">.*?</div>', 'id="kpiTopPerformer">Wellington Morais</div>')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="kpiTopCob">.*?</span>', 'id="kpiTopCob">65,0%</span>')
 
 # Update remaining days simulation
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const fatDiarioAtual = item\.fat / \d+;.*', 'const fatDiarioAtual = item.fat / 12; // 12 dias úteis decorridos até 19/10')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="\d+"', 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="9"')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'const fatDiarioAtual = item\.fat / \d+;.*', 'const fatDiarioAtual = item.fat / 15; // 15 dias úteis decorridos até 22/10')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="\d+"', 'id="diasRestantesInput" class="filter-input" style="width: 80px;" min="1" max="30" value="6"')
 
 # Update filter chips and JS logic thresholds
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(&ge;\d+([,\.]\d+)?%\)', '(&ge;39%)')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(\d+([,\.]\d+)?%-\d+([,\.]\d+)?%\)', '(36%-39%)')
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(&lt;\d+([,\.]\d+)?%\)', '(&lt;36%)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(&ge;\d+([,\.]\d+)?%\)', '(&ge;61%)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(\d+([,\.]\d+)?%-\d+([,\.]\d+)?%\)', '(58%-61%)')
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, '\(&lt;\d+([,\.]\d+)?%\)', '(&lt;58%)')
 
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'high' && d\.cobMdtr < \d+(\.\d+)?", "activeStatusFilter === 'high' && d.cobMdtr < 39")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'mid' && \(d\.cobMdtr < \d+(\.\d+)? \|\| d\.cobMdtr >= \d+(\.\d+)?\)", "activeStatusFilter === 'mid' && (d.cobMdtr < 36 || d.cobMdtr >= 39)")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'low' && d\.cobMdtr >= \d+(\.\d+)?", "activeStatusFilter === 'low' && d.cobMdtr >= 36")
-$html = [System.Text.RegularExpressions.Regex]::Replace($html, "const progressClass = item\.cobMdtr >= \d+(\.\d+)? \? 'progress-high' : item\.cobMdtr >= \d+(\.\d+)? \? 'progress-mid' : 'progress-low';", "const progressClass = item.cobMdtr >= 39 ? 'progress-high' : item.cobMdtr >= 36 ? 'progress-mid' : 'progress-low';")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'high' && d\.cobMdtr < \d+(\.\d+)?", "activeStatusFilter === 'high' && d.cobMdtr < 61")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'mid' && \(d\.cobMdtr < \d+(\.\d+)? \|\| d\.cobMdtr >= \d+(\.\d+)?\)", "activeStatusFilter === 'mid' && (d.cobMdtr < 58 || d.cobMdtr >= 61)")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "activeStatusFilter === 'low' && d\.cobMdtr >= \d+(\.\d+)?", "activeStatusFilter === 'low' && d.cobMdtr >= 58")
+$html = [System.Text.RegularExpressions.Regex]::Replace($html, "const progressClass = item\.cobMdtr >= \d+(\.\d+)? \? 'progress-high' : item\.cobMdtr >= \d+(\.\d+)? \? 'progress-mid' : 'progress-low';", "const progressClass = item.cobMdtr >= 61 ? 'progress-high' : item.cobMdtr >= 58 ? 'progress-mid' : 'progress-low';")
 
 # Save both grafico_ranking_setores.html and index.html in pure UTF-8 without BOM
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
@@ -347,10 +355,13 @@ if (Test-Path "$env:LOCALAPPDATA\Programs\MinGit\cmd\git.exe") {
     $git = "git"
 }
 
-& $git add .
+& $git add ANALISE_SETORES_COTA_MDTR_OUTUBRO2026.md README.md grafico_ranking_setores.html index.html update_all_and_deploy.ps1
+try {
+    & $git add "Acompanhamento 847010600 Outubro26.xlsx" 2>$null
+} catch {}
 & $git status
 
-$commitMsg = "feat: atualizacao da base de dados e sincronizacao no github - Outubro/2026"
+$commitMsg = "feat: atualizacao da base de dados e sincronizacao no github - MDTR 20/10 e Sales 22/10"
 & $git commit -m $commitMsg
 
 Write-Output "==> [5/6] Enviando atualizações para o GitHub (push origin main)..."

@@ -1,47 +1,36 @@
-# 📊 Acompanhamento de Setores, Cota e MDTR — Outubro/2026
-**Regional:** 847010600 - JOSÉ CABRAL NETO  
-**Empresa:** Hypera Pharma  
-**Painel Online (GitHub Pages):** [https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/](https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/)
+# Painel Comercial Regional - Outubro/2026
+**Regional:** 847010600 - JOSÃ‰ CABRAL NETO  
+**AtualizaÃ§Ã£o:** MDTR atÃ© 20/10/2026 | Faturamento Bruto (Sales) atÃ© 22/10/2026  
+**Dias Ãšteis:** 21 dias Ãºteis (15 decorridos atÃ© 22/10 | 6 dias Ãºteis restantes)
 
 ---
 
-## ðŸŽ¯ Cobertura de Carteira, PositivaÃ§Ã£o & Clientes NÃ£o Positivados (HYMPAR)
+## ðŸŒ Acesso ao Dashboard Interativo
+Acesse o painel analÃ­tico interativo publicado diretamente no GitHub Pages:  
+ðŸ‘‰ **[https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/](https://cabralnetto26-ship-it.github.io/Acompanhamento-Outubro/)**
 
-- **Clientes Totais na Base:** 1.097
-- **Meta de PositivaÃ§Ã£o (80%):** 877
-- **Positivados Realizados (PH):** 692 (78,9% de atingimento da meta)
-- **Saldo / Gap Restante:** -185 clientes a positivar
-- **Clientes NÃ£o Positivados no Hympar:** 405 lojas (R$ 1.616.108,76 em cota travada)
-  - **NÃ£o Comprou:** 385 lojas
-  - **Comprou SG (Oportunidade PH):** 20 lojas
-- **Aba Interativa no Painel:** visualizaÃ§Ã£o do resumo por consultor e alternÃ¢ncia instantÃ¢nea para a lista nominal das 405 lojas com filtros por Rede, Consultor e busca por CNPJ/RazÃ£o Social.
-
----
-## 🔍 Diagnóstico por Rede & Clientes Sem Compra (BASE 600)
-
-- **Lojas Ativas / Comprando:** 685 lojas (62,4%) — R$ 2.394.528,43 faturados.
-- **Lojas com Faturamento Zero:** 412 lojas (37,6%) — R$ 1.637.283,23 em cota travada.
-  - **Pedidos Retidos em Carteira:** 379 lojas no MDTR (R$ 381.792,42 em pedidos retidos aguardando faturamento).
-  - **Totalmente Inativos:** 33 lojas (R$ 52.943,41 de cota sem movimentação comercial).
-- **Aba Interativa no Painel:** navegação com alternância de abas entre Desempenho por Rede e Drilldown das 412 Lojas Zeradas com busca instantânea por CNPJ/Razão Social e filtro de status.
+Arquivo local correspondente: [grafico_ranking_setores.html](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/grafico_ranking_setores.html) e [index.html](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/index.html)
 
 ---
 
-## 💻 Painel Interativo (`index.html`)
+## ðŸ“Š Principais Indicadores Regionais
 
-O dashboard está hospedado no GitHub Pages e conta com recursos avançados:
-- **Filtros Editáveis:** busca em tempo real por nome/código, filtro por nível de cobertura, e botões para ligar/desligar setores individuais.
-- **Simulador de Metas Dinâmico:** ajuste o número de dias úteis restantes e o alvo da cota para ver a meta diária e a taxa de aceleração recalculadas na hora.
-- **Gráficos com Chart.js:** visualização horizontal de ranking e barras agrupadas de Cota vs MDTR vs Faturado.
-- **Diagnóstico por Rede & Clientes Sem Compra:** visão consolidada por rede e detalhamento de lojas zeradas.
-- **Curva ABC & HYMPAR:** tabelas dinâmicas sincronizadas com o filtro de consultor.
+| Indicador | Consolidado Regional | % Atingimento / Cobertura | Status e ObservaÃ§Ãµes |
+| :--- | :---: | :---: | :--- |
+| **Cota Regional** | **R$ 8.071.973,31** | 100,0% | Base total: 1.097 lojas (8 setores) |
+| **MDTR Realizado (20/10)** | **R$ 4.913.238,18** | **60,9%** | Ritmo acelerado de pedidos em carteira |
+| **Faturamento Bruto (22/10)** | **R$ 3.059.961,16** | **37,9%** | Expedido e faturado |
+| **GAP Cota 100%** | **-R$ 5.012.012,15** | 62,1% | Saldo pendente nos 6 dias Ãºteis restantes |
+| **Meta IntermediÃ¡ria** | **R$ 5.145.882,99** | **63,8%** | Alvo intermediÃ¡rio da regional |
+| **GAP Meta IntermediÃ¡ria** | **-R$ 2.085.921,83** | - | Montante a faturar para alcanÃ§ar o marco |
+| **PositivaÃ§Ã£o HYMPAR (PH)** | **719 lojas** | **81,9%** | Meta: 878 lojas (Meta de 80% superada!) |
+| **NÃ£o Positivados Hympar** | **378 lojas** | - | **R$ 1,48M** em cota (360 NÃ£o Comprou / 18 Comprou SG) |
+| **Clientes com Fat. Zero** | **355 lojas** | - | **R$ 1,36M** em cota travada (reduÃ§Ã£o de 57 lojas zeradas) |
 
 ---
 
-## 📁 Estrutura de Arquivos
-
-- [index.html](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/index.html): Dashboard interativo publicado no GitHub Pages.
-- [grafico_ranking_setores.html](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/grafico_ranking_setores.html): Cópia idêntica local do painel interativo.
-- [ANALISE_SETORES_COTA_MDTR_OUTUBRO2026.md](file:///c:/Users/jose.cabral/OneDrive%20-%20Hypera/Documentos/Aula%20IA/ANALISE_SETORES_COTA_MDTR_OUTUBRO2026.md): Relatório executivo e tático completo.
-- `Acompanhamento 847010600 Outubro26.xlsx`: Planilha com a base de dados original.
-- `update_all_and_deploy.ps1`: Script automatizado de atualização e push ao GitHub.
+## ðŸ“ Estrutura de Arquivos
+- `grafico_ranking_setores.html` / `index.html`: Dashboard executivo com filtros dinÃ¢micos, ranking, simulaÃ§Ãµes, diagnÃ³stico de redes e aba de clientes nÃ£o compradores do Hympar.
+- `ANALISE_SETORES_COTA_MDTR_OUTUBRO2026.md`: RelatÃ³rio executivo completo em Markdown com diagnÃ³sticos e recomendaÃ§Ãµes.
+- `update_all_and_deploy.ps1`: Script PowerShell de automaÃ§Ã£o ponta a ponta (extraÃ§Ã£o do Excel, injeÃ§Ã£o JSON, sanitizaÃ§Ã£o UTF-8 sem BOM e push no GitHub).
+- `Acompanhamento 847010600 Outubro26.xlsx`: Planilha corporativa oficial de dados.
